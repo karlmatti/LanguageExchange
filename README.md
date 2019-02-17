@@ -1,2 +1,2 @@
 # LanguageExchange
-Grand Language Exchange
+Project "Grand Language Exchange" in ITI0208 Tarkvaratehnika
