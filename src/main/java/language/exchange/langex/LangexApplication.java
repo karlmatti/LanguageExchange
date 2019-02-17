@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LangexApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		SpringApplication.run(LangexApplication.class, args);
-	}
+        SpringApplication.run(LangexApplication.class, args);
+    }
 
 }
 

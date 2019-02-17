@@ -92,5 +92,19 @@
         }
     });
 </script>
+<form>
+    <div>
+        <label for="example">Let's submit some text</label>
+        <input id="example" type="text" name="text">
+    </div>
+    <div>
+        <input type="submit" formmethod="post" value="Send">
+    </div>
+</form>
+<div>
+    <h1>Submitted text: </h1>
+    <!--/*@thymesVar id="text" type=""*/-->
+    <span th:text="${info}"></span>
+</div>
 </body>
 </html>
