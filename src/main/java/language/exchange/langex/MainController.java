@@ -1,11 +1,13 @@
 package language.exchange.langex;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import java.security.Principal;
 
 @Controller
 public class MainController {
@@ -17,9 +19,16 @@ public class MainController {
     }
 
     @PostMapping("/")
-    public String postIndex(@RequestParam("text") String text, Model model2) {
-        model2.addAttribute("info", text);
+    public String postIndex(@RequestParam("text") String text, Model model) {
+        model.addAttribute("info", text);
         System.out.println(text);
         return "index";
+    }
+
+    @RequestMapping(value = "/user")
+    public String user(Principal principal, Model model) {
+        model.addAttribute("userinfo", principal.toString());
+        System.out.println(principal.getClass().getDeclaredMethods().length);
+        return "user";
     }
 }
