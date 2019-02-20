@@ -1,4 +1,3 @@
-/*
 DROP SCHEMA PUBLIC CASCADE;
 
 CREATE TABLE user
@@ -20,4 +19,3 @@ VALUES (
   'Matti', 'Estonian',
   'Russian', 'Fishing'
 );
-*/
