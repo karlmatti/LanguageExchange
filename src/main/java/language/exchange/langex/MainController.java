@@ -31,4 +31,11 @@ public class MainController {
         System.out.println(principal.getClass().getDeclaredMethods().length);
         return "user";
     }
+
+    @GetMapping("/profile")
+    public String index() {
+
+        return "profile";
+    }
+
 }
