@@ -27,7 +27,7 @@ public class MainController {
 
     @RequestMapping(value = "/user")
     public String user(Principal principal, Model model) {
-        model.addAttribute("userinfo", principal.toString());
+        model.addAttribute("userId", principal.getName());
         System.out.println(principal.getClass().getDeclaredMethods().length);
         return "user";
     }

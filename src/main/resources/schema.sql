@@ -1,19 +1,23 @@
-create table user
+/*
+DROP SCHEMA PUBLIC CASCADE;
+
+CREATE TABLE user
 (
-  id integer not null,
-  firstname varchar(255) not null,
-  lastname varchar(255) not null,
-  languages varchar(255) not null,
-  learninglanguages varchar(255),
-  hobbies varchar(255)
-  primary key(id)
+  id BIGINT NOT NULL PRIMARY KEY,
+  firstname VARCHAR(255) NOT NULL,
+  lastname VARCHAR(255) NOT NULL,
+  languages VARCHAR(255) NOT NULL,
+  learninglanguages VARCHAR(255),
+  hobbies VARCHAR(255)
 );
 
-insert into user values (
-  114005839740106632529,
-  'Karl',
-  'Matti',
-  'Estonian',
-  'Russian',
-  'Fishing'
+INSERT INTO user(
+id, firstname,
+lastname, languages,
+learninglanguages, hobbies)
+VALUES (
+  114005839740106632529, 'Karl',
+  'Matti', 'Estonian',
+  'Russian', 'Fishing'
 );
+*/
