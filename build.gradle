@@ -19,12 +19,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compile group: 'org.springframework.security.oauth.boot',
-            name: 'spring-security-oauth2-autoconfigure', 
+            name: 'spring-security-oauth2-autoconfigure',
             version: '2.0.0.RELEASE'
-
-    // JDBC drivers
-    runtime("org.hsqldb:hsqldb")
-    runtime("mysql:mysql-connector-java:5.1.25")
 
     compileOnly 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -33,14 +29,10 @@ dependencies {
         exclude module: "spring-boot-starter-tomcat"
     }
     compile("org.springframework.boot:spring-boot-starter-jetty")
-    // end::jetty[]
-    // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    // end::actuator[]
     testCompile("junit:junit")
 
-    compile group: 'org.hsqldb',
-            name: 'hsqldb',
-            version: '2.4.1'
-    
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile "com.h2database:h2"
 }

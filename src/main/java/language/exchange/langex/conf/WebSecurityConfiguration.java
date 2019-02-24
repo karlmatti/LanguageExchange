@@ -19,5 +19,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+
+        //in order to allow use h2 database
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 }
