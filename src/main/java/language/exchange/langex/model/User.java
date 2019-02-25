@@ -1,16 +1,41 @@
 package language.exchange.langex.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
 @Entity
 public class User {
 
+
+    @GeneratedValue
+    private @Id
+    int id;
+    private Long googleId;
+    private String firstName;
+    private String lastName;
+    private String cLvlLangs;
+    private String bLvlLangs;
+    private String aLvlLangs;
+    private String hobbies;
+    private String photoLocation;
+
+
+    public User() {
+    }
+
+    public User(Long googleId, String firstName, String lastName, String cLvlLangs, String bLvlLangs, String aLvlLangs, String hobbies, String photoLocation) {
+        this.googleId = googleId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cLvlLangs = cLvlLangs;
+        this.bLvlLangs = bLvlLangs;
+        this.aLvlLangs = aLvlLangs;
+        this.hobbies = hobbies;
+        this.photoLocation = photoLocation;
+    }
 
     public int getId() {
         return id;
@@ -44,20 +69,28 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getLanguages() {
-        return languages;
+    public String getcLvlLangs() {
+        return cLvlLangs;
     }
 
-    public void setLanguages(String languages) {
-        this.languages = languages;
+    public void setcLvlLangs(String cLvlLangs) {
+        this.cLvlLangs = cLvlLangs;
     }
 
-    public String getStudyingLangs() {
-        return studyingLangs;
+    public String getbLvlLangs() {
+        return bLvlLangs;
     }
 
-    public void setStudyingLangs(String studyingLangs) {
-        this.studyingLangs = studyingLangs;
+    public void setbLvlLangs(String bLvlLangs) {
+        this.bLvlLangs = bLvlLangs;
+    }
+
+    public String getaLvlLangs() {
+        return aLvlLangs;
+    }
+
+    public void setaLvlLangs(String aLvlLangs) {
+        this.aLvlLangs = aLvlLangs;
     }
 
     public String getHobbies() {
@@ -68,6 +101,14 @@ public class User {
         this.hobbies = hobbies;
     }
 
+    public String getPhotoLocation() {
+        return photoLocation;
+    }
+
+    public void setPhotoLocation(String photoLocation) {
+        this.photoLocation = photoLocation;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -75,19 +116,11 @@ public class User {
                 ", googleId=" + googleId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", languages='" + languages + '\'' +
-                ", studyingLangs='" + studyingLangs + '\'' +
+                ", cLvlLangs='" + cLvlLangs + '\'' +
+                ", bLvlLangs='" + bLvlLangs + '\'' +
+                ", aLvlLangs='" + aLvlLangs + '\'' +
                 ", hobbies='" + hobbies + '\'' +
+                ", photoLocation='" + photoLocation + '\'' +
                 '}';
     }
-
-    @Id
-    @GeneratedValue
-    private int id;
-    private Long googleId;
-    private String firstName;
-    private String lastName;
-    private String languages;
-    private String studyingLangs;
-    private String hobbies;
 }

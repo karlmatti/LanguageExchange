@@ -1,4 +1,12 @@
-insert into USER values(0, 'mart', 242342543545, 'fishing', 'german', 'kalno', 'english')
+/*insert into USER values(0, 'mart', 242342543545, 'fishing', 'german', 'kalno', 'english')*/
+INSERT INTO user VALUES (
+0, 'Russian',
+'Finnish', 'Estonian;English',
+'Karl', 3,
+'Fishing;Programming', 'Matti',
+'/img/114005839740106632529.PNG'
+);
+
 
 /* Json  example
 {
@@ -9,4 +17,10 @@ insert into USER values(0, 'mart', 242342543545, 'fishing', 'german', 'kalno', '
 	"studyingLangs": "english",
 	"hobbies": "mining"
 }
+INSERT INTO user VALUES (
+  0, 'Karl',
+  'Matti', 'Fishing;Programming', 'Estonian;English', 114005839740106632529,
+  'Finnish', 'Russian',
+  '/img/114005839740106632529.PNG'
+);
  */

@@ -25,10 +25,12 @@ public class MainController {
         return "index";
     }
 
+
     @RequestMapping(value = "/user")
     public String user(Principal principal, Model model) {
         model.addAttribute("userId", principal.getName());
         System.out.println(principal.getClass().getDeclaredMethods().length);
+
         return "user";
     }
 
@@ -38,4 +40,9 @@ public class MainController {
         return "profile";
     }
 
+    @PostMapping("/profile")
+    public String profile() {
+
+        return "profile";
+    }
 }
