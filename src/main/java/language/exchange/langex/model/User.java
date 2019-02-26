@@ -12,6 +12,7 @@ public class User {
     @GeneratedValue
     private @Id
     int id;
+    int age;
     private String googleId;
     private String firstName;
     private String lastName;
@@ -25,7 +26,10 @@ public class User {
     public User() {
     }
 
-    public User(String googleId, String firstName, String lastName, String cLvlLangs, String bLvlLangs, String aLvlLangs, String hobbies, String photoLocation) {
+    public User(int age, String googleId, String firstName,
+                String lastName, String cLvlLangs, String bLvlLangs,
+                String aLvlLangs, String hobbies, String photoLocation) {
+        this.age = age;
         this.googleId = googleId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,6 +46,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getGoogleId() {
@@ -111,7 +123,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "googleId='" + googleId + '\'' +
+                "id=" + id +
+                ", age=" + age +
+                ", googleId='" + googleId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", cLvlLangs='" + cLvlLangs + '\'' +

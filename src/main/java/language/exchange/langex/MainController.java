@@ -61,13 +61,14 @@ public class MainController {
                               Model model,
                               @RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName,
+                              @RequestParam("age") int age,
                               @RequestParam("cLvlLangs") String cLvlLangs,
                               @RequestParam("bLvlLangs") String bLvlLangs,
                               @RequestParam("aLvlLangs") String aLvlLangs,
                               @RequestParam("hobbies") String hobbies) {
-        User user = new User(principal.getName(), firstName, lastName,
+        User user = new User(age, principal.getName(), firstName, lastName,
                 cLvlLangs, bLvlLangs, aLvlLangs,
-                hobbies, "photo");
+                hobbies, "None");
         System.out.println(user.toString());
         userService.saveOrUpdate(user);
         return "redirect:/profile/";

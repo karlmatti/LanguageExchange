@@ -1,6 +1,6 @@
 INSERT INTO user VALUES (
 0,
-'Russian','Finnish',
+'Russian',22,'Finnish',
 
 'Estonian;English','Karl',
 '114005839740106632529',
