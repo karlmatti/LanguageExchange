@@ -2,15 +2,17 @@ package language.exchange.langex.model;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
 @Entity
 public class User {
 
-
+    @GeneratedValue
     private @Id
-    String googleId;
+    int id;
+    private String googleId;
     private String firstName;
     private String lastName;
     private String cLvlLangs;
@@ -34,6 +36,13 @@ public class User {
         this.photoLocation = photoLocation;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getGoogleId() {
         return googleId;
