@@ -32,9 +32,9 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    private int saveUser(@RequestBody User user) {
+    private String saveUser(@RequestBody User user) {
         userService.saveOrUpdate(user);
-        return user.getId();
+        return user.getGoogleId();
     }
 
 

@@ -41,16 +41,7 @@ public class MainController {
                               @RequestParam("bLvlLangs") String bLvlLangs,
                               @RequestParam("aLvlLangs") String aLvlLangs,
                               @RequestParam("hobbies") String hobbies) {
-        //after logging in first time, first data must be set
-        //coming soon
-        /*
-        User user = new User(Long.parseLong(principal.getName()), firstName, lastName, cLvlLangs, bLvlLangs,
-                aLvlLangs, hobbies, "photo");
-        System.out.println(user.toString());*/
-        /*User user = new User(Long.parseLong(principal.getName()), firstName, lastName, cLvlLangs, bLvlLangs,
-                aLvlLangs, hobbies, "photo");*/
-        //int googleId = Integer.parseInt(principal.getName());
-        User user = new User(123, firstName, lastName, cLvlLangs, bLvlLangs,
+        User user = new User(principal.getName(), firstName, lastName, cLvlLangs, bLvlLangs,
                 aLvlLangs, hobbies, "photo");
         System.out.println(user.toString());
         return "user";

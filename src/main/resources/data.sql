@@ -1,8 +1,11 @@
 INSERT INTO user VALUES (
-0, 'Russian',
-'Finnish', 'Estonian;English',
-'Karl', 3,
-'Fishing;Programming', 'Matti',
+'114005839740106632529',
+'Russian',
+'Finnish',
+'Estonian;English',
+'Karl',
+'Fishing;Programming',
+'Matti',
 '/img/114005839740106632529.PNG'
 );
 

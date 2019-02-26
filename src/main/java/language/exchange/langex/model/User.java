@@ -2,7 +2,6 @@ package language.exchange.langex.model;
 
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
@@ -10,10 +9,8 @@ import javax.persistence.Id;
 public class User {
 
 
-    @GeneratedValue
     private @Id
-    int id;
-    private int googleId;
+    String googleId;
     private String firstName;
     private String lastName;
     private String cLvlLangs;
@@ -26,7 +23,7 @@ public class User {
     public User() {
     }
 
-    public User(int googleId, String firstName, String lastName, String cLvlLangs, String bLvlLangs, String aLvlLangs, String hobbies, String photoLocation) {
+    public User(String googleId, String firstName, String lastName, String cLvlLangs, String bLvlLangs, String aLvlLangs, String hobbies, String photoLocation) {
         this.googleId = googleId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,19 +34,12 @@ public class User {
         this.photoLocation = photoLocation;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getGoogleId() {
+    public String getGoogleId() {
         return googleId;
     }
 
-    public void setGoogleId(int googleId) {
+    public void setGoogleId(String googleId) {
         this.googleId = googleId;
     }
 
@@ -112,8 +102,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", googleId=" + googleId +
+                "googleId='" + googleId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", cLvlLangs='" + cLvlLangs + '\'' +
