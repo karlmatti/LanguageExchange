@@ -13,7 +13,7 @@ public class User {
     @GeneratedValue
     private @Id
     int id;
-    private Long googleId;
+    private int googleId;
     private String firstName;
     private String lastName;
     private String cLvlLangs;
@@ -26,7 +26,7 @@ public class User {
     public User() {
     }
 
-    public User(Long googleId, String firstName, String lastName, String cLvlLangs, String bLvlLangs, String aLvlLangs, String hobbies, String photoLocation) {
+    public User(int googleId, String firstName, String lastName, String cLvlLangs, String bLvlLangs, String aLvlLangs, String hobbies, String photoLocation) {
         this.googleId = googleId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,11 +45,11 @@ public class User {
         this.id = id;
     }
 
-    public Long getGoogleId() {
+    public int getGoogleId() {
         return googleId;
     }
 
-    public void setGoogleId(Long googleId) {
+    public void setGoogleId(int googleId) {
         this.googleId = googleId;
     }
 
