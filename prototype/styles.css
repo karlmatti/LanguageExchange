@@ -48,12 +48,12 @@
 #imageUpload{
   position: relative;
   top: 45px;
-  left: 120px;
+  left: 170px;
 }
 #profileImage{
   position: relative;
   top: 20px;
-  left: 35px;
+  left: 90px;
 }
 #pData{
   max-width: 60px
@@ -98,6 +98,7 @@
   position:relative;
   height:175px;
   top:120px;
+  left: 50px;
 }
 #fb p{
   font-family:sans-serif;
