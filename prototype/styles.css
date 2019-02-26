@@ -1,290 +1,96 @@
-.body-wrapper {
+.body-wrapper{
     min-width: 1200px;
     max-width: 1200px;
     margin: auto;
 }
-
 .logo {
-    max-width: 1000;
-    max-height: 250;
-    word-wrap: break-word;
+  max-width: 1000;
+  max-height: 250;
+  word-wrap: break-word;
 }
-
 .topnav {
-    background-color: #333;
-    overflow: hidden;
+  background-color: #333;
+  overflow: hidden;
 }
-
 .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
-
 .topnav a:hover {
-    background-color: #ddd;
-    color: black;
+  background-color: #ddd;
+  color: black;
 }
-
 .topnav a.active {
-    background-color: #4CAF50;
-    color: white;
+  background-color: #4CAF50;
+  color: white;
 }
-
 .topnav a.logout {
     color: #f2f2f2;
     color: white;
     float: right;
 }
-
 .mainback {
-    background-color: #333;
-    min-height: 1200px;
+  background-color: #333;
+  min-height:1200px;
     max-height: 1200px;
     color: white;
 }
-
-.mainback h2.alignment {
-    position: relative;
-    top: -40px;
-    left: 25px;
+.mainback h2.alignment{
+  position: relative;
+  top: -40px;
+  left: 25px;
 }
 
-.dropdown.dropdown-lg .dropdown-menu {
-    margin-top: -1px;
-    padding: 6px 20px;
+#imageUpload{
+  position: relative;
+  top: 45px;
+  left: 120px;
+}
+#profileImage{
+  position: relative;
+  top: 20px;
+  left: 35px;
+}
+#pData{
+  max-width: 60px
+  margin:auto;
+  margin-right: auto;
+  word-wrap: break-word;
+  position: relative;
+  text-align:justify;
+  left: -50px;
+  top:90px;
 }
 
-.input-group-btn .btn-group {
-    display: flex !important;
-
+.submitbutton{
+  margin-right: right;
+  position: relative;
+  float: right;
+  width: 40%;
+  left:135px;
+  top:180px;
 }
-
-.btn-group .btn {
-    border-radius: 0;
-    margin-left: -1px;
-}
-
-.btn-group .btn:last-child {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-
-.btn-group .form-horizontal .btn[type="submit"] {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-
-.form-horizontal .form-group {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.form-group .form-control:last-child {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-
-@media screen and (min-width: 768px) {
-    #adv-search {
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .dropdown.dropdown-lg {
-        position: static !important;
-        background-color: #808080
-    }
-
-    .dropdown.dropdown-lg .dropdown-menu {
-        min-width: 500px;
-    }
-}
-
-.thumbnail {
-    min-width: 300px;
-    max-width: 300px;
-    padding: 1;
-    border: 2px solid red
-}
-
-.mainback h2.alignment {
-    position: relative;
-    top: -40px;
-    left: 50px;
-}
-
-#imageUpload {
-    position: relative;
-    top: 45px;
-    left: 120px;
-}
-
-#profileImage {
-    position: relative;
-    top: 20px;
-    left: 35px;
-}
-
-#pData {
-    max-width: 60px
-    margin: auto;
-    margin-right: auto;
-    word-wrap: break-word;
-    position: relative;
-    text-align: justify;
-    left: -50px;
-    top: 90px;
-}
-
-.submitbutton {
-    margin-right: right;
-    position: relative;
-    float: right;
-    width: 40%;
-    left: 135px;
-    top: 180px;
-}
-
 .friendList {
-    background-color: #BF9795;
-    min-width: 80px;
-    max-width: 80px;
-    position: relative;
-    padding: 1px 100px;
-    top: 90px;
-    left: 60px;
+  background-color:#BF9795;
+  min-width: 80px;
+  max-width: 80px;
+  position: relative;
+  padding: 1px 100px;
+  top:90px;
+  left:60px; 
 }
 
-.friendList p.names {
-    text-align: left;
-    color: #f2f2f2;
-    font-size: 17px;
-    text-align: left;
+.friendList p.names{
+  text-align:left;
+  color: #f2f2f2;
+  font-size: 17px;
+  text-align: left;
 }
 
-#fb {
-    width: 500px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    position: relative;
-    height: 175px;
-    top: 120px;
-}
-
-#fb p {
-    font-family: sans-serif;
-    margin: 0 0 0 10px;
-    line-height: 30px;
-}
-
-#fb-top span {
-    color: #4267B2;
-    float: right;
-    margin-right: 10px;
-}
-
-#fb-top {
-    background-color: #3076FF;
-    height: 30px;
-    width: 500px;
-    border-radius: 5px 5px 0 0;
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    border: 1px solid gray;
-}
-
-#fb img {
-    position: absolute;
-    left: 10px;
-    top: 52.5px;
-}
-
-#info {
-    position: absolute;
-    left: 120px;
-    top: 75px;
-}
-
-#info {
-    color: #134FC9;
-    line-height: 25px;
-    font-size: 18px;
-}
-
-#info span {
-    color: #777;
-    font-size: 14px;
-}
-
-#button-block {
-    position: absolute;
-    right: 10px;
-    top: 85px;
-}
-
-#button-block div {
-    display: inline-block;
-}
-
-#pData, #col-75 {
-    display: inline-block;
-
-}
-
-#col-75 {
-    margin: auto;
-    margin-right: auto;
-    position: relative;
-    float: right;
-    top: 80px;
-    left: -40px;
-
-}
-
-.test {
-    margin: auto;
-    margin-right: auto;
-    position: relative;
-    top: 280px;
-    left: -40px;
-}
-
-.biography {
-    min-width: 150px;
-    max-width: 550px;
-    margin: auto;
-    margin-right: auto;
-    position: relative;
-    word-wrap: break-word;
-    top: 150px;
-}
-
-#confirm, #delete {
-    background-color: #4267B2;
-    color: white;
-    padding: 7px;
-    border-radius: 2px;
-    margin-right: 10px;
-    font-family: sans-serif;
-}
-
-#delete {
-    color: #222;
-    background-color: #bbb;
-    border: 1px solid #999;
-    padding: 6px;
-    margin-right: 0;
-}
-
-#button-block div:hover {
-    opacity: .8;
-    cursor: pointer;
-}
 #fb{
   width:500px;
   border:1px solid gray;
