@@ -41,6 +41,7 @@ public class UserController {
     public String initProfile(Principal principal, Model model) {
         //after logging in first time, first data must be set
         //coming soon
+
         return "user";
     }
 }

@@ -1,4 +1,3 @@
-/*insert into USER values(0, 'mart', 242342543545, 'fishing', 'german', 'kalno', 'english')*/
 INSERT INTO user VALUES (
 0, 'Russian',
 'Finnish', 'Estonian;English',
@@ -9,18 +8,17 @@ INSERT INTO user VALUES (
 
 
 /* Json  example
-{
-	"googleId": 4534563456,
-	"firstName": "igor",
-	"lastName": "kozlovski",
-	"languages": "russian",
-	"studyingLangs": "english",
-	"hobbies": "mining"
-}
-INSERT INTO user VALUES (
-  0, 'Karl',
-  'Matti', 'Fishing;Programming', 'Estonian;English', 114005839740106632529,
-  'Finnish', 'Russian',
-  '/img/114005839740106632529.PNG'
-);
- */
+[
+  {
+    "id": 0,
+    "googleId": 3,
+    "firstName": "Karl",
+    "lastName": "Matti",
+    "cLvlLangs": "Estonian;English",
+    "bLvlLangs": "Finnish",
+    "aLvlLangs": "Russian",
+    "hobbies": "Fishing;Programming",
+    "photoLocation": "/img/114005839740106632529.PNG"
+  }
+]
+*/
