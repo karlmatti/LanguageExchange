@@ -1,6 +1,7 @@
 package language.exchange.langex.repo;
 
 import language.exchange.langex.model.User;
+import language.exchange.langex.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserRepository UserRepository;
+    language.exchange.langex.repo.UserRepository UserRepository;
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<User>();
