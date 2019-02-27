@@ -20,14 +20,14 @@ public class MainController {
     public String index(Model model) {
         model.addAttribute("eventName", "FIFA 2018");
         System.out.println(model.toString());
-        return "index";
+        return "signUp";
     }
 
     @PostMapping("/")
     public String postIndex(@RequestParam("text") String text, Model model) {
         model.addAttribute("info", text);
         System.out.println(text);
-        return "index";
+        return "signUp";
     }
 
     @GetMapping("/profile")
@@ -49,6 +49,7 @@ public class MainController {
             model.addAttribute("userId", principal.getName());
             return "user";
         } else {
+            model.addAttribute("userId", principal.getName());
             return "redirect:/profile/";
 
         }
@@ -57,8 +58,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/newUser")
-    public String initProfile(Principal principal,
-                              Model model,
+    public String initProfile(Principal principal, Model model,
                               @RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName,
                               @RequestParam("age") int age,
@@ -66,11 +66,13 @@ public class MainController {
                               @RequestParam("bLvlLangs") String bLvlLangs,
                               @RequestParam("aLvlLangs") String aLvlLangs,
                               @RequestParam("hobbies") String hobbies) {
-        User user = new User(age, principal.getName(), firstName, lastName,
-                cLvlLangs, bLvlLangs, aLvlLangs,
+        User user = new User(age, principal.getName(), firstName, lastName, cLvlLangs, bLvlLangs, aLvlLangs,
                 hobbies, "None");
         System.out.println(user.toString());
+        model.addAttribute("googleID", principal.getName());
+        System.out.println("I am google ID:");
+        System.out.println(principal.getName());
         userService.saveOrUpdate(user);
-        return "redirect:/profile/";
+        return "profile";
     }
 }

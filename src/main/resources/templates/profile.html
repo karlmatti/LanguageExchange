@@ -1,21 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>LangEx - Profile</title>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/css/styles.css}" href="../static/css/styles.css"
+          rel="stylesheet" type="text/css" media="screen"/>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Include Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Include Bootstrap -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+                  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <title>Grand language Exchange - Profile</title>
+
 </head>
 <body>
-<h2>User profile</h2>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+<div class="body-wrapper">
+    <div class="logo">
+        <img src="https://www.gfwcofmn.org/wp-content/uploads/2016/04/cropped-mississippi-headwaters-1200x250-logo.png">
+    </div>
+    <div id = "app">
+    <!--/*@thymesVar id="text" type=""*/-->
+            <span id="googleID" th:text="${googleID}"></span>
+    </div>
+
+
+    <div class="topnav">
+        <a class="active" href="avaleht.html">Avaleht</a>
+        <a href="messenger.html">Messenger</a>
+        <a href="search.html">Search</a>
+        <a href="profile.html">Minu Profiil</a>
+        <a class="logout" href="#">Logi Valja</a>
+    </div>
+    <br>
+    <div class="mainback">
+        <div class="row">
+            <div class="col">
+                <h5 class="alignment">Tere tulemast oma profiilile *Kasutajanimi*</h5>
+                <br>
+                <image id="profileImage" src="http://www.athensparent.com/images/medium300x250.gif"/>
+                <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+                <br>
+            </div>
+            <div class="col">
+                <div id="pData">
+                    <p>Sinu nimi: Andrus</p>
+                    <p>Vanus: 29</p>
+                    <p>Keeled:Eesti, Inglise</p>
+                    <p>Õpitavad keeled: Saksa, Hispaania</p>
+                    <p>Huvid:Kalastamine</p>
+                </div>
+                <div id="col-75">
+                    <input id="name" type="text" name="fname" value="" placeholder="Sinu uus nimi"></input><br><br>
+                    <input id="Age" type="text" name="age" value="" placeholder="Sinu uus vanus"></input><br><br>
+                    <input id="language" type="text" name="lang" value="" placeholder="Sinu uus keel"></input><br><br>
+                    <input id="lLanguage" type="text" name="llang" value=""
+                           placeholder="Sinu uus opitav keel"></input><br><br>
+                    <input id="intrest" type="text" name="intrests" value=""
+                           placeholder="Sinu uus huvi"></input><br><br>
+                </div>
+                <input class="submitbutton" type="submit" value="Salvesta uued andmed">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class=friendList>
+                    <p class="names">Sõbrakutsed</p>
+                </div>
+                <div id="fb">
+                    <div id="fb-top">
+                        <p><b>Friend Requests</b></p>
+                    </div>
+                    <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
+                         height="100" width="100" alt="Image of man">
+                    <p id="info"><b>Rainer Murumaa</b></p>
+                    <div id="button-block">
+                        <div id="confirm">Confirm</div>
+                        <div id="delete">Delete Request</div>
+                    </div>
+                </div>
+                <br>
+                <div id="fb">
+                    <div id="fb-top">
+                        <p><b>Friend Requests</b></p>
+                    </div>
+                    <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
+                         height="100" width="100" alt="Image of man">
+                    <p id="info"><b>Andres Kivil</b></p>
+                    <div id="button-block">
+                        <div id="confirm">Confirm</div>
+                        <div id="delete">Delete Request</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="biography">
+                    <H4>Kasutaja Biogprahy</H4>
+                    <p>dwjkajdiwajidwajidjwiadjiwajdiwjaidjawidjwijdiwajdiwjaidjiwajdiwajdiwjidwjaidjwiadjiwjdiwjdiwjaidwjaidjwiadjwidjiwjdiwjaidjwiadjwiajdiwajidajdiwamdmwadkwadjiwjdiajiwjadijwajdiwjdia</p>
+                    <br>
+                    <textarea rows="4" cols="50" placeholder="Kirjuta siia oma biography"></textarea>
+                    <input type="submit" value="Salvesta enda bio">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="/js/profile.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
 </body>
 </html>

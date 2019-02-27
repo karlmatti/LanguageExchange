@@ -58,8 +58,7 @@
             -->
             <ul>
                 <li style="list-style-type:none" v-for="player in players">
-                    <player-card
-                            v-bind:player="player" v-bind:key="player.id">
+                    <player-card v-bind:player="player" v-bind:key="player.id">
                     </player-card>
                 </li>
             </ul>

@@ -15,7 +15,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/index.html", "/users")
+                .antMatchers("/", "/signUp.html", "/users")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

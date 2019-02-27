@@ -32,6 +32,10 @@ public class UserService {
         UserRepository.deleteById(id);
     }
 
+    /*public void update(int id, User user) {
+        UserRepository.
+    }*/
+
     public boolean checkUserStatus(String googleId) {
         List<User> users = getAllUsers();
         for (int i = 0; i < users.size(); i++) {

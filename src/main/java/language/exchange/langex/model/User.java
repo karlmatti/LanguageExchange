@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue
     private @Id
     int id;
-    int age;
+    private int age;
     private String googleId;
     private String firstName;
     private String lastName;
