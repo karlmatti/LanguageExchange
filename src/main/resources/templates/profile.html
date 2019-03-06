@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +29,7 @@
     <div class="logo">
         <img src="https://www.gfwcofmn.org/wp-content/uploads/2016/04/cropped-mississippi-headwaters-1200x250-logo.png">
     </div>
+
     <div id = "app">
     <!--/*@thymesVar id="text" type=""*/-->
             <span id="googleID" th:text="${googleID}"></span>
@@ -36,11 +37,10 @@
 
 
     <div class="topnav">
-        <a class="active" href="avaleht.html">Avaleht</a>
         <a href="messenger.html">Messenger</a>
         <a href="search.html">Search</a>
-        <a href="profile.html">Minu Profiil</a>
-        <a class="logout" href="#">Logi Valja</a>
+        <a class="active" href="profile.html">My Profile</a>
+        <a class="logout" href="/logout">Log Out</a>
     </div>
     <br>
     <div class="mainback">
