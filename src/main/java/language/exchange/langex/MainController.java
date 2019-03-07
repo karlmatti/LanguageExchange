@@ -20,14 +20,14 @@ public class MainController {
     public String index(Model model) {
         model.addAttribute("eventName", "FIFA 2018");
         System.out.println(model.toString());
-        return "signUp";
+        return "start";
     }
 
     @PostMapping("/")
     public String postIndex(@RequestParam("text") String text, Model model) {
         model.addAttribute("info", text);
         System.out.println(text);
-        return "signUp";
+        return "start";
     }
 
     @GetMapping("/profile")
@@ -47,17 +47,17 @@ public class MainController {
         boolean userStatus = userService.checkUserStatus(principal.getName());
         if (userStatus) {
             model.addAttribute("userId", principal.getName());
-            return "user";
+            return "signUp";
         } else {
-            model.addAttribute("userId", principal.getName());
-            return "redirect:/profile/";
+            //model.addAttribute("userId", principal.getName());
+            return "profile";
 
         }
 
 
     }
 
-    @RequestMapping(path = "/newUser")
+    @PostMapping("/user")
     public String initProfile(Principal principal, Model model,
                               @RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName,
@@ -65,14 +65,16 @@ public class MainController {
                               @RequestParam("cLvlLangs") String cLvlLangs,
                               @RequestParam("bLvlLangs") String bLvlLangs,
                               @RequestParam("aLvlLangs") String aLvlLangs,
-                              @RequestParam("hobbies") String hobbies) {
+                              @RequestParam("hobbies") String hobbies,
+                              @RequestParam("bioGraphy") String bioGraphy) {
         User user = new User(age, principal.getName(), firstName, lastName, cLvlLangs, bLvlLangs, aLvlLangs,
-                hobbies, "None");
+                hobbies, "default.PNG", bioGraphy);
         System.out.println(user.toString());
         model.addAttribute("googleID", principal.getName());
         System.out.println("I am google ID:");
         System.out.println(principal.getName());
         userService.saveOrUpdate(user);
-        return "profile";
+
+        return "redirect:/profile";
     }
 }

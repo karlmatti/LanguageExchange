@@ -19,6 +19,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+        //https://www.baeldung.com/spring-session
 
         //in order to allow use h2 database
         http.csrf().disable();
