@@ -3,6 +3,7 @@ package language.exchange.langex;
 
 import language.exchange.langex.repo.UserService;
 import language.exchange.langex.model.User;
+import org.bouncycastle.math.raw.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,16 +31,16 @@ public class MainController {
         return "start";
     }
 
-    @GetMapping("/profile")
-    public String index() {
-
+   @GetMapping("/profile")
+     public String profile(Principal principal, Model model) {
+        model.addAttribute("googleID", principal.getName());
         return "profile";
     }
 
-    @PostMapping("/profile")
-    public String profile() {
-
-        return "profile";
+    @GetMapping("/signUp")
+    public String signUp(Principal principal, Model model) {
+        model.addAttribute("googleID", principal.getName());
+        return "signUp";
     }
 
     @GetMapping("/user")
@@ -47,17 +48,14 @@ public class MainController {
         boolean userStatus = userService.checkUserStatus(principal.getName());
         if (userStatus) {
             model.addAttribute("userId", principal.getName());
-            return "signUp";
+            return "redirect:/signUp";
         } else {
             //model.addAttribute("userId", principal.getName());
             return "profile";
-
         }
-
-
     }
 
-    @PostMapping("/user")
+    @PostMapping("/signUp")
     public String initProfile(Principal principal, Model model,
                               @RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName,
@@ -70,7 +68,6 @@ public class MainController {
         User user = new User(age, principal.getName(), firstName, lastName, cLvlLangs, bLvlLangs, aLvlLangs,
                 hobbies, "default.PNG", bioGraphy);
         System.out.println(user.toString());
-        model.addAttribute("googleID", principal.getName());
         System.out.println("I am google ID:");
         System.out.println(principal.getName());
         userService.saveOrUpdate(user);
