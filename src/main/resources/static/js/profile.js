@@ -18,7 +18,7 @@ Vue.component('messages-list', {
 });
 
 var app = new Vue ({
-    el: '#app',
+    el: '#pData',
     template: '<messages-list v-bind:get="messages" ></messages-list>',
     data: {
         messages: []
@@ -30,6 +30,10 @@ var app = new Vue ({
                 if (user.googleId == temp) {
                 return this.messages.push(user);
         }}))
-    )}
+    )},
+    mounted: function() {
+        console.log("bla");
+        console.log(this.$refs.testElement);
+    }
 });
 console.log("right right right");
