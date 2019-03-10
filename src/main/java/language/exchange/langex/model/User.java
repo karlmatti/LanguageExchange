@@ -21,6 +21,7 @@ public class User {
     private String aLvlLangs;
     private String hobbies;
     private String photoLocation;
+    private String bioGraphy;
 
 
     public User() {
@@ -28,7 +29,8 @@ public class User {
 
     public User(int age, String googleId, String firstName,
                 String lastName, String cLvlLangs, String bLvlLangs,
-                String aLvlLangs, String hobbies, String photoLocation) {
+                String aLvlLangs, String hobbies, String photoLocation,
+                String bioGraphy) {
         this.age = age;
         this.googleId = googleId;
         this.firstName = firstName;
@@ -38,6 +40,7 @@ public class User {
         this.aLvlLangs = aLvlLangs;
         this.hobbies = hobbies;
         this.photoLocation = photoLocation;
+        this.bioGraphy = bioGraphy;
     }
 
     public int getId() {
@@ -120,6 +123,14 @@ public class User {
         this.photoLocation = photoLocation;
     }
 
+    public String getBioGraphy() {
+        return bioGraphy;
+    }
+
+    public void setBioGraphy(String bioGraphy) {
+        this.bioGraphy = bioGraphy;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -133,6 +144,7 @@ public class User {
                 ", aLvlLangs='" + aLvlLangs + '\'' +
                 ", hobbies='" + hobbies + '\'' +
                 ", photoLocation='" + photoLocation + '\'' +
+                ", bioGraphy='" + bioGraphy + '\'' +
                 '}';
     }
 }

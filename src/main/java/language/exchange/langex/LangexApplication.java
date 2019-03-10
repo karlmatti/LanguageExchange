@@ -9,7 +9,8 @@ public class LangexApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(LangexApplication.class, args);
+
+
     }
 
 }
-
