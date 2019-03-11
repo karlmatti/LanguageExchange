@@ -9,9 +9,9 @@ import javax.persistence.Id;
 @Entity
 public class User {
 
-    @GeneratedValue
+    //@GeneratedValue
     private @Id
-    int id;
+    String id;
     private int age;
     private String googleId;
     private String firstName;
@@ -31,6 +31,7 @@ public class User {
                 String lastName, String cLvlLangs, String bLvlLangs,
                 String aLvlLangs, String hobbies, String photoLocation,
                 String bioGraphy) {
+        this.id = googleId;
         this.age = age;
         this.googleId = googleId;
         this.firstName = firstName;
@@ -43,11 +44,11 @@ public class User {
         this.bioGraphy = bioGraphy;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

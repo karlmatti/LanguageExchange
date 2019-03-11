@@ -24,7 +24,8 @@ public class UserService {
         return UserRepository.findById(id).get();
     }
 
-    public void saveOrUpdate(User user) {
+    public void saveOrUpdate(User user)
+    {
         UserRepository.save(user);
     }
 
@@ -32,9 +33,10 @@ public class UserService {
         UserRepository.deleteById(id);
     }
 
-    /*public void update(int id, User user) {
-        UserRepository.
-    }*/
+    public void update(int id, User user) {
+        UserRepository.deleteById(id);
+        UserRepository.save(user);
+    }
 
     public boolean checkUserStatus(String googleId) {
         List<User> users = getAllUsers();

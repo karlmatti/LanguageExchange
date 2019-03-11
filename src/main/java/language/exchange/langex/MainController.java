@@ -33,7 +33,21 @@ public class MainController {
 
    @GetMapping("/profile")
      public String profile(Principal principal, Model model) {
-        model.addAttribute("googleID", principal.getName());
+       model.addAttribute("googleID", principal.getName());
+        return "profile";
+    }
+
+    @PostMapping("/profile")
+    public String updateProfile(Principal principal, Model model,
+                                @RequestParam("fname") String firstName,
+                                @RequestParam("age") int age,
+                                @RequestParam("lang") String language,
+                                @RequestParam("llang") String lLangauge,
+                                @RequestParam("intrests") String interests) {
+        User user = new User(age, principal.getName(), firstName, "lastName", language, lLangauge, "unknown",
+                interests, "default.PNG", "biography");
+
+        userService.saveOrUpdate(user);
         return "profile";
     }
 
