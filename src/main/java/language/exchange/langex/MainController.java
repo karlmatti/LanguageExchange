@@ -48,6 +48,7 @@ public class MainController {
                 interests, "default.PNG", "biography");
 
         userService.saveOrUpdate(user);
+        model.addAttribute("googleID", principal.getName());
         return "profile";
     }
 
