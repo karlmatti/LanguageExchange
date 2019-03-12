@@ -3,12 +3,16 @@ package language.exchange.langex;
 
 import language.exchange.langex.repo.UserService;
 import language.exchange.langex.model.User;
-import org.bouncycastle.math.raw.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 
@@ -21,14 +25,14 @@ public class MainController {
     public String index(Model model) {
         model.addAttribute("eventName", "FIFA 2018");
         System.out.println(model.toString());
-        return "start";
+        return "index";
     }
 
     @PostMapping("/")
     public String postIndex(@RequestParam("text") String text, Model model) {
         model.addAttribute("info", text);
         System.out.println(text);
-        return "start";
+        return "index";
     }
 
    @GetMapping("/profile")
@@ -66,7 +70,7 @@ public class MainController {
             return "redirect:/signUp";
         } else {
             //model.addAttribute("userId", principal.getName());
-            return "profile";
+            return "redirect:/profile";
         }
     }
 
@@ -88,5 +92,15 @@ public class MainController {
         userService.saveOrUpdate(user);
 
         return "redirect:/profile";
+    }
+
+    @GetMapping("/client/logout")
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        System.out.println("olen logoutis");
+        return "redirect:/";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
     }
 }

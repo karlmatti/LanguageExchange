@@ -10,15 +10,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .csrf()
                 .disable()
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/signUp.html", "/users")
+                .antMatchers("/", "/users")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+
         //https://www.baeldung.com/spring-session
 
         //in order to allow use h2 database

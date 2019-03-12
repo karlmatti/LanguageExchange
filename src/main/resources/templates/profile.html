@@ -40,7 +40,7 @@
         <a href="messenger.html">Messenger</a>
         <a href="search.html">Search</a>
         <a class="active" href="profile.html">My Profile</a>
-        <a class="logout" href="/logout">Log Out</a>
+        <a class="logout" href="/client/logout">Log Out</a>
     </div>
     <br>
     <div class="mainback">
@@ -56,8 +56,9 @@
                 <div id="pData">
                     <p>Sinu nimi: {{messages.firstName}} {{messages.lastName}}</p>
                     <p>Vanus: {{messages.age}}</p>
-                    <p>Keeled: {{messages.cLvlLangs}} {{messages.blvlLangs}} {{messages.aLvlLangs}}</p>
-                    <p>Õpitavad keeled: Saksa, Hispaania</p>
+                    <p>C tasemel keeled: {{messages.cLvlLangs}}</p>
+                    <p>B tasemel keeled: {{messages.blvlLangs}}</p>
+                    <p>A tasemel keeled: {{messages.aLvlLangs}}</p>
                     <p>Huvid: {{messages.hobbies}}</p>
                 </div>
                 <div id="col-75">
