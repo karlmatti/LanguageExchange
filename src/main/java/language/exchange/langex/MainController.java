@@ -103,4 +103,11 @@ public class MainController {
         System.out.println("olen logoutis");
         return "redirect:/";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
     }
+
+    @GetMapping("/search")
+    public String search(Principal principal, Model model) {
+        System.out.println("tsauki " + principal.getName());
+        return "search";
+    }
+
 }
