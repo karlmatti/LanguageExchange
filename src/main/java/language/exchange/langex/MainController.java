@@ -1,8 +1,10 @@
 package language.exchange.langex;
 
 
-import language.exchange.langex.repo.UserService;
+import language.exchange.langex.model.Friends;
 import language.exchange.langex.model.User;
+import language.exchange.langex.repo.FriendsService;
+import language.exchange.langex.repo.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -107,12 +109,21 @@ public class MainController {
     @GetMapping("/search")
     public String search(Principal principal, Model model) {
         System.out.println("tsauki " + principal.getName());
+
         return "search";
     }
 
     @GetMapping("/messenger")
-    public String messanger(Principal principal, Model model) {
+    public String messenger(Principal principal, Model model) {
         return "messenger";
+    }
+
+    @GetMapping("/friends")
+    public String friends(Principal principal) {
+        //FriendsService service = new FriendsService();
+        //System.out.println(service.getUserFriends(principal.getName()).toString());
+
+        return principal.getName();
     }
 
 }

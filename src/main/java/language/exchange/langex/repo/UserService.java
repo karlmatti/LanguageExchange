@@ -11,7 +11,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    language.exchange.langex.repo.UserRepository UserRepository;
+    UserRepository UserRepository;
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<User>();
@@ -36,6 +36,7 @@ public class UserService {
         UserRepository.deleteById(id);
         UserRepository.save(user);
     }
+
 
     public boolean checkUserStatus(String googleId) {
         List<User> users = getAllUsers();

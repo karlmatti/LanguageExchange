@@ -24,7 +24,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         //https://www.baeldung.com/spring-session
 
         //in order to allow use h2 database
-        http.csrf().disable();
         http.headers().frameOptions().disable();
     }
 }
