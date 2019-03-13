@@ -13,7 +13,6 @@ public class User {
     private @Id
     String id;
     private int age;
-    private String googleId;
     private String firstName;
     private String lastName;
     private String cLvlLangs;
@@ -33,7 +32,6 @@ public class User {
                 String bioGraphy) {
         this.id = googleId;
         this.age = age;
-        this.googleId = googleId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.cLvlLangs = cLvlLangs;
@@ -58,14 +56,6 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getGoogleId() {
-        return googleId;
-    }
-
-    public void setGoogleId(String googleId) {
-        this.googleId = googleId;
     }
 
     public String getFirstName() {
@@ -137,7 +127,6 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", age=" + age +
-                ", googleId='" + googleId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", cLvlLangs='" + cLvlLangs + '\'' +

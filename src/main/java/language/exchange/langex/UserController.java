@@ -37,7 +37,7 @@ public class UserController {
     @PostMapping("/users")
     private String saveUser(@RequestBody User user) {
         userService.saveOrUpdate(user);
-        return user.getGoogleId();
+        return user.getId();
     }
 /*
     @GetMapping("/logout")
