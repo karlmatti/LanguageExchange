@@ -110,4 +110,9 @@ public class MainController {
         return "search";
     }
 
+    @GetMapping("/messenger")
+    public String messanger(Principal principal, Model model) {
+        return "messenger";
+    }
+
 }

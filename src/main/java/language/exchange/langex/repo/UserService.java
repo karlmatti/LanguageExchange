@@ -40,7 +40,7 @@ public class UserService {
     public boolean checkUserStatus(String googleId) {
         List<User> users = getAllUsers();
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getGoogleId().equals(googleId)) {
+            if (users.get(i).getId().equals(googleId)) {
                 return false;
             }
         }
