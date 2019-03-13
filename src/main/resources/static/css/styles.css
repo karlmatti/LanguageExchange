@@ -4,8 +4,8 @@
     margin: auto;
 }
 .logo {
-  max-width: 1000;
-  max-height: 250;
+  max-width: 1200px;
+  max-height: 250px;
   word-wrap: break-word;
 }
 .topnav {
@@ -61,8 +61,8 @@
   text-align: center;
 }
 img {
-  width: 300px;
-  height: 250px;
+  width: auto;
+  height: auto;
   margin: auto;
   display: block;
   margin-bottom: 10px;
