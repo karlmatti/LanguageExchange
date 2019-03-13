@@ -22,6 +22,9 @@ import java.security.Principal;
 public class MainController {
     @Autowired
     UserService userService;
+    @Autowired
+    FriendsService friendsService;
+
 
     @GetMapping("/")
     public String index(Model model) {
@@ -37,9 +40,9 @@ public class MainController {
         return "index";
     }
 
-   @GetMapping("/profile")
-     public String profile(Principal principal, Model model) {
-       model.addAttribute("googleID", principal.getName());
+    @GetMapping("/profile")
+    public String profile(Principal principal, Model model) {
+        model.addAttribute("googleID", principal.getName());
         return "profile";
     }
 
@@ -121,9 +124,9 @@ public class MainController {
     @GetMapping("/friends")
     public String friends(Principal principal) {
         //FriendsService service = new FriendsService();
-        //System.out.println(service.getUserFriends(principal.getName()).toString());
+        System.out.println(friendsService.getUserFriends(principal.getName()).toString());
 
-        return principal.getName();
+        return "profile";
     }
 
 }
