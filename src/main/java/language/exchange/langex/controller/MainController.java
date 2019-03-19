@@ -1,4 +1,4 @@
-package language.exchange.langex;
+package language.exchange.langex.controller;
 
 
 import language.exchange.langex.model.Friends;
@@ -13,9 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -29,6 +32,12 @@ public class MainController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("eventName", "FIFA 2018");
+        System.out.println(model.toString());
+        List<User> users = userService.getAllUsers();
+        users.add(new User(1, "231111123123123", "firstname",
+                "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
+                "hobbies", "default.PNG", "bioGraphy"));
+        model.addAttribute("users", users);
         System.out.println(model.toString());
         return "index";
     }
@@ -110,11 +119,55 @@ public class MainController {
     }
 
     @GetMapping("/search")
-    public String search(Principal principal, Model model) {
-        System.out.println("tsauki " + principal.getName());
+    public String search() {
+        return "search";
+    }
+
+    @GetMapping("/searchResults")
+    private String searchUsers(@RequestParam("criteria") int criteria,
+                               @RequestParam("keyword") String keyword, Model model) {
+        List<User> allUsers = userService.getAllUsers();
+        allUsers.add(new User(1, "231111123123123", "firstname",
+                "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
+                "hobbies", "default.PNG", "bioGraphy"));
+        List<User> returnedUsers = new ArrayList<>();
+        for (User user : allUsers) {
+            String firstName = user.getFirstName();
+            String lastName = user.getLastName();
+            String hobbies = user.getHobbies();
+            String cLvlLangs = user.getcLvlLangs();
+            String bLvlLangs = user.getbLvlLangs();
+            String aLvlLangs = user.getaLvlLangs();
+            if (criteria == 0) { // by names, hobbies, languages
+                if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
+                        hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
+                        bLvlLangs.indexOf(keyword) != -1 || aLvlLangs.indexOf(keyword) != -1) {
+                    returnedUsers.add(user);
+                }
+            } else if (criteria == 1) { // by names
+                if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1) {
+                    returnedUsers.add(user);
+                }
+            } else if (criteria == 2) { // by hobbies
+                if (hobbies.indexOf(keyword) != -1) {
+                    returnedUsers.add(user);
+                }
+            } else if (criteria == 3) { // by languages
+                if (cLvlLangs.indexOf(keyword) != -1 || bLvlLangs.indexOf(keyword) != -1 ||
+                        aLvlLangs.indexOf(keyword) != -1) {
+                    returnedUsers.add(user);
+                }
+            }
+
+        }
+
+
+        model.addAttribute("users", returnedUsers);
+
 
         return "search";
     }
+
 
     @GetMapping("/messenger")
     public String messenger(Principal principal, Model model) {

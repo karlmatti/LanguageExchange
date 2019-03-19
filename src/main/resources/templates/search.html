@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -27,18 +27,20 @@
     <br>
     <div class="mainback">
         <div class="container">
+
             <div class="row">
                 <div class="col-md-12">
                     <br>
 
-                    <form method="POST" class="input-group" id="adv-search">
+                    <form method="GET" class="input-group" id="adv-search" action="/searchResults">
 
-                        <input type="text" name="text" class="form-control" placeholder="Insert keyword" value=""/>
+                        <input type="text" name="keyword" class="form-control" placeholder="Insert keyword" value=""
+                               required/>
 
                         <div class="dropdown dropdown-lg">
                             <div class="form-group">
 
-                                <select class="form-control" name="choice">
+                                <select class="form-control" name="criteria">
                                     <option value="0" selected>All Choices</option>
                                     <option value="1">By Name</option>
                                     <option value="2">By Hobbies</option>
@@ -52,6 +54,41 @@
 
                 </div>
 
+            </div>
+
+            <div class="row">
+                <div class="caption" th:each="user : ${users}">
+                    <strong>User <p th:text="${user.getId()}"></p></strong>
+                    First name:
+                    <span th:text="${user.getFirstName()}"></span>
+                    <br>
+                    Last name:
+                    <span th:text="${user.getLastName()}"></span>
+                    <br>
+                    Age:
+                    <span th:text="${user.getAge()}"></span>
+                    <br>
+                    C Lvl Language(s):
+                    <span th:text="${user.getcLvlLangs()}"></span>
+                    <br>
+                    B Lvl Language(s):
+                    <span th:text="${user.getbLvlLangs()}"></span>
+                    <br>
+                    A Lvl Language(s):
+                    <span th:text="${user.getaLvlLangs()}"></span>
+                    <br>
+                    Hobbies:
+                    <span th:text="${user.getHobbies()}"></span>
+                    <br>
+                    Bio:
+                    <span th:text="${user.getBioGraphy()}"></span>
+                    <br>
+                    Photo location:
+                    <span th:text="${user.getPhotoLocation()}"></span>
+                    <br>
+                    <br>
+
+                </div>
             </div>
 
         </div>
