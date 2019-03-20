@@ -8,7 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link th:href="@{/css/styles.css}" href="../static/css/styles.css"
+          rel="stylesheet" type="text/css" media="screen"/>
 
     <title>Grand language Exchange</title>
 </head>
@@ -57,7 +58,10 @@
             </div>
 
             <div class="row">
-                <div class="caption" th:each="user : ${users}">
+                <div class="col-sm-4" th:each="user : ${users}">
+                    <div class="thumbnail">
+                        <img src="http://www.athensparent.com/images/medium300x250.gif">
+                    </div>
                     <strong>User <p th:text="${user.getId()}"></p></strong>
                     First name:
                     <span th:text="${user.getFirstName()}"></span>
@@ -95,118 +99,7 @@
     </div>
 </div>
 <br>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="thumbnail">
-                <img src="http://www.athensparent.com/images/medium300x250.gif">
-                <div class="caption">
-                    <h4>Kasutaja nimi</h4>
-                    <p>Nimi: Andrus</p>
-                    <p>Vanus: Andrus</p>
-                    <p>Keeled: Andrus</p>
-                    <p>Õpitavad keeled: Andrus</p>
-                    <p>Huvid: Andrus</p>
-                    <a href="#" class="btn btn-default btn-xs pull-right" role="button"><i
-                            class="glyphicon glyphicon-edit"></i></a> <a href="#"
-                                                                         class="btn btn-info btn-xs"
-                                                                         role="button">Lisa Sobraks</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="col">
-            <div class="thumbnail">
-                <img src="http://www.athensparent.com/images/medium300x250.gif">
-                <div class="caption">
-                    <h4>Kasutaja nimi</h4>
-                    <p>Nimi: Andrus</p>
-                    <p>Vanus: Andrus</p>
-                    <p>Keeled: Andrus</p>
-                    <p>Õpitavad keeled: Andrus</p>
-                    <p>Huvid: Andrus</p>
-                    <a href="#" class="btn btn-default btn-xs pull-right" role="button"><i
-                            class="glyphicon glyphicon-edit"></i></a> <a href="#"
-                                                                         class="btn btn-info btn-xs"
-                                                                         role="button">Lisa Sobraks</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="thumbnail">
-                <img src="http://www.athensparent.com/images/medium300x250.gif">
-                <div class="caption">
-                    <h4>Kasutaja nimi</h4>
-                    <p>Nimi: Andrus</p>
-                    <p>Vanus: Andrus</p>
-                    <p>Keeled: Andrus</p>
-                    <p>Õpitavad keeled: Andrus</p>
-                    <p>Huvid: Andrus</p>
-                    <a href="#" class="btn btn-default btn-xs pull-right" role="button"><i
-                            class="glyphicon glyphicon-edit"></i></a> <a href="#"
-                                                                         class="btn btn-info btn-xs"
-                                                                         role="button">Lisa Sobraks</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="thumbnail">
-                <img src="http://www.athensparent.com/images/medium300x250.gif">
-                <div class="caption">
-                    <h4>Kasutaja nimi</h4>
-                    <p>Nimi: Andrus</p>
-                    <p>Vanus: Andrus</p>
-                    <p>Keeled: Andrus</p>
-                    <p>Õpitavad keeled: Andrus</p>
-                    <p>Huvid: Andrus</p>
-                    <a href="#" class="btn btn-default btn-xs pull-right" role="button"><i
-                            class="glyphicon glyphicon-edit"></i></a> <a href="#"
-                                                                         class="btn btn-info btn-xs"
-                                                                         role="button">Lisa Sobraks</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="thumbnail">
-                <img src="http://www.athensparent.com/images/medium300x250.gif">
-                <div class="caption">
-                    <h4>Kasutaja nimi</h4>
-                    <p>Nimi: Andrus</p>
-                    <p>Vanus: Andrus</p>
-                    <p>Keeled: Andrus</p>
-                    <p>Õpitavad keeled: Andrus</p>
-                    <p>Huvid: Andrus</p>
-                    <a href="#" class="btn btn-default btn-xs pull-right" role="button"><i
-                            class="glyphicon glyphicon-edit"></i></a> <a href="#"
-                                                                         class="btn btn-info btn-xs"
-                                                                         role="button">Lisa Sobraks</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="thumbnail">
-                <img src="http://www.athensparent.com/images/medium300x250.gif">
-                <div class="caption">
-                    <h4>Kasutaja nimi</h4>
-                    <p>Nimi: Andrus</p>
-                    <p>Vanus: Andrus</p>
-                    <p>Keeled: Andrus</p>
-                    <p>Õpitavad keeled: Andrus</p>
-                    <p>Huvid: Andrus</p>
-                    <a href="#" class="btn btn-default btn-xs pull-right" role="button"><i
-                            class="glyphicon glyphicon-edit"></i></a> <a href="#"
-                                                                         class="btn btn-info btn-xs"
-                                                                         role="button">Lisa Sobraks</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 
 <!-- Optional JavaScript -->
