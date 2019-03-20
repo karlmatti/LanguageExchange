@@ -4,8 +4,8 @@
   margin: auto;
 }
 .logo {
-  max-width: 1200;
-  max-height: 250;
+  max-width: 1200px;
+  max-height: 250px;
   word-wrap: break-word;
 }
 .button{
@@ -17,6 +17,7 @@
 }
 #bannerImage{
   width: 1200px;
+  height:250px;
 }
 .card-body{
   background-color: #000089;
@@ -69,7 +70,7 @@
   left: 90px;
 }
 #pData{
-  max-width: 60px
+  max-width: 60px;
   margin:auto;
   margin-right: auto;
   word-wrap: break-word;
@@ -80,7 +81,7 @@
 }
 
 .submitbutton{
-  margin-right: right;
+  margin-right:0px;
   position: relative;
   float: right;
   width: 40%;
@@ -272,7 +273,7 @@
 .thumbnail{
   min-width: 300px;
   max-width: 300px;
-  padding:1;
+  padding:1px;
   border:2px solid red
 }
 .contain{max-width:1170px; margin:auto;}
@@ -295,7 +296,7 @@ img{ max-width:100%;}
 .srch_bar {
   display: inline-block;
   text-align: right;
-  width: 60%; padding:
+  width: 60%;
 }
 .headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
 
@@ -427,13 +428,6 @@ img{ max-width:100%;}
 span.label {
   font-family: serif;
   font-weight: normal;
-}
-span.icon {
-  background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
-  display: inline-block;
-  vertical-align: middle;
-  width: 42px;
-  height: 42px;
 }
 span.buttonText {
   display: inline-block;

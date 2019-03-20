@@ -37,14 +37,14 @@ public class MainController {
                 "hobbies", "default.PNG", "bioGraphy"));
         model.addAttribute("users", users);
         System.out.println(model.toString());
-        return "start";
+        return "home";
     }
 
     @PostMapping("/")
     public String postIndex(@RequestParam("text") String text, Model model) {
         model.addAttribute("info", text);
         System.out.println(text);
-        return "start";
+        return "home";
     }
 
     @GetMapping("/profile")
