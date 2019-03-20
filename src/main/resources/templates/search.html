@@ -10,6 +10,11 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link th:href="@{/css/styles.css}" href="../static/css/styles.css"
           rel="stylesheet" type="text/css" media="screen"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 
     <title>Grand language Exchange</title>
 </head>
@@ -90,7 +95,13 @@
                     Photo location:
                     <span th:text="${user.getPhotoLocation()}"></span>
                     <br>
-                    <br>
+                    <form action="/addFriends" method="post">
+                        <input type="hidden" th:value="${googleID}" name="userId"/>
+                        <input type="hidden" th:value="${user.getId()}" name="friendId"/>
+
+                        <button type="submit" class="btn btn-primary">Add Friend</button>
+                    </form>
+
 
                 </div>
             </div>
@@ -100,7 +111,9 @@
 </div>
 <br>
 
-
+<script src="/js/search.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

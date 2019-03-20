@@ -86,6 +86,16 @@ public class MainController {
         }
     }
 
+    public boolean checkUser(Principal principal, Model model) {
+        boolean userStatus = userService.checkUserStatus(principal.getName());
+        if (userStatus) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
     @PostMapping("/signUp")
     public String initProfile(Principal principal, Model model,
                               @RequestParam("firstName") String firstName,
@@ -123,7 +133,9 @@ public class MainController {
 
     @GetMapping("/searchResults")
     private String searchUsers(@RequestParam("criteria") int criteria,
-                               @RequestParam("keyword") String keyword, Model model) {
+                               @RequestParam("keyword") String keyword,
+                               Model model,
+                               Principal principal) {
         List<User> allUsers = userService.getAllUsers();
         allUsers.add(new User(1, "231111123123123", "firstname",
                 "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
@@ -138,29 +150,33 @@ public class MainController {
             String bLvlLangs = user.getbLvlLangs().toLowerCase();
             String aLvlLangs = user.getaLvlLangs().toLowerCase();
             keyword = keyword.toLowerCase();
-            if (criteria == 0) { // by names, hobbies, languages
-                if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
-                        hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
-                        bLvlLangs.indexOf(keyword) != -1 || aLvlLangs.indexOf(keyword) != -1) {
-                    returnedUsers.add(user);
-                }
-            } else if (criteria == 1) { // by names
-                if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1) {
-                    returnedUsers.add(user);
-                }
-            } else if (criteria == 2) { // by hobbies
-                if (hobbies.indexOf(keyword) != -1) {
-                    returnedUsers.add(user);
-                }
-            } else if (criteria == 3) { // by languages
-                if (cLvlLangs.indexOf(keyword) != -1 || bLvlLangs.indexOf(keyword) != -1 ||
-                        aLvlLangs.indexOf(keyword) != -1) {
-                    returnedUsers.add(user);
+
+            if (!principal.getName().equals(user.getId())) {
+                System.out.println("principal name: " + principal.getName() + "and userid: " + user.getId());
+                if (criteria == 0) { // by names, hobbies, languages
+                    if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
+                            hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
+                            bLvlLangs.indexOf(keyword) != -1 || aLvlLangs.indexOf(keyword) != -1) {
+                        returnedUsers.add(user);
+                    }
+                } else if (criteria == 1) { // by names
+                    if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1) {
+                        returnedUsers.add(user);
+                    }
+                } else if (criteria == 2) { // by hobbies
+                    if (hobbies.indexOf(keyword) != -1) {
+                        returnedUsers.add(user);
+                    }
+                } else if (criteria == 3) { // by languages
+                    if (cLvlLangs.indexOf(keyword) != -1 || bLvlLangs.indexOf(keyword) != -1 ||
+                            aLvlLangs.indexOf(keyword) != -1) {
+                        returnedUsers.add(user);
+                    }
                 }
             }
 
         }
-
+        model.addAttribute("googleID", principal.getName());
         model.addAttribute("users", returnedUsers);
 
         return "search";
@@ -179,5 +195,6 @@ public class MainController {
 
         return "profile";
     }
+
 
 }

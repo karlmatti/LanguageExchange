@@ -3,6 +3,7 @@ package language.exchange.langex;
 
 import language.exchange.langex.model.User;
 
+import language.exchange.langex.repo.FriendsService;
 import language.exchange.langex.repo.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    FriendsService friendsService;
 
     @GetMapping("/users")
     private List<User> getAllUsers() {
@@ -31,12 +34,25 @@ public class UserController {
         userService.delete(id);
     }
 
+    /*
     @PostMapping("/users")
     private String saveUser(@RequestBody User user) {
         userService.saveOrUpdate(user);
         return user.getId();
     }
-
+    */
+    @PostMapping("/addFriends")
+    public String addFriends(@RequestParam("userId") String userId,
+                             @RequestParam("friendId") String friendId) {
+        boolean successful = friendsService.addFriends(userId, friendId);
+        if (successful) {
+            System.out.println(userId + " and " + friendId + " are now friends!");
+        } else {
+            System.out.println("Sorry but they are already friends!");
+        }
+        //returns friends profile later
+        return "search";
+    }
 
 /*
     @GetMapping("/logout")
