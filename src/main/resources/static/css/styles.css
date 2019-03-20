@@ -1,16 +1,25 @@
 .body-wrapper{
-    min-width: 1200px;
-    max-width: 1200px;
-    margin: auto;
+  min-width: 1200px;
+  max-width: 1200px;
+  margin: auto;
 }
 .logo {
-  max-width: 1200px;
-  max-height: 250px;
+  max-width: 1200;
+  max-height: 250;
   word-wrap: break-word;
+}
+.button{
+  float: right;
 }
 .topnav {
   background-color: #333;
   overflow: hidden;
+}
+#bannerImage{
+  width: 1200px;
+}
+.card-body{
+  background-color: #000089;
 }
 .topnav a {
   float: left;
@@ -29,15 +38,15 @@
   color: white;
 }
 .topnav a.logout {
-    color: #f2f2f2;
-    color: white;
-    float: right;
+  color: #f2f2f2;
+  color: white;
+  float: right;
 }
 .mainback {
   background-color: #333;
-  min-height:1200px;
-    max-height: 1200px;
-    color: white;
+  min-height:1400px;
+  max-height: 1200px;
+  color:white;
 }
 .mainback h2.alignment{
   position: relative;
@@ -58,20 +67,9 @@
   position: relative;
   top: 20px;
   left: 90px;
-  text-align: center;
-}
-img {
-  width: auto;
-  height: auto;
-  margin: auto;
-  display: block;
-  margin-bottom: 10px;
-}
-button {
-
 }
 #pData{
-  max-width: 60px;
+  max-width: 60px
   margin:auto;
   margin-right: auto;
   word-wrap: break-word;
@@ -96,7 +94,7 @@ button {
   position: relative;
   padding: 1px 100px;
   top:90px;
-    left: 60px;
+  left:60px;
 }
 
 .friendList p.names{
@@ -196,9 +194,18 @@ button {
   margin-right: auto;
   position: relative;
   word-wrap: break-word;
+  top:50px;
+  left:240px;
+}
+.mYbiography{
+  min-width: 150px;
+  max-width: 550px;
+  margin:auto;
+  margin-right: auto;
+  position: relative;
+  word-wrap: break-word;
   top:150px;
 }
-
 #confirm, #delete{
   background-color:#4267B2;
   color:white;
@@ -221,53 +228,52 @@ button {
   cursor:pointer;
 }
 .dropdown.dropdown-lg .dropdown-menu {
-    margin-top: -1px;
-    padding: 6px 20px;
+  margin-top: -1px;
+  padding: 6px 20px;
 }
 .input-group-btn .btn-group {
-    display: flex !important;
+  display: flex !important;
 
 }
 .btn-group .btn {
-    border-radius: 0;
-    margin-left: -1px;
+  border-radius: 0;
+  margin-left: -1px;
 }
 .btn-group .btn:last-child {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 .btn-group .form-horizontal .btn[type="submit"] {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 .form-horizontal .form-group {
-    margin-left: 0;
-    margin-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 .form-group .form-control:last-child {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 @media screen and (min-width: 768px) {
-    #adv-search {
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .dropdown.dropdown-lg {
-        position: static !important;
-        background-color: #808080
-    }
-
-    .dropdown.dropdown-lg .dropdown-menu {
-        min-width: 500px;
-    }
+  #adv-search {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .dropdown.dropdown-lg {
+    position: static !important;
+    background-color: #808080
+  }
+  .dropdown.dropdown-lg .dropdown-menu {
+    min-width: 500px;
+  }
 }
 .thumbnail{
   min-width: 300px;
   max-width: 300px;
-    padding: 1px;
+  padding:1;
+  border:2px solid red
 }
 .contain{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
@@ -289,8 +295,7 @@ img{ max-width:100%;}
 .srch_bar {
   display: inline-block;
   text-align: right;
-  width: 60%;
-
+  width: 60%; padding:
 }
 .headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
 
@@ -342,7 +347,6 @@ img{ max-width:100%;}
   vertical-align: top;
   width: 92%;
 }
-
 .received_withd_msg p {
   background: #ebebeb none repeat scroll 0 0;
   border-radius: 3px;
@@ -406,4 +410,117 @@ img{ max-width:100%;}
 .msg_history {
   height: 516px;
   overflow-y: auto;
+}
+#customBtn {
+  display: inline-block;
+  background: white;
+  color: #444;
+  width: 190px;
+  border-radius: 5px;
+  border: thin solid #888;
+  box-shadow: 1px 1px 1px grey;
+  white-space: nowrap;
+}
+#customBtn:hover {
+  cursor: pointer;
+}
+span.label {
+  font-family: serif;
+  font-weight: normal;
+}
+span.icon {
+  background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px;
+  height: 42px;
+}
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 42px;
+  padding-right: 42px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.modal-login {
+  color: #636363;
+  width: 350px;
+  top: 100px;
+}
+.modal-login .modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+}
+.modal-login .modal-header {
+  border-bottom: none;
+  position: relative;
+  justify-content: center;
+}
+.modal-login h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -15px;
+}
+.modal-login .form-control:focus {
+  border-color: #70c5c0;
+}
+.modal-login .form-control, .modal-login .btn {
+  min-height: 40px;
+  border-radius: 3px;
+}
+.modal-login .close {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+.modal-login .modal-footer {
+  background: #ecf0f1;
+  border-color: #dee4e7;
+  text-align: center;
+  justify-content: center;
+  margin: 0 -20px -20px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.modal-login .modal-footer a {
+  color: #999;
+}
+.modal-login .avatar {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: -70px;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  z-index: 9;
+  background: #60c7c1;
+  padding: 15px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.modal-login .avatar img {
+  width: 100%;
+}
+.modal-login.modal-dialog {
+  margin-top: 30px;
+}
+.modal-login .btn {
+  color: #fff;
+  border-radius: 4px;
+  background: #60c7c1;
+  text-decoration: none;
+  transition: all 0.4s;
+  line-height: normal;
+  border: none;
+}
+.modal-login .btn:hover, .modal-login .btn:focus {
+  background: #45aba6;
+  outline: none;
+}
+.trigger-btn {
+  display: inline-block;
+  margin: 100px auto;
 }

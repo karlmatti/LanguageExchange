@@ -1,7 +1,6 @@
 package language.exchange.langex.controller;
 
 
-import language.exchange.langex.model.Friends;
 import language.exchange.langex.model.User;
 import language.exchange.langex.repo.FriendsService;
 import language.exchange.langex.repo.UserService;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
@@ -39,14 +37,14 @@ public class MainController {
                 "hobbies", "default.PNG", "bioGraphy"));
         model.addAttribute("users", users);
         System.out.println(model.toString());
-        return "index";
+        return "start";
     }
 
     @PostMapping("/")
     public String postIndex(@RequestParam("text") String text, Model model) {
         model.addAttribute("info", text);
         System.out.println(text);
-        return "index";
+        return "start";
     }
 
     @GetMapping("/profile")
