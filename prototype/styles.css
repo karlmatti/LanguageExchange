@@ -4,8 +4,8 @@
     margin: auto;
 }
 .logo {
-  max-width: 1200;
-  max-height: 250;
+  max-width: 1200px;
+  max-height: 250px;
   word-wrap: break-word;
 }
 .button{
