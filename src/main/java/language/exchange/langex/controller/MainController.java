@@ -130,14 +130,16 @@ public class MainController {
         allUsers.add(new User(1, "231111123123123", "firstname",
                 "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
                 "hobbies", "default.PNG", "bioGraphy"));
+
         List<User> returnedUsers = new ArrayList<>();
         for (User user : allUsers) {
-            String firstName = user.getFirstName();
-            String lastName = user.getLastName();
-            String hobbies = user.getHobbies();
-            String cLvlLangs = user.getcLvlLangs();
-            String bLvlLangs = user.getbLvlLangs();
-            String aLvlLangs = user.getaLvlLangs();
+            String firstName = user.getFirstName().toLowerCase();
+            String lastName = user.getLastName().toLowerCase();
+            String hobbies = user.getHobbies().toLowerCase();
+            String cLvlLangs = user.getcLvlLangs().toLowerCase();
+            String bLvlLangs = user.getbLvlLangs().toLowerCase();
+            String aLvlLangs = user.getaLvlLangs().toLowerCase();
+            keyword = keyword.toLowerCase();
             if (criteria == 0) { // by names, hobbies, languages
                 if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
                         hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
@@ -161,9 +163,7 @@ public class MainController {
 
         }
 
-
         model.addAttribute("users", returnedUsers);
-
 
         return "search";
     }
