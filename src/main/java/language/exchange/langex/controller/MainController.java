@@ -10,7 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,6 +55,15 @@ public class MainController {
         return "profile";
     }
 
+    @GetMapping("/otherProfile")
+    public String otherProfile(@RequestParam("userId") String userId,
+                               Model model) {
+        model.addAttribute("googleID", userId);
+
+        return "otherProfile";
+    }
+
+
     @PostMapping("/profile")
     public String updateProfile(Principal principal, Model model,
                                 @RequestParam("fname") String firstName,
@@ -81,7 +92,7 @@ public class MainController {
             model.addAttribute("userId", principal.getName());
             return "redirect:/signUp";
         } else {
-            //model.addAttribute("userId", principal.getName());
+
             return "redirect:/profile";
         }
     }
@@ -128,6 +139,19 @@ public class MainController {
 
     @GetMapping("/search")
     public String search() {
+        return "search";
+    }
+
+    @PostMapping("/addFriends")
+    public String addFriends(@RequestParam("userId") String userId,
+                             @RequestParam("friendId") String friendId) {
+        boolean successful = friendsService.addFriends(userId, friendId);
+        if (successful) {
+            System.out.println(userId + " and " + friendId + " are now friends!");
+        } else {
+            System.out.println("Sorry but they are already friends!");
+        }
+        //returns friends profile later
         return "search";
     }
 
@@ -185,6 +209,7 @@ public class MainController {
 
     @GetMapping("/messenger")
     public String messenger(Principal principal, Model model) {
+
         return "messenger";
     }
 
