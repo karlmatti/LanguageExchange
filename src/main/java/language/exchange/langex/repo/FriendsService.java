@@ -2,7 +2,6 @@ package language.exchange.langex.repo;
 
 
 import language.exchange.langex.model.Friends;
-import language.exchange.langex.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +28,7 @@ public class FriendsService {
     public boolean addFriends(String userId, String friendId) {
 
         boolean addFriends = true;
-
         for (Friends friend : FriendsRepository.findAll()) {
-            System.out.println("UserOne " + friend.getUserOne() + ";UserTwo " + friend.getUserTwo());
-            System.out.println("UserId " + userId + ";FriendId " + friendId);
-            System.out.println("1:" + (friend.getUserOne().equals(userId) && friend.getUserTwo().equals(friendId)));
-            System.out.println("2:" + (friend.getUserOne().equals(friendId) && friend.getUserTwo().equals(userId)));
             if (friend.getUserOne().equals(userId) && friend.getUserTwo().equals(friendId)) {
 
                 addFriends = false;
@@ -43,9 +37,8 @@ public class FriendsService {
             }
         }
         if (addFriends) {
-            System.out.println("Saving...");
             Friends friend = new Friends(userId, friendId);
-            //error
+
             FriendsRepository.save(friend);
         }
         return addFriends;
