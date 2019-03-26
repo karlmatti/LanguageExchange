@@ -25,7 +25,7 @@
         <img src="https://www.gfwcofmn.org/wp-content/uploads/2016/04/cropped-mississippi-headwaters-1200x250-logo.png">
     </div>
     <div class="topnav">
-        <a href="messenger.html">Messenger</a>
+        <a href="/messenger">Messenger</a>
         <a class="active" href="/search">Search</a>
         <a href="/profile">My Profile</a>
         <a class="logout" href="/client/logout">Log Out</a>
@@ -54,55 +54,33 @@
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
-
+                        <button type="submit" class="btn btn-primary" style="height:38px;">Search</button>
                     </form>
-
                 </div>
-
             </div>
-
             <div class="row">
                 <div class="col-sm-4" th:each="user : ${users}">
-                    <div class="thumbnail">
+                    <div class="card" style="max-width: 300px;">
                         <img src="http://www.athensparent.com/images/medium300x250.gif">
-                    </div>
-                    <strong>User <p th:text="${user.getId()}"></p></strong>
-                    First name:
-                    <span th:text="${user.getFirstName()}"></span>
-                    <br>
-                    Last name:
-                    <span th:text="${user.getLastName()}"></span>
-                    <br>
-                    C Lvl Language(s):
-                    <span th:text="${user.getcLvlLangs()}"></span>
-                    <br>
-                    B Lvl Language(s):
-                    <span th:text="${user.getbLvlLangs()}"></span>
-                    <br>
-                    A Lvl Language(s):
-                    <span th:text="${user.getaLvlLangs()}"></span>
-                    <br>
-                    Hobbies:
-                    <span th:text="${user.getHobbies()}"></span>
-                    <br>
-
-                    <form action="/otherProfile" method="get">
+                    <div class="card-body" style="max-width: 300px;">
+                        <p class="card-text">First name:<span th:text="${user.getFirstName()}"></span></p>
+                        <p class="card-text">Last name:<span th:text="${user.getLastName()}"></span></p>
+                        <p class="card-text">C Lvl Language(s):<span th:text="${user.getcLvlLangs()}"></span></p>
+                        <p class="card-text">B Lvl Language(s):<span th:text="${user.getbLvlLangs()}"></span></p>
+                        <p class="card-text">A Lvl Language(s):<span th:text="${user.getaLvlLangs()}"></span></p>
+                        <p class="card-text">Hobbies:<span th:text="${user.getHobbies()}"></span></p>
+                    <form action="/otherProfile" method="get" style="display: inline;">
                         <input type="hidden" th:value="${user.getId()}" name="userId"/>
-
                         <button type="submit" class="btn btn-primary">View Profile</button>
                     </form>
-                    <form action="/addFriends" method="post">
+                    <form action="/addFriends" method="post" style="display: inline;" >
                         <input type="hidden" th:value="${googleID}" name="userId"/>
                         <input type="hidden" th:value="${user.getId()}" name="friendId"/>
-
-                        <button type="submit" class="btn btn-primary">Add Friend</button>
+                        <button type="submit" class="btn btn-warning">Add Friend</button>
                     </form>
-
-
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

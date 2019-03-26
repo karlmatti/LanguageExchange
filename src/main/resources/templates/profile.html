@@ -48,15 +48,34 @@
             </div>
             <div class="col">
                 <div id="pData">
-                    <p>Sinu nimi: {{messages.firstName}} {{messages.lastName}}</p>
-                    <p>Vanus: {{messages.age}}</p>
-                    <p>C tasemel keeled: {{messages.cLvlLangs}}</p>
-                    <p>B tasemel keeled: {{messages.blvlLangs}}</p>
-                    <p>A tasemel keeled: {{messages.aLvlLangs}}</p>
-                    <p>Huvid: {{messages.hobbies}}</p>
+                    <p>Name: {{messages.firstName}} {{messages.lastName}}</p>
+                    <p>Age: {{messages.age}}</p>
+                    <p>C Level languages: {{messages.cLvlLangs}}</p>
+                    <p>B Level languages: {{messages.bLvlLangs}}</p>
+                    <p>A Level languages: {{messages.aLvlLangs}}</p>
+                    <p>Hobbies: {{messages.hobbies}}</p>
                     <br>
-                    <div class="col text-center">
-                        <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#largeModal">Click to open Modal</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                        Launch demo modal
+                    </button>
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--<div id="col-75">
@@ -77,9 +96,6 @@
         </div>
         <div class="row">
             <div class="col">
-                <div class=friendList>
-                    <p class="names">Sõbrakutsed</p>
-                </div>
                 <div id="fb">
                     <div id="fb-top">
                         <p><b>Friend Requests</b></p>
@@ -108,34 +124,16 @@
             </div>
             <div class="col">
                 <div class="biography">
-                    <H4>Kasutaja Biogprahy</H4>
+                    <H4>Users biography</H4>
                     <p>{{messages.bioGraphy}}</p>
                     <br>
-                    <textarea rows="4" cols="50" placeholder="Kirjuta siia oma biography"></textarea>
-                    <input type="submit" value="Salvesta enda bio">
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Large Modal</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h3>Modal Body</h3>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                    <textarea rows="4" cols="50" placeholder="Write here to update your biography"></textarea>
+                    <input type="submit" value="Save bio">
                 </div>
             </div>
         </div>
     </div>
+</div>
     <script src="/js/profile.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
