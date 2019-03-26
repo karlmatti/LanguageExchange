@@ -13,7 +13,9 @@
         <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Include Bootstrap -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
                   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -56,28 +58,55 @@
                     <p>Hobbies: {{messages.hobbies}}</p>
                     <br>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                        Launch demo modal
+                        Change personal data
                     </button>
                     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                <div class="modal-body" style="top:135px;">
+                                    <div class="modal-dialog modal-login">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update profile</h4>
+                                            </div>
+                                            <form method = post>
+                                            <div class="modal-body">
+                                                <h6>Your new name</h6>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Karl" autocomplete="off" required>
+                                                </div>
+                                                <h6>Your new lastname</h6>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Matti" autocomplete="off" required>
+                                                </div>
+                                                <h6>Your new age</h6>
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control" name="age" id="age" placeholder="22" autocomplete="off" required>
+                                                </div>
+                                                <h6>Your new C level language</h6>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="cLvlLangs" id="cLvlLangs" placeholder="Estonian;English" autocomplete="off" required>
+                                                </div>
+                                                <h6>Your new B level language</h6>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="bLvlLangs" id="bLvlLangs" placeholder="Finnish" autocomplete="off" required>
+                                                </div>
+                                                <h6>Your new A level language</h6>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="aLvlLangs" id="aLvlLangs" placeholder="Russian" autocomplete="off" required>
+                                                </div>
+                                                <h6>Your new Hobbies</h6>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="hobbies" id="hobbies" placeholder="Fishing;Programming" autocomplete="off" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-lg btn-block login-btn" data-dismiss="modal">Update profile</button>
+                                                </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
                 <!--<div id="col-75">
                      <form method = post>
                     <input id="name" type="text" name="fname" value="" placeholder="Sinu uus nimi" style="color: black"></input>
@@ -132,8 +161,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
     <script src="/js/profile.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
