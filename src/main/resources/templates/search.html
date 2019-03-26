@@ -74,9 +74,6 @@
                     Last name:
                     <span th:text="${user.getLastName()}"></span>
                     <br>
-                    Age:
-                    <span th:text="${user.getAge()}"></span>
-                    <br>
                     C Lvl Language(s):
                     <span th:text="${user.getcLvlLangs()}"></span>
                     <br>
@@ -89,12 +86,12 @@
                     Hobbies:
                     <span th:text="${user.getHobbies()}"></span>
                     <br>
-                    Bio:
-                    <span th:text="${user.getBioGraphy()}"></span>
-                    <br>
-                    Photo location:
-                    <span th:text="${user.getPhotoLocation()}"></span>
-                    <br>
+
+                    <form action="/otherProfile" method="get">
+                        <input type="hidden" th:value="${user.getId()}" name="userId"/>
+
+                        <button type="submit" class="btn btn-primary">View Profile</button>
+                    </form>
                     <form action="/addFriends" method="post">
                         <input type="hidden" th:value="${googleID}" name="userId"/>
                         <input type="hidden" th:value="${user.getId()}" name="friendId"/>

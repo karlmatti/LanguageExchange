@@ -55,6 +55,15 @@ public class MainController {
         return "profile";
     }
 
+    @GetMapping("/otherProfile")
+    public String otherProfile(@RequestParam("userId") String userId,
+                               Model model) {
+        model.addAttribute("googleID", userId);
+
+        return "otherProfile";
+    }
+
+
     @PostMapping("/profile")
     public String updateProfile(Principal principal, Model model,
                                 @RequestParam("fname") String firstName,
