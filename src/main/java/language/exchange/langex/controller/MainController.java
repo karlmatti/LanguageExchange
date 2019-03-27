@@ -31,36 +31,36 @@ public class MainController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("eventName", "FIFA 2018");
-        System.out.println(model.toString());
-        List<User> users = userService.getAllUsers();
-        users.add(new User(1, "231111123123123", "firstname",
-                "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
-                "hobbies", "default.PNG", "bioGraphy"));
-        model.addAttribute("users", users);
-        System.out.println(model.toString());
-        return "home";
-    }
-
-    @PostMapping("/")
-    public String postIndex(@RequestParam("text") String text, Model model) {
-        model.addAttribute("info", text);
-        System.out.println(text);
         return "home";
     }
 
     @GetMapping("/profile")
     public String profile(Principal principal, Model model) {
         model.addAttribute("googleID", principal.getName());
-        return "profile";
+        boolean userStatus = checkUser(principal);
+        model.addAttribute("userId", principal.getName());
+        if (userStatus) {
+
+            return "redirect:/signUp";
+        } else {
+
+            return "profile";
+        }
     }
 
     @GetMapping("/otherProfile")
     public String otherProfile(@RequestParam("userId") String userId,
-                               Model model) {
+                               Model model, Principal principal) {
         model.addAttribute("googleID", userId);
+        boolean userStatus = checkUser(principal);
+        model.addAttribute("userId", principal.getName());
+        if (userStatus) {
 
-        return "otherProfile";
+            return "redirect:/signUp";
+        } else {
+            return "otherProfile";
+        }
+
     }
 
 
@@ -84,13 +84,19 @@ public class MainController {
 
     @GetMapping("/signUp")
     public String signUp(Principal principal, Model model) {
+        boolean userStatus = checkUser(principal);
         model.addAttribute("googleID", principal.getName());
-        return "signUp";
+        if (userStatus) {
+            return "signUp";
+        } else {
+            return "redirect:/profile";
+        }
+
     }
 
     @GetMapping("/user")
     public String user(Principal principal, Model model) {
-        boolean userStatus = userService.checkUserStatus(principal.getName());
+        boolean userStatus = checkUser(principal);
         if (userStatus) {
             model.addAttribute("userId", principal.getName());
             return "redirect:/signUp";
@@ -100,13 +106,8 @@ public class MainController {
         }
     }
 
-    public boolean checkUser(Principal principal, Model model) {
-        boolean userStatus = userService.checkUserStatus(principal.getName());
-        if (userStatus) {
-            return false;
-        } else {
-            return true;
-        }
+    public boolean checkUser(Principal principal) {
+        return userService.checkUserStatus(principal.getName());
     }
 
 
@@ -120,11 +121,9 @@ public class MainController {
                               @RequestParam("aLvlLangs") String aLvlLangs,
                               @RequestParam("hobbies") String hobbies,
                               @RequestParam("bioGraphy") String bioGraphy) {
+
         User user = new User(age, principal.getName(), firstName, lastName, cLvlLangs, bLvlLangs, aLvlLangs,
                 hobbies, "default.PNG", bioGraphy);
-        System.out.println(user.toString());
-        System.out.println("I am google ID:");
-        System.out.println(principal.getName());
         userService.saveOrUpdate(user);
 
         return "redirect:/profile";
@@ -136,26 +135,40 @@ public class MainController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        System.out.println("olen logoutis");
         return "redirect:/";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
     }
 
     @GetMapping("/search")
-    public String search() {
-        return "search";
+    public String search(Principal principal, Model model) {
+        boolean userStatus = checkUser(principal);
+        if (userStatus) {
+            model.addAttribute("userId", principal.getName());
+            return "redirect:/signUp";
+        } else {
+            return "search";
+        }
+
     }
 
     @PostMapping("/addFriends")
     public String addFriends(@RequestParam("userId") String userId,
-                             @RequestParam("friendId") String friendId) {
-        boolean successful = friendsService.addFriends(userId, friendId);
-        if (successful) {
-            System.out.println(userId + " and " + friendId + " are now friends!");
+                             @RequestParam("friendId") String friendId,
+                             Principal principal,
+                             Model model) {
+        boolean userStatus = checkUser(principal);
+        if (userStatus) {
+            model.addAttribute("userId", principal.getName());
+            return "redirect:/signUp";
         } else {
-            System.out.println("Sorry but they are already friends!");
+
+            boolean successful = friendsService.addFriends(userId, friendId);
+            if (successful) {
+                System.out.println(userId + " and " + friendId + " are now friends!");
+            } else {
+                System.out.println("Sorry but they are already friends!");
+            }
+            return "search";
         }
-        //returns friends profile later
-        return "search";
     }
 
     @GetMapping("/searchResults")
@@ -163,66 +176,68 @@ public class MainController {
                                @RequestParam("keyword") String keyword,
                                Model model,
                                Principal principal) {
-        List<User> allUsers = userService.getAllUsers();
-        allUsers.add(new User(1, "231111123123123", "firstname",
-                "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
-                "hobbies", "default.PNG", "bioGraphy"));
+        boolean userStatus = checkUser(principal);
+        if (userStatus) {
+            model.addAttribute("userId", principal.getName());
+            return "redirect:/signUp";
+        } else {
 
-        List<User> returnedUsers = new ArrayList<>();
-        for (User user : allUsers) {
-            String firstName = user.getFirstName().toLowerCase();
-            String lastName = user.getLastName().toLowerCase();
-            String hobbies = user.getHobbies().toLowerCase();
-            String cLvlLangs = user.getcLvlLangs().toLowerCase();
-            String bLvlLangs = user.getbLvlLangs().toLowerCase();
-            String aLvlLangs = user.getaLvlLangs().toLowerCase();
-            keyword = keyword.toLowerCase();
+            List<User> allUsers = userService.getAllUsers();
+            allUsers.add(new User(1, "231111123123123", "firstname",
+                    "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
+                    "hobbies", "default.PNG", "bioGraphy"));
 
-            if (!principal.getName().equals(user.getId())) {
-                System.out.println("principal name: " + principal.getName() + "and userid: " + user.getId());
-                if (criteria == 0) { // by names, hobbies, languages
-                    if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
-                            hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
-                            bLvlLangs.indexOf(keyword) != -1 || aLvlLangs.indexOf(keyword) != -1) {
-                        returnedUsers.add(user);
-                    }
-                } else if (criteria == 1) { // by names
-                    if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1) {
-                        returnedUsers.add(user);
-                    }
-                } else if (criteria == 2) { // by hobbies
-                    if (hobbies.indexOf(keyword) != -1) {
-                        returnedUsers.add(user);
-                    }
-                } else if (criteria == 3) { // by languages
-                    if (cLvlLangs.indexOf(keyword) != -1 || bLvlLangs.indexOf(keyword) != -1 ||
-                            aLvlLangs.indexOf(keyword) != -1) {
-                        returnedUsers.add(user);
+            List<User> returnedUsers = new ArrayList<>();
+            for (User user : allUsers) {
+                String firstName = user.getFirstName().toLowerCase();
+                String lastName = user.getLastName().toLowerCase();
+                String hobbies = user.getHobbies().toLowerCase();
+                String cLvlLangs = user.getcLvlLangs().toLowerCase();
+                String bLvlLangs = user.getbLvlLangs().toLowerCase();
+                String aLvlLangs = user.getaLvlLangs().toLowerCase();
+                keyword = keyword.toLowerCase();
+
+                if (!principal.getName().equals(user.getId())) {
+                    System.out.println("principal name: " + principal.getName() + "and userid: " + user.getId());
+                    if (criteria == 0) { // by names, hobbies, languages
+                        if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
+                                hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
+                                bLvlLangs.indexOf(keyword) != -1 || aLvlLangs.indexOf(keyword) != -1) {
+                            returnedUsers.add(user);
+                        }
+                    } else if (criteria == 1) { // by names
+                        if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1) {
+                            returnedUsers.add(user);
+                        }
+                    } else if (criteria == 2) { // by hobbies
+                        if (hobbies.indexOf(keyword) != -1) {
+                            returnedUsers.add(user);
+                        }
+                    } else if (criteria == 3) { // by languages
+                        if (cLvlLangs.indexOf(keyword) != -1 || bLvlLangs.indexOf(keyword) != -1 ||
+                                aLvlLangs.indexOf(keyword) != -1) {
+                            returnedUsers.add(user);
+                        }
                     }
                 }
+
             }
+            model.addAttribute("googleID", principal.getName());
+            model.addAttribute("users", returnedUsers);
 
+            return "search";
         }
-        model.addAttribute("googleID", principal.getName());
-        model.addAttribute("users", returnedUsers);
-
-        return "search";
     }
-
 
     @GetMapping("/messenger")
     public String messenger(Principal principal, Model model) {
-
-        return "messenger";
+        boolean userStatus = checkUser(principal);
+        if (userStatus) {
+            model.addAttribute("userId", principal.getName());
+            return "redirect:/signUp";
+        } else {
+            return "messenger";
+        }
     }
-
-    @GetMapping("/friends")
-    public String friends(Principal principal) {
-        //FriendsService service = new FriendsService();
-        System.out.println(friendsService.getUserFriends(principal.getName()).toString());
-
-        return "profile";
-    }
-
 
 }
