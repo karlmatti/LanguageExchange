@@ -66,13 +66,16 @@ public class MainController {
 
     @PostMapping("/profile")
     public String updateProfile(Principal principal, Model model,
-                                @RequestParam("fname") String firstName,
+                                @RequestParam("firstName") String firstName,
+                                @RequestParam("lastName") String lastName,
                                 @RequestParam("age") int age,
-                                @RequestParam("lang") String language,
-                                @RequestParam("llang") String lLangauge,
-                                @RequestParam("intrests") String interests) {
-        User user = new User(age, principal.getName(), firstName, "lastName", language, lLangauge, "unknown",
-                interests, "default.PNG", "biography");
+                                @RequestParam("cLvlLangs") String cLvlLangs,
+                                @RequestParam("bLvlLangs") String bLvlLangs,
+                                @RequestParam("aLvlLangs") String aLvlLangs,
+                                @RequestParam("hobbies") String hobbies,
+                                @RequestParam("bioGraphy") String bioGraphy) {
+        User user = new User(age, principal.getName(), firstName, lastName, cLvlLangs, bLvlLangs, aLvlLangs,
+                hobbies, "default.PNG", bioGraphy);
 
         userService.saveOrUpdate(user);
         model.addAttribute("googleID", principal.getName());
