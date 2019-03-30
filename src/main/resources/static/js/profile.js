@@ -1,7 +1,5 @@
-
-var temp = $("#googleID").text();
-console.log(temp);
 var userApi = Vue.resource('/users{/id}');
+
 
 /*Vue.component('message-row', {
     props: ['finalMessage'],
@@ -26,7 +24,9 @@ var app = new Vue ({
         userApi.get().then(result =>
         result.json().then(data =>
             data.forEach(user => {
-                if (user.id == temp) {
+                console.log("DAVAI");
+                console.log(googleID)
+                if (user.id == googleID) {
                     console.log('some')
                     console.log("console");
                 this.messages = user;
