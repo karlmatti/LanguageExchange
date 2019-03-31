@@ -19,8 +19,9 @@ public class UserService {
         return users;
     }
 
-    public User getUserById(int id) {
-        return UserRepository.findById(id).get();
+    public User getUserById(String id) {
+        return UserRepository.findById(Integer.parseInt(id)).get();
+
     }
 
     public void saveOrUpdate(User user)
