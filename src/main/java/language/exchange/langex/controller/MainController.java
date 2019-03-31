@@ -23,6 +23,8 @@ import java.util.List;
 
 @Controller
 public class MainController {
+
+    private static int counter = 4;
     @Autowired
     UserService userService;
     @Autowired
@@ -161,9 +163,11 @@ public class MainController {
             return "redirect:/signUp";
         } else {
 
-            boolean successful = friendsService.addFriends(userId, friendId);
+            boolean successful = friendsService.addFriends(userId, friendId, counter + ".txt" );
+
             if (successful) {
                 System.out.println(userId + " and " + friendId + " are now friends!");
+                counter++;
             } else {
                 System.out.println("Sorry but they are already friends!");
             }

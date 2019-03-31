@@ -11,13 +11,16 @@ public class Friends {
     int id;
     private String userOne;
     private String userTwo;
+    private String chatNumber;
 
     public Friends() {
+
     }
 
-    public Friends(String userOne, String userTwo) {
+    public Friends(String userOne, String userTwo, String chatNumber) {
         this.userOne = userOne;
         this.userTwo = userTwo;
+        this.chatNumber = chatNumber;
     }
 
     public int getId() {
@@ -44,12 +47,22 @@ public class Friends {
         this.userTwo = userTwo;
     }
 
+    public String getChatNumber() {
+        return chatNumber;
+    }
+
+    public void setChatNumber(String chatNumber) {
+        this.chatNumber = chatNumber;
+    }
+
+
     @Override
     public String toString() {
         return "Friends{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", userOne='" + userOne + '\'' +
                 ", userTwo='" + userTwo + '\'' +
+                ", chatNumber='" + chatNumber + '\'' +
                 '}';
     }
 }

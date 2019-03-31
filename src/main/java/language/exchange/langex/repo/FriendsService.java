@@ -25,7 +25,7 @@ public class FriendsService {
         return friends;
     }
 
-    public boolean addFriends(String userId, String friendId) {
+    public boolean addFriends(String userId, String friendId, String chatNumber) {
 
         boolean addFriends = true;
         for (Friends friend : FriendsRepository.findAll()) {
@@ -37,7 +37,7 @@ public class FriendsService {
             }
         }
         if (addFriends) {
-            Friends friend = new Friends(userId, friendId);
+            Friends friend = new Friends(userId, friendId, chatNumber);
 
             FriendsRepository.save(friend);
         }
