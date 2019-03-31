@@ -53,15 +53,16 @@ input {
 }
 .wrapper {
     height: 100%;
-    background-color: black;
+    /*background-color: black;*/
 }
 .container {
-    width: 840px;
+    width: 1040px;
     height: 650px;
     overflow: hidden;
     top: 50%;
     left: 50%;
     margin-top: 360px;
+    margin-right: 200px;
     transform: translate(-50%, -50%);
     padding: 10px;
     -webkit-border-radius: 20px;
@@ -87,7 +88,7 @@ input {
     -ms-filter: blur(60px);
     -o-filter: blur(60px);
     filter: blur(60px);
-    background: url('likes/mt.jpg') 0 / cover;
+    background: url('/images/forest3.jpg') 0 / cover;
 }
 .glass {
     height: 100%;
@@ -149,7 +150,7 @@ input {
     right: -15px;
     bottom: -15px;
     left: -15px;
-    background: url('likes/mt.jpg') 0 / cover;
+    background: url('/images/forest3.jpg') 0 / cover;
     opacity: .2;
     -webkit-filter: blur(20px);
     -moz-filter: blur(20px);
@@ -191,7 +192,7 @@ input {
 }
 .right {
     float: left;
-    width: 490px;
+    width: 610px;
     height: 100%;
     padding: 10px;
     overflow: hidden;
@@ -391,7 +392,7 @@ input {
     right: -15px;
     bottom: -15px;
     left: -15px;
-    background: url('likes/mt.jpg') 0 / cover;
+    background: url('/images/forest3.jpg') 0 / cover;
     opacity: .5;
     -webkit-filter: blur(20px);
     -moz-filter: blur(20px);

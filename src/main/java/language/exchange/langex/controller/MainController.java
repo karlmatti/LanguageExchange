@@ -37,7 +37,7 @@ public class MainController {
     @GetMapping("/profile")
     public String profile(Principal principal, Model model) {
         model.addAttribute("googleID", principal.getName());
-        boolean userStatus = checkUser(principal);
+        boolean userStatus = checkUserExistance(principal);
         model.addAttribute("userId", principal.getName());
         if (userStatus) {
 
@@ -52,7 +52,7 @@ public class MainController {
     public String otherProfile(@RequestParam("userId") String userId,
                                Model model, Principal principal) {
         model.addAttribute("googleID", userId);
-        boolean userStatus = checkUser(principal);
+        boolean userStatus = checkUserExistance(principal);
         model.addAttribute("userId", principal.getName());
         if (userStatus) {
 
@@ -84,7 +84,7 @@ public class MainController {
 
     @GetMapping("/signUp")
     public String signUp(Principal principal, Model model) {
-        boolean userStatus = checkUser(principal);
+        boolean userStatus = checkUserExistance(principal);
         model.addAttribute("googleID", principal.getName());
         if (userStatus) {
             return "signUp";
@@ -96,7 +96,7 @@ public class MainController {
 
     @GetMapping("/user")
     public String user(Principal principal, Model model) {
-        boolean userStatus = checkUser(principal);
+        boolean userStatus = checkUserExistance(principal);
         if (userStatus) {
             model.addAttribute("userId", principal.getName());
             return "redirect:/signUp";
@@ -106,7 +106,7 @@ public class MainController {
         }
     }
 
-    public boolean checkUser(Principal principal) {
+    public boolean checkUserExistance(Principal principal) {
         return userService.checkUserStatus(principal.getName());
     }
 
@@ -140,7 +140,7 @@ public class MainController {
 
     @GetMapping("/search")
     public String search(Principal principal, Model model) {
-        boolean userStatus = checkUser(principal);
+        boolean userStatus = checkUserExistance(principal);
         if (userStatus) {
             model.addAttribute("userId", principal.getName());
             return "redirect:/signUp";
@@ -155,7 +155,7 @@ public class MainController {
                              @RequestParam("friendId") String friendId,
                              Principal principal,
                              Model model) {
-        boolean userStatus = checkUser(principal);
+        boolean userStatus = checkUserExistance(principal);
         if (userStatus) {
             model.addAttribute("userId", principal.getName());
             return "redirect:/signUp";
@@ -176,7 +176,7 @@ public class MainController {
                                @RequestParam("keyword") String keyword,
                                Model model,
                                Principal principal) {
-        boolean userStatus = checkUser(principal);
+        boolean userStatus = checkUserExistance(principal);
         if (userStatus) {
             model.addAttribute("userId", principal.getName());
             return "redirect:/signUp";
@@ -231,11 +231,13 @@ public class MainController {
 
     @GetMapping("/messenger")
     public String messenger(Principal principal, Model model) {
-        boolean userStatus = checkUser(principal);
+        boolean userStatus = checkUserExistance(principal);
+
         if (userStatus) {
             model.addAttribute("userId", principal.getName());
             return "redirect:/signUp";
         } else {
+            model.addAttribute("userId", principal.getName());
             return "messenger";
         }
     }
