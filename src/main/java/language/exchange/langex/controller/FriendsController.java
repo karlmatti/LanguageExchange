@@ -20,7 +20,6 @@ public class FriendsController {
 
     @GetMapping("/friends/{id}")
     private List<String> getFriendByID(@PathVariable("id") String id) {
-        System.out.println("hello world");
         return friendsService.getUserFriends(id);
     }
 }

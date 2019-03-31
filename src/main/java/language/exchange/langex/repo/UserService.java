@@ -20,8 +20,13 @@ public class UserService {
     }
 
     public User getUserById(String id) {
-        return UserRepository.findById(Integer.parseInt(id)).get();
-
+        List<User> users = getAllUsers();
+        for (User user : users) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public void saveOrUpdate(User user)

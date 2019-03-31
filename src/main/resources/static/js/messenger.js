@@ -1,28 +1,32 @@
 
+
 var targetsID = [];
 var targetsNames = [];
 var nicknameofthisuser;
-var thisUserID;
+var thisUserID = googleID;
 
 
 $.ajax({
-    url:"/friends",
+    url:"/friends/" + thisUserID,
     success: function (data) {
         data.forEach(stream => {
-            if (stream.id == googleID) {
-                nicknameofthisuser = stream.firstName + ' ' + stream.lastName;
-                thisUserID = googleID;
-                return;
-            }
-            targetsID.push(stream.id);
-            targetsNames.push(stream.firstName + ' ' + stream.lastName);
+            targetsID.push(stream)
         });
     },async: false
 });
 
+
+for (var i = 0; i < targetsID.length; i++) {
+    $.ajax({
+        url: "/users/" + targetsID[i],
+        success: function (data) {
+            targetsNames.push(data.firstName + ' ' + data.lastName);
+        }, async: false
+    });
+}
+
 console.log(targetsID);
 console.log(targetsNames);
-console.log(nicknameofthisuser);
 console.log(thisUserID);
 
 
