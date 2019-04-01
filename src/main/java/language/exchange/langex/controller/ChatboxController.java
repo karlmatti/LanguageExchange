@@ -16,7 +16,7 @@ public class ChatboxController {
 
 
     @PostMapping("/chatbox/{data}")
-    private Map<String, String> getFriendByID(@PathVariable("data") String data) throws IOException {
+    private String getChat(@PathVariable("data") String data) throws IOException {
 
 
         String arrayApart[];
@@ -27,22 +27,23 @@ public class ChatboxController {
         String chatID = arrayApart[2];
         String friendName = arrayApart[3];
 
-        System.out.println(userID);
-        System.out.println(friendID);
-        System.out.println(chatID);
-        System.out.println(friendName);
-
         Writer writer = null;
-
+        String resultString = "";
         File f = new File(chatID);
+
         if (f.exists() && !f.isDirectory()) {
             File file = new File(chatID);
 
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String st;
-            while ((st = br.readLine()) != null)
-                System.out.println(st);
+            while ((st = br.readLine()) != null) {
+                resultString = (new StringBuilder()).append(resultString)
+                        .append(st.replace(userID, "self").replace(friendID, "other") + "\n").toString();
+            }
+            if (resultString.length() > 3)
+            resultString = resultString.substring(0, resultString.length() - 2);
+
         } else {
             try {
                 writer = new BufferedWriter(new OutputStreamWriter(
@@ -54,13 +55,22 @@ public class ChatboxController {
             }
         }
 
-
-
-
-
-
-        return null;
+        return "{\"name\" : \"" + friendName + "\", \"detail\": [ \n" + resultString +  "]}";
 
     }
 
+    @PostMapping("/chatboxSend/{data}")
+    private String sendToChat(@PathVariable("data") String data) throws IOException {
+        String explode[] = data.split("-");
+
+        String fileName = explode[0];
+        String newData = explode[1];
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+        writer.newLine();
+        writer.append(newData);
+        writer.close();
+
+        return null;
+    }
 }

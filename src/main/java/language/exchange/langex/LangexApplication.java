@@ -12,10 +12,10 @@ public class LangexApplication {
 
         SpringApplication.run(LangexApplication.class, args);
 
-        for (int i = 1; i < 10; i++) {
+        /*for (int i = 1; i < 10; i++) {
             File file = new File(i + ".txt");
             if (file.delete());
-        }
+        }*/
 
     }
 

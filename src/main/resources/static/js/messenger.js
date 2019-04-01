@@ -75,11 +75,12 @@ $(document).ready(function () {
 
         console.log("return haven't worked");
 
-        activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " messages/" + realChats[idx-1] + " " + realNames[idx-1];
+        activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " " + realChats[idx-1] + " " +  realNames[idx-1];
         console.log(activeChat);
+        let tempVar = '';
         $.ajax({
-            type: "POST",
             url:"/chatbox/" + activeChat,
+            type: 'POST',
             success: function (data) {
                 console.log(data);
                 tempVar = data;
@@ -95,19 +96,18 @@ $(document).ready(function () {
 
 
 
-        obj = JSON.parse(tempVar);
+        let obj = JSON.parse(tempVar);
 
-        var bgSrc = $target.attr('src');
+        let bgSrc = $target.attr('src');
         $('.m-c-name').removeClass('active');
         $target.addClass('active');
         createMessages(bgSrc, obj);
 
-        timerId = setInterval(function() {
-            var stringsCurrent = 0;
+        let timerId = setInterval(function() {
+            let stringsCurrent = 0;
             $.ajax({
                 type: "POST",
-                url:"http://dijkstra.cs.ttu.ee/~igkozl/prax4/server.php",
-                data: {getChat: activeChat},
+                url:"/chatbox/" + activeChat,
                 success: function (data) {
                     if (data.length < 3) {
                         stringsCurrent = 0;
@@ -116,13 +116,13 @@ $(document).ready(function () {
                     }
                 },async: false
             });
+
             if (stringsCurrent > numberOfStringsinCertainChat) {
                 numberOfStringsinCertainChat++;
-                dataFromNextLine = "";
+                let innerObj = '';
                 $.ajax({
+                    url:"/chatbox/" + activeChat,
                     type: "POST",
-                    url:"http://dijkstra.cs.ttu.ee/~igkozl/prax4/server.php",
-                    data: {getChat: activeChat},
                     success: function (data) {
                         console.log(data);
                         innerObj = JSON.parse(data).detail[numberOfStringsinCertainChat - 1];
@@ -172,8 +172,7 @@ function getFirstUserChat() {
         numberOfStringsinCertainChat = JSON.parse(tempVar).detail.length;
     }
 
-
-    obj = JSON.parse(tempVar);
+    var obj = JSON.parse(tempVar);
 
 
     var bgSrc = $target.attr('src');
@@ -184,9 +183,8 @@ function getFirstUserChat() {
     timerId = setInterval(function() {
         var stringsCurrent = 0;
         $.ajax({
+            url:"/chatbox/" + activeChat,
             type: "POST",
-            url:"http://dijkstra.cs.ttu.ee/~igkozl/prax4/server.php",
-            data: {getChat: activeChat},
             success: function (data) {
                 if (data.length < 3) {
                     stringsCurrent = 0;
@@ -200,7 +198,7 @@ function getFirstUserChat() {
             dataFromNextLine = "";
             $.ajax({
                 type: "POST",
-                url:"http://dijkstra.cs.ttu.ee/~igkozl/prax4/server.php",
+                url:"/chatbox/" + activeChat,
                 data: {getChat: activeChat},
                 success: function (data) {
                     console.log(data);
@@ -228,12 +226,11 @@ function send() {
     activeChatNumber = activeChatNumber[2];
 
 
-    var sendMessage = activeChatNumber + "$" + '\n{ "owner": ' + '"' + "<?php echo $nickname ?>" + '"' + ', "content": ' + '"' + $input.val() + '"},'
+    var sendMessage = activeChatNumber + "-" + '\n{ "owner": ' + '"' + nicknameOfThisUser + '"' + ', "content": ' + '"' + $input.val() + '"},'
     console.log(sendMessage);
     $.ajax({
+        url:"/chatboxSend/" + sendMessage,
         type: "POST",
-        url:"http://dijkstra.cs.ttu.ee/~igkozl/prax4/server.php",
-        data: {writeMessage: sendMessage},
         success: function (data) {
             console.log(data);
         },async: false
@@ -258,7 +255,6 @@ function createMessages(bgSrc, data) {
     console.log(data);
 
     $('.right-header .name-wrp .name').text(data.name);
-
 
     if (jQuery.isEmptyObject(data)) {
         return 0;
@@ -300,7 +296,7 @@ function sendRobot(pushData) {
 
     var $li = $('<li>', {class: 'other typing'});
     var $msg = $('<div>', {class: 'message'}).append('<span>●</span><span>●</span><span>●</span>');
-    $li.append('\n').append($msg)
+    $li.append('\n').append($msg);
     $('.message-ul').append('\n').append($li);
     scrollBottom();
 
@@ -315,8 +311,4 @@ function sendRobot(pushData) {
 
 $(document).ready(function() {
     $('.menu-link').bigSlide();
-});
-
-document.querySelector( "#nav-toggle" ).addEventListener( "click", function() {
-    this.classList.toggle( "active" );
 });
