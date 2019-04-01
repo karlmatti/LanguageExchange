@@ -24,11 +24,6 @@ for (let i = 0; i < targetNames.length; i++) {
     });
 }
 
-console.log(targetNames);
-console.log(realNames);
-console.log(realChats);
-console.log(nicknameOfThisUser);
-
 var activeChat = "";
 
 for (i = 1; i < targetNames.length + 1; i++) {
@@ -66,17 +61,11 @@ $(document).ready(function () {
         console.log(ev);
         numberOfStringsinCertainChat = 0;
         clearInterval(timeId);
-        var idx = parseInt($(this).attr('idx'));
-        //var obj = list[idx-1];
-        var $target = $(this).find('.m-c-name');
+        let idx = parseInt($(this).attr('idx'));
+        let $target = $(this).find('.m-c-name');
         targetUser = $target.text();
 
-        console.log(realChats[idx-1]);
-
-        console.log("return haven't worked");
-
         activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " " + realChats[idx-1] + " " +  realNames[idx-1];
-        console.log(activeChat);
         let tempVar = '';
         $.ajax({
             url:"/chatbox/" + activeChat,
@@ -93,9 +82,6 @@ $(document).ready(function () {
         } else {
             numberOfStringsinCertainChat = JSON.parse(tempVar).detail.length;
         }
-
-
-
         let obj = JSON.parse(tempVar);
 
         let bgSrc = $target.attr('src');
@@ -138,24 +124,20 @@ $(document).ready(function () {
     });
 
     scrollBottom();
-
-
 });
-
 
 function getFirstUserChat() {
 
     numberOfStringsinCertainChat = 0;
     clearInterval(timeId);
-    var idx = parseInt($('#m1').attr('idx'));
-    //var obj = list[idx-1];
-    var $target = $('#m1').find('.m-c-name');
+    let idx = parseInt($('#m1').attr('idx'));
+    let $target = $('#m1').find('.m-c-name');
     targetUser = $target.text();
 
     console.log(realChats[idx-1]);
 
     activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " " + realChats[idx-1] + " " +  realNames[idx-1];
-    console.log(activeChat);
+
     $.ajax({
         url:"/chatbox/" + activeChat,
         type: 'POST',
@@ -173,14 +155,12 @@ function getFirstUserChat() {
     }
 
     var obj = JSON.parse(tempVar);
-
-
     var bgSrc = $target.attr('src');
     $('.m-c-name').removeClass('active');
     $target.addClass('active');
     createMessages(bgSrc, obj);
 
-    timerId = setInterval(function() {
+    let timerId = setInterval(function() {
         var stringsCurrent = 0;
         $.ajax({
             url:"/chatbox/" + activeChat,
@@ -195,11 +175,10 @@ function getFirstUserChat() {
         });
         if (stringsCurrent > numberOfStringsinCertainChat) {
             numberOfStringsinCertainChat++;
-            dataFromNextLine = "";
+            let innerObj = '';
             $.ajax({
                 type: "POST",
                 url:"/chatbox/" + activeChat,
-                data: {getChat: activeChat},
                 success: function (data) {
                     console.log(data);
                     innerObj = JSON.parse(data).detail[numberOfStringsinCertainChat - 1];
@@ -214,20 +193,15 @@ function getFirstUserChat() {
     }, 500);
 }
 
-
 function send() {
-    var d = new Date();
-    var $input = $('.r-f-input-wrp .input-wrp input');
-    var $li = $('<li>', {class: 'self'});
-    var $msg = $('<div>', {class: 'message'}).text($input.val());
+    let $input = $('.r-f-input-wrp .input-wrp input');
+    let $li = $('<li>', {class: 'self'});
+    let $msg = $('<div>', {class: 'message'}).text($input.val());
     $li.append('\n').append($msg);
 
-    activeChatNumber = activeChat.split(" ");
-    activeChatNumber = activeChatNumber[2];
+    let activeChatNumber = activeChat.split(" ")[2];
+    let sendMessage = activeChatNumber + "-" + '\n{ "owner": ' + '"' + nicknameOfThisUser + '"' + ', "content": ' + '"' + $input.val() + '"},';
 
-
-    var sendMessage = activeChatNumber + "-" + '\n{ "owner": ' + '"' + nicknameOfThisUser + '"' + ', "content": ' + '"' + $input.val() + '"},'
-    console.log(sendMessage);
     $.ajax({
         url:"/chatboxSend/" + sendMessage,
         type: "POST",
@@ -236,7 +210,6 @@ function send() {
         },async: false
     });
 
-
     $('.message-ul').append('\n').append($li);
     $input.val('');
 
@@ -244,9 +217,7 @@ function send() {
         $li.addClass('init');
     }, 0);
     scrollBottom();
-
 }
-
 
 function createMessages(bgSrc, data) {
     $('.message-ul').children().remove();
@@ -260,20 +231,19 @@ function createMessages(bgSrc, data) {
         return 0;
     }
 
-    var $input = $('.r-f-input-wrp .input-wrp input');
-    for (var i=0; i<data.detail.length; i++) {
-        var detail = data.detail[i];
-        var $li = $('<li>', {class: detail.owner});
-        var $msg = $('<div>', {class: 'message'}).text(detail.content);
+
+    for (let i=0; i<data.detail.length; i++) {
+        let detail = data.detail[i];
+        let $li = $('<li>', {class: detail.owner});
+        let $msg = $('<div>', {class: 'message'}).text(detail.content);
 
         if (detail.owner == 'other') {
-            var $icon = $('<div>', {class: 'icon'}).css({background: "url(" + bgSrc + ") 0 /cover"});
+            let $icon = $('<div>', {class: 'icon'}).css({background: "url(" + bgSrc + ") 0 /cover"});
             $li.append('\n').append($icon).append('\n').append($msg).append('\n');
         } else {
             $li.append('\n').append('\n').append($msg);
         }
         $('.message-ul').append('\n').append($li);
-
     }
 
     setTimeout(function () {
@@ -306,9 +276,3 @@ function sendRobot(pushData) {
         $msg.text(pushData.content);
     }, 2300);
 }
-
-!function(a){"use strict";a.fn.bigSlide=function(b){var c=a.extend({menu:"#menu",push:".push",side:"left",menuWidth:"15.625em",speed:"300"},b),d=this,e=a(c.menu),f=a(c.push),g=c.menuWidth,h={position:"fixed",top:"0",bottom:"0","settings.side":"-"+c.menuWidth,width:c.menuWidth,height:"100%"},i={"-webkit-transition":c.side+" "+c.speed+"ms ease","-moz-transition":c.side+" "+c.speed+"ms ease","-ms-transition":c.side+" "+c.speed+"ms ease","-o-transition":c.side+" "+c.speed+"ms ease",transition:c.side+" "+c.speed+"ms ease"};return e.css(h),f.css(c.side,"0"),e.css(i),f.css(i),e._state="closed",e.open=function(){e._state="open",e.css(c.side,"0"),f.css(c.side,g)},e.close=function(){e._state="closed",e.css(c.side,"-"+g),f.css(c.side,"0")},d.on("click.bigSlide",function(a){a.preventDefault(),"closed"===e._state?e.open():e.close()}),d.on("touchend",function(a){d.trigger("click.bigSlide"),a.preventDefault()}),e}}(jQuery);
-
-$(document).ready(function() {
-    $('.menu-link').bigSlide();
-});
