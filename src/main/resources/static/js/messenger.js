@@ -1,22 +1,21 @@
-
-
 var targetNames = [];
 var realNames = [];
-var nicknameofthisuser;
+var realChats = [];
 var nicknameOfThisUser = googleID;
 
 
 $.ajax({
     url:"/friends/" + nicknameOfThisUser,
     success: function (data) {
-        data.forEach(stream => {
-            targetNames.push(stream)
-        });
+       for ([userId, chatID] of Object.entries(data)) {
+           targetNames.push(userId);
+           realChats.push(chatID);
+       }
     },async: false
 });
 
 
-for (var i = 0; i < targetNames.length; i++) {
+for (let i = 0; i < targetNames.length; i++) {
     $.ajax({
         url: "/users/" + targetNames[i],
         success: function (data) {
@@ -27,29 +26,15 @@ for (var i = 0; i < targetNames.length; i++) {
 
 console.log(targetNames);
 console.log(realNames);
-console.log(nicknameOfThisUser);
-
-
-var targetNames = <?php echo json_encode($targetUsers);?>;
-var realNames = <?php echo json_encode($realName);?>;
-//var realPictures = <?php echo json_encode($realPicture);?>;
-var realChats = <?php echo json_encode($realChats);?>;
-var nicknameOfThisUser = "<?php echo $nickname?>";
-
-var activeChat = "";
-
-
-
-console.log(targetNames);
-console.log(realNames);
-console.log(realPictures);
 console.log(realChats);
 console.log(nicknameOfThisUser);
+
+var activeChat = "";
 
 for (i = 1; i < targetNames.length + 1; i++) {
 
     $('<div>', {idx:"" + i, id:"m" + i, class:"message-card"}).appendTo('.left-body');
-    $('<div>', {class:"m-card-icon", style:"background: url("+ realPictures[i - 1] +"); background-size: 100% 100%;"}).appendTo('#m' + i );
+    //$('<div>', {class:"m-card-icon", style:"background: url("+ realPictures[i - 1] +"); background-size: 100% 100%;"}).appendTo('#m' + i );
     $('<div>', {id:"s" + i, class:"m-card-content"}).appendTo('#m' + i );
     $('<div>', {class:"m-c-name active"}).text(realNames[i - 1]).appendTo('#s'+ i);
     $('<div>', {class:"m-c-time"}).appendTo('#s' + i);
@@ -90,12 +75,11 @@ $(document).ready(function () {
 
         console.log("return haven't worked");
 
-        activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " messages/" + realChats[idx-1];
+        activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " messages/" + realChats[idx-1] + " " + realNames[idx-1];
         console.log(activeChat);
         $.ajax({
             type: "POST",
-            url:"http://dijkstra.cs.ttu.ee/~igkozl/prax4/server.php",
-            data: {getChat: activeChat},
+            url:"/chatbox/" + activeChat,
             success: function (data) {
                 console.log(data);
                 tempVar = data;
@@ -170,12 +154,11 @@ function getFirstUserChat() {
 
     console.log(realChats[idx-1]);
 
-    activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " messages/" + realChats[idx-1];
+    activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " " + realChats[idx-1] + " " +  realNames[idx-1];
     console.log(activeChat);
     $.ajax({
-        type: "POST",
-        url:"http://dijkstra.cs.ttu.ee/~igkozl/prax4/server.php",
-        data: {getChat: activeChat},
+        url:"/chatbox/" + activeChat,
+        type: 'POST',
         success: function (data) {
             console.log(data);
             tempVar = data;
@@ -336,4 +319,4 @@ $(document).ready(function() {
 
 document.querySelector( "#nav-toggle" ).addEventListener( "click", function() {
     this.classList.toggle( "active" );
-});*/
+});

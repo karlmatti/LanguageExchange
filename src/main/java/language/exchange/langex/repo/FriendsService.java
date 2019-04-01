@@ -6,20 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FriendsService {
     @Autowired
     FriendsRepository FriendsRepository;
 
-    public List<String> getUserFriends(String userId) {
-        List<String> friends = new ArrayList<>();
+    public Map<String, String>  getUserFriendsAndChats(String userId) {
+        Map<String, String> friends = new HashMap<>();
         for (Friends friend : FriendsRepository.findAll()) {
             if (friend.getUserOne().equals(userId)) {
-                friends.add(friend.getUserTwo());
+                friends.put(friend.getUserTwo(), friend.getChatNumber());
             } else if (friend.getUserTwo().equals(userId)) {
-                friends.add(friend.getUserOne());
+                friends.put(friend.getUserOne(), friend.getChatNumber());
             }
         }
         return friends;

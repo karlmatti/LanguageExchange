@@ -16,7 +16,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/users/**", "/friends/**", "/css/**", "/images/**")
+                .antMatchers("/", "/users/**", "/friends/**", "/chatbox/**", "/css/**", "/images/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
