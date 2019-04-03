@@ -26,7 +26,7 @@ public class MockitoApplicationTests {
     private MainController mainController;
 
     @Autowired
-    private FriendsService friendService;
+    private FriendsService friendsService;
 
     @Test
     public void usersUpdatedInfoIsChanged() {
@@ -85,6 +85,17 @@ public class MockitoApplicationTests {
         correctResult.add(user);
         Assert.assertEquals(correctResult.size(), actualResult.size());
         Assert.assertEquals(correctResult.get(0).getId(), actualResult.get(0).getId());
+
+    }
+
+    @Test
+    public void addingOtherAsFriendIsSuccessful() {
+        String userId = "12345";
+        String friendId = "67890";
+        int counter = 1;
+        boolean successful = friendsService.addFriends(userId, friendId, counter + ".txt");
+
+        Assert.assertTrue(successful);
 
     }
 }
