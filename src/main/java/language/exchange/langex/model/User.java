@@ -2,14 +2,12 @@ package language.exchange.langex.model;
 
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
 @Entity
 public class User {
 
-    //@GeneratedValue
     private @Id
     String id;
     private int age;

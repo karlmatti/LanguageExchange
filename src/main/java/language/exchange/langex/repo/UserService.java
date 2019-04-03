@@ -29,9 +29,10 @@ public class UserService {
         return null;
     }
 
-    public void saveOrUpdate(User user)
+    public User saveOrUpdate(User user)
     {
         UserRepository.save(user);
+        return getUserById(user.getId());
     }
 
     public void delete(int id) {
@@ -53,4 +54,6 @@ public class UserService {
         }
         return true;
     }
+
+
 }

@@ -163,7 +163,7 @@ public class MainController {
             return "redirect:/signUp";
         } else {
 
-            boolean successful = friendsService.addFriends(userId, friendId, counter + ".txt" );
+            boolean successful = friendsService.addFriends(userId, friendId, counter + ".txt");
 
             if (successful) {
                 System.out.println(userId + " and " + friendId + " are now friends!");
@@ -191,46 +191,51 @@ public class MainController {
                     "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
                     "hobbies", "default.PNG", "bioGraphy"));
 
-            List<User> returnedUsers = new ArrayList<>();
-            for (User user : allUsers) {
-                String firstName = user.getFirstName().toLowerCase();
-                String lastName = user.getLastName().toLowerCase();
-                String hobbies = user.getHobbies().toLowerCase();
-                String cLvlLangs = user.getcLvlLangs().toLowerCase();
-                String bLvlLangs = user.getbLvlLangs().toLowerCase();
-                String aLvlLangs = user.getaLvlLangs().toLowerCase();
-                keyword = keyword.toLowerCase();
-
-                if (!principal.getName().equals(user.getId())) {
-                    System.out.println("principal name: " + principal.getName() + "and userid: " + user.getId());
-                    if (criteria == 0) { // by names, hobbies, languages
-                        if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
-                                hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
-                                bLvlLangs.indexOf(keyword) != -1 || aLvlLangs.indexOf(keyword) != -1) {
-                            returnedUsers.add(user);
-                        }
-                    } else if (criteria == 1) { // by names
-                        if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1) {
-                            returnedUsers.add(user);
-                        }
-                    } else if (criteria == 2) { // by hobbies
-                        if (hobbies.indexOf(keyword) != -1) {
-                            returnedUsers.add(user);
-                        }
-                    } else if (criteria == 3) { // by languages
-                        if (cLvlLangs.indexOf(keyword) != -1 || bLvlLangs.indexOf(keyword) != -1 ||
-                                aLvlLangs.indexOf(keyword) != -1) {
-                            returnedUsers.add(user);
-                        }
-                    }
-                }
-
-            }
+            List<User> returnedUsers = filterUsers(allUsers, keyword, criteria, principal.getName());
             model.addAttribute("googleID", principal.getName());
             model.addAttribute("users", returnedUsers);
 
             return "search";
         }
+    }
+
+    public List<User> filterUsers(List<User> allUsers, String keyword, int criteria, String principalName) {
+        List<User> returnedUsers = new ArrayList<>();
+        for (User user : allUsers) {
+            String firstName = user.getFirstName().toLowerCase();
+            String lastName = user.getLastName().toLowerCase();
+            String hobbies = user.getHobbies().toLowerCase();
+            String cLvlLangs = user.getcLvlLangs().toLowerCase();
+            String bLvlLangs = user.getbLvlLangs().toLowerCase();
+            String aLvlLangs = user.getaLvlLangs().toLowerCase();
+            keyword = keyword.toLowerCase();
+
+            if (!principalName.equals(user.getId())) {
+                System.out.println("principal name: " + principalName + "and userid: " + user.getId());
+                if (criteria == 0) { // by names, hobbies, languages
+                    if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
+                            hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
+                            bLvlLangs.indexOf(keyword) != -1 || aLvlLangs.indexOf(keyword) != -1) {
+                        returnedUsers.add(user);
+                    }
+                } else if (criteria == 1) { // by names
+                    if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1) {
+                        returnedUsers.add(user);
+                    }
+                } else if (criteria == 2) { // by hobbies
+                    if (hobbies.indexOf(keyword) != -1) {
+                        returnedUsers.add(user);
+                    }
+                } else if (criteria == 3) { // by languages
+                    if (cLvlLangs.indexOf(keyword) != -1 || bLvlLangs.indexOf(keyword) != -1 ||
+                            aLvlLangs.indexOf(keyword) != -1) {
+                        returnedUsers.add(user);
+                    }
+                }
+            }
+
+        }
+        return returnedUsers;
     }
 
     @GetMapping("/messenger")
