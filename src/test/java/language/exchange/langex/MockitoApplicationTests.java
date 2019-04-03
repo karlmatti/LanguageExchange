@@ -35,15 +35,16 @@ public class MockitoApplicationTests {
 
     }
 
-
-
-/*
     @Test
-    public void whenUserIdIsProvided_thenRetrievedNameIsCorrect() {
-        Mockito.when(productService.getProductName()).thenReturn("Mock Product Name");
-        String testName = orderService.getProductName();
-        Assert.assertEquals("Mock Product Name", testName);
+    public void registeredUserIsFoundById() {
+        User user = new User(20, "22222", "firstname",
+                "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
+                "hobbies", "default.PNG", "bioGraphy");
+        User registeredUser = userService.saveOrUpdate(user);
+
+        User userById = userService.getUserById(user.getId());
+
+        Assert.assertEquals(registeredUser.getId(), userById.getId());
     }
-    */
 }
 
