@@ -11,15 +11,17 @@ public class Friends {
     int id;
     private String userOne;
     private String userTwo;
+    private Boolean friends = false;
     private String chatNumber;
 
     public Friends() {
 
     }
 
-    public Friends(String userOne, String userTwo, String chatNumber) {
+    public Friends(String userOne, String userTwo, Boolean friends, String chatNumber) {
         this.userOne = userOne;
         this.userTwo = userTwo;
+        this.friends = friends;
         this.chatNumber = chatNumber;
     }
 
@@ -55,6 +57,13 @@ public class Friends {
         this.chatNumber = chatNumber;
     }
 
+    public Boolean getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Boolean friends) {
+        this.friends = friends;
+    }
 
     @Override
     public String toString() {
@@ -62,6 +71,7 @@ public class Friends {
                 "id=" + id +
                 ", userOne='" + userOne + '\'' +
                 ", userTwo='" + userTwo + '\'' +
+                ", friends=" + friends +
                 ", chatNumber='" + chatNumber + '\'' +
                 '}';
     }
