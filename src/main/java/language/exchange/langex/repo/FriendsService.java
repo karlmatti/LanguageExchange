@@ -5,9 +5,7 @@ import language.exchange.langex.model.Friends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,16 +28,22 @@ public class FriendsService {
     public boolean addFriends(String userId, String friendId, String chatNumber) {
 
         boolean addFriends = true;
+        boolean friendsYet = false;
         for (Friends friend : FriendsRepository.findAll()) {
             if (friend.getUserOne().equals(userId) && friend.getUserTwo().equals(friendId)) {
-
+                if (!friend.getFriends()) {
+                    friendsYet = true;
+                }
                 addFriends = false;
             } else if (friend.getUserOne().equals(friendId) && friend.getUserTwo().equals(userId)) {
+                if (!friend.getFriends()) {
+                    friendsYet = true;
+                }
                 addFriends = false;
             }
         }
-        if (addFriends) {
-            Friends friend = new Friends(userId, friendId, chatNumber);
+        if (addFriends || friendsYet) {
+            Friends friend = new Friends(userId, friendId, friendsYet, chatNumber);
 
             FriendsRepository.save(friend);
         }
