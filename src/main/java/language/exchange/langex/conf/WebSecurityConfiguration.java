@@ -16,12 +16,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/users/**", "/friends/**", "/chatbox/**", "/chatboxSend/**", "/css/**", "/images/**")
+                .antMatchers("/", "/users/**", "/friends/**", "/chatbox/**", "/chatboxSend/**", "/css/**", "/images/**", "/chatboxLastMessage/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
 
-        //https://www.baeldung.com/spring-session
+        //https://www.baeldung.com/spri ng-session
 
         //in order to allow use h2 database
         http.headers().frameOptions().disable();

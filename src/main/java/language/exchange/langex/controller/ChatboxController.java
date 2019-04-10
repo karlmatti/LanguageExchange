@@ -14,18 +14,19 @@ import java.util.Map;
 @RestController
 public class ChatboxController {
 
-
     @PostMapping("/chatbox/{data}")
     private String getChat(@PathVariable("data") String data) throws IOException {
-
 
         String arrayApart[];
         arrayApart = data.split(" ");
 
-        String userID= arrayApart[0];
+        String userID = arrayApart[0];
         String friendID = arrayApart[1];
         String chatID = arrayApart[2];
         String friendName = arrayApart[3];
+
+        if (chatID.equals("undefined"))
+            return null;
 
         Writer writer = null;
         String resultString = "";
@@ -38,11 +39,12 @@ public class ChatboxController {
 
             String st;
             while ((st = br.readLine()) != null) {
+                System.out.println(st);
                 resultString = (new StringBuilder()).append(resultString)
                         .append(st.replace(userID, "self").replace(friendID, "other") + "\n").toString();
             }
             if (resultString.length() > 3)
-            resultString = resultString.substring(0, resultString.length() - 2);
+                resultString = resultString.substring(0, resultString.length() - 2);
 
         } else {
             try {
@@ -51,14 +53,41 @@ public class ChatboxController {
             } catch (IOException ex) {
                 // Report
             } finally {
-                try {writer.close();} catch (Exception ex) {/*ignore*/}
+                try {
+                    writer.close();
+                } catch (Exception ex) {/*ignore*/}
             }
         }
 
-        return "{\"name\" : \"" + friendName + "\", \"detail\": [ \n" + resultString +  "]}";
+        return "{\"name\" : \"" + friendName + "\", \"detail\": [ \n" + resultString + "]}";
 
     }
 
+    @PostMapping("/chatboxLastMessage/{data}")
+    private String getLastMessage(@PathVariable("data") String data) throws IOException {
+
+
+        String chatID = data;
+
+        if (chatID.equals("undefined"))
+            return null;
+
+        Writer writer = null;
+        String resultString = "";
+        File f = new File(chatID);
+
+        if (f.exists() && !f.isDirectory()) {
+            File file = new File(chatID);
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            resultString = br.readLine();
+            System.out.println(resultString);
+        }
+
+        return resultString;
+
+    }
     @PostMapping("/chatboxSend/{data}")
     private String sendToChat(@PathVariable("data") String data) throws IOException {
         String explode[] = data.split("-");

@@ -1,39 +1,51 @@
-var targetNames = [];
+var targetIDs = [];
 var realNames = [];
-var realChats = [];
-var nicknameOfThisUser = googleID;
+var chatID = [];
+var lastMessages = [];
+var thisUsersID = googleID;
 
 
 $.ajax({
-    url:"/friends/" + nicknameOfThisUser,
+    url:"/friends/" + thisUsersID,
     success: function (data) {
-       for ([userId, chatID] of Object.entries(data)) {
-           targetNames.push(userId);
-           realChats.push(chatID);
+        console.log(123);
+       for (let [userId, chatID] of Object.entries(data)) {
+           targetIDs.push(userId);
+           chatID.push(chatID);
        }
     },async: false
 });
 
 
-for (let i = 0; i < targetNames.length; i++) {
+for (let i = 0; i < targetIDs.length; i++) {
     $.ajax({
-        url: "/users/" + targetNames[i],
+        url: "/users/" + targetIDs[i],
         success: function (data) {
             realNames.push(data.firstName + ' ' + data.lastName);
         }, async: false
     });
+
+    $.ajax({
+        type: "POST",
+        url: "/chatboxLastMessage/" + chatID[i],
+        success: function (data) {
+            lastMessages.push(data);
+        }, async: false
+    });
 }
+
+
 
 var activeChat = "";
 
-for (i = 1; i < targetNames.length + 1; i++) {
+for (i = 1; i < targetIDs.length + 1; i++) {
 
     $('<div>', {idx:"" + i, id:"m" + i, class:"message-card"}).appendTo('.left-body');
     //$('<div>', {class:"m-card-icon", style:"background: url("+ realPictures[i - 1] +"); background-size: 100% 100%;"}).appendTo('#m' + i );
     $('<div>', {id:"s" + i, class:"m-card-content"}).appendTo('#m' + i );
     $('<div>', {class:"m-c-name active"}).text(realNames[i - 1]).appendTo('#s'+ i);
     $('<div>', {class:"m-c-time"}).appendTo('#s' + i);
-    $('<div>', {class:"m-c-last-message"}).text("Perfect Imperfection").appendTo('#s'+ i);
+    $('<div>', {class:"m-c-last-message"}).text(lastMessages[i - 1]).appendTo('#s'+ i);
 }
 
 var targetUser = "";
@@ -65,7 +77,7 @@ $(document).ready(function () {
         let $target = $(this).find('.m-c-name');
         targetUser = $target.text();
 
-        activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " " + realChats[idx-1] + " " +  realNames[idx-1];
+        activeChat = thisUsersID + " " + targetIDs[idx-1] + " " + chatID[idx-1] + " " +  realNames[idx-1];
         let tempVar = '';
         $.ajax({
             url:"/chatbox/" + activeChat,
@@ -134,10 +146,10 @@ function getFirstUserChat() {
     let $target = $('#m1').find('.m-c-name');
     targetUser = $target.text();
 
-    console.log(realChats[idx-1]);
+    console.log(chatID[idx-1]);
 
-    activeChat = nicknameOfThisUser + " " + targetNames[idx-1] + " " + realChats[idx-1] + " " +  realNames[idx-1];
-
+    activeChat = thisUsersID + " " + targetIDs[idx-1] + " " + chatID[idx-1] + " " +  realNames[idx-1];
+    console.log(activeChat);
     $.ajax({
         url:"/chatbox/" + activeChat,
         type: 'POST',
@@ -200,7 +212,7 @@ function send() {
     $li.append('\n').append($msg);
 
     let activeChatNumber = activeChat.split(" ")[2];
-    let sendMessage = activeChatNumber + "-" + '\n{ "owner": ' + '"' + nicknameOfThisUser + '"' + ', "content": ' + '"' + $input.val() + '"},';
+    let sendMessage = activeChatNumber + "-" + '\n{ "owner": ' + '"' + thisUsersID + '"' + ', "content": ' + '"' + $input.val() + '"},';
 
     $.ajax({
         url:"/chatboxSend/" + sendMessage,

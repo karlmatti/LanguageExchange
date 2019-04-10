@@ -17,6 +17,9 @@ public class LangexApplication {
             if (file.delete());
         }
 
+        File file = new File("undefined");
+        if (file.delete());
+
     }
 
 }
