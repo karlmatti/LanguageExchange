@@ -31,7 +31,6 @@ public class FriendsService {
         return requests;
 
     }
-
     public List<Friends> getAllFriends() {
         List<Friends> friends = new ArrayList<Friends>();
         FriendsRepository.findAll().forEach(friend -> friends.add(friend));
@@ -54,27 +53,24 @@ public class FriendsService {
 
         boolean addFriends = true;
         boolean friendsYet = false;
-        String chatNr = "error";
         for (Friends friend : FriendsRepository.findAll()) {
             if (friend.getUserOne().equals(userId) && friend.getUserTwo().equals(friendId)) {
                 if (!friend.getFriends()) {
                     friendsYet = true;
-                    chatNr = friend.getChatNumber();
                     FriendsRepository.delete(friend);
                 }
                 addFriends = false;
             } else if (friend.getUserOne().equals(friendId) && friend.getUserTwo().equals(userId)) {
                 if (!friend.getFriends()) {
                     friendsYet = true;
-                    chatNr = friend.getChatNumber();
                     FriendsRepository.delete(friend);
                 }
                 addFriends = false;
             }
         }
         if (friendsYet) {
-            Friends friend = new Friends(userId, friendId, friendsYet, chatNr);
 
+            Friends friend = new Friends(userId, friendId, friendsYet, chatNumber);
             FriendsRepository.save(friend);
         } else if (addFriends) {
 
