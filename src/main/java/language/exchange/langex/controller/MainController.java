@@ -32,7 +32,7 @@ public class MainController {
 
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index() {
         return "home";
     }
 
@@ -108,13 +108,13 @@ public class MainController {
         }
     }
 
-    public boolean checkUserExistance(Principal principal) {
+    private boolean checkUserExistance(Principal principal) {
         return userService.checkUserStatus(principal.getName());
     }
 
 
     @PostMapping("/signUp")
-    public String initProfile(Principal principal, Model model,
+    public String initProfile(Principal principal,
                               @RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName,
                               @RequestParam("age") int age,
