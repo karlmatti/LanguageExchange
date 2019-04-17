@@ -278,7 +278,7 @@ input {
     min-height: 34px;
     word-wrap: break-word;
     word-break: break-word;
-    background-color: #cc5de0;
+    background-color: slategray;
     padding: 10px;
     border-radius: 10px;
     font-size: 14px;
@@ -324,7 +324,7 @@ input {
     min-height: 34px;
     word-wrap: break-word;
     word-break: break-word;
-    background-color: #38e0e8;
+    background-color: deepskyblue;
     padding: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;

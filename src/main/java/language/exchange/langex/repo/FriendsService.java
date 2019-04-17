@@ -40,9 +40,9 @@ public class FriendsService {
     public Map<String, String>  getUserFriendsAndChats(String userId) {
         Map<String, String> friends = new HashMap<>();
         for (Friends friend : FriendsRepository.findAll()) {
-            if (friend.getUserOne().equals(userId) && friend.getFriends()) {
+            if (friend.getUserOne().equals(userId)) {
                 friends.put(friend.getUserTwo(), friend.getChatNumber());
-            } else if (friend.getUserTwo().equals(userId) && friend.getFriends()) {
+            } else if (friend.getUserTwo().equals(userId)) {
                 friends.put(friend.getUserOne(), friend.getChatNumber());
             }
         }

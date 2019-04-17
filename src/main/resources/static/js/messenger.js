@@ -9,9 +9,9 @@ $.ajax({
     url:"/friends/" + thisUsersID,
     success: function (data) {
         console.log(123);
-       for (let [userId, chatID] of Object.entries(data)) {
+       for (let [userId, chatNumber] of Object.entries(data)) {
            targetIDs.push(userId);
-           chatID.push(chatID);
+           chatID.push(chatNumber);
        }
     },async: false
 });
@@ -54,7 +54,10 @@ var timeId = 0;
 
 getFirstUserChat();
 
+
 $(document).ready(function () {
+
+
 
 
     $('.r-f-input-wrp .input-wrp input').on('keydown', function (ev) {
@@ -231,6 +234,9 @@ function send() {
     scrollBottom();
 }
 
+
+
+
 function createMessages(bgSrc, data) {
     $('.message-ul').children().remove();
 
@@ -243,15 +249,40 @@ function createMessages(bgSrc, data) {
         return 0;
     }
 
-
     for (let i=0; i<data.detail.length; i++) {
         let detail = data.detail[i];
         let $li = $('<li>', {class: detail.owner});
         let $msg = $('<div>', {class: 'message'}).text(detail.content);
 
+
+
         if (detail.owner == 'other') {
             let $icon = $('<div>', {class: 'icon'}).css({background: "url(" + bgSrc + ") 0 /cover"});
-            $li.append('\n').append($icon).append('\n').append($msg).append('\n');
+            $li.append('\n').append($icon).append('\n').append($msg).append('\n').click(function () {
+                console.log("meow");
+                console.log($(this).text());
+                Swal.mixin({
+                    input: 'text',
+                    confirmButtonText: 'Next &rarr;',
+                    showCancelButton: true,
+                }).queue([
+                    {
+                        title: 'Correct message',
+                        text: $(this).text()
+                    }
+                ]).then((result) => {
+                    if (result.value) {
+                        Swal.fire({
+                            title: 'All done!',
+                            html:
+                                'Your answers: <pre><code>' +
+                                JSON.stringify(result.value) +
+                                '</code></pre>',
+                            confirmButtonText: 'Lovely!'
+                        })
+                    }
+                })
+            });
         } else {
             $li.append('\n').append('\n').append($msg);
         }
@@ -265,6 +296,10 @@ function createMessages(bgSrc, data) {
     scrollBottom();
 }
 
+function temporarty() {
+    console.log("PLUMP");
+}
+
 function scrollBottom() {
     var $ul = $('.message-ul');
     var offset = $ul[0].scrollHeight - $ul[0].clientHeight;
@@ -272,6 +307,7 @@ function scrollBottom() {
         $ul[0].scrollTop += offset;
     }
 }
+
 
 function sendRobot(pushData) {
     $('.typing').removeClass('typing');

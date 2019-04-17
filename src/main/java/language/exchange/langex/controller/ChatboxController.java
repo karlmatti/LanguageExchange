@@ -10,6 +10,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 public class ChatboxController {
@@ -39,7 +41,7 @@ public class ChatboxController {
 
             String st;
             while ((st = br.readLine()) != null) {
-                System.out.println(st);
+
                 resultString = (new StringBuilder()).append(resultString)
                         .append(st.replace(userID, "self").replace(friendID, "other") + "\n").toString();
             }
@@ -66,7 +68,6 @@ public class ChatboxController {
     @PostMapping("/chatboxLastMessage/{data}")
     private String getLastMessage(@PathVariable("data") String data) throws IOException {
 
-
         String chatID = data;
 
         if (chatID.equals("undefined"))
@@ -74,6 +75,7 @@ public class ChatboxController {
 
         Writer writer = null;
         String resultString = "";
+        String last = "";
         File f = new File(chatID);
 
         if (f.exists() && !f.isDirectory()) {
@@ -81,11 +83,18 @@ public class ChatboxController {
 
             BufferedReader br = new BufferedReader(new FileReader(file));
 
-            resultString = br.readLine();
-            System.out.println(resultString);
+            while ((resultString = br.readLine()) != null) {
+                last = resultString;
+            }
+
+            Pattern pattern = Pattern.compile("(?<=\"content\": \").+(?=\"},)");
+            Matcher mathcher = pattern.matcher(last);
+            System.out.println(mathcher.find());
+            last = mathcher.group(0);
+
         }
 
-        return resultString;
+        return last;
 
     }
     @PostMapping("/chatboxSend/{data}")
