@@ -14,8 +14,8 @@ public class UserService {
     UserRepository UserRepository;
 
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<User>();
-        UserRepository.findAll().forEach(user -> users.add(user));
+        List<User> users = new ArrayList<>();
+        UserRepository.findAll().forEach(users::add);
         return users;
     }
 
@@ -47,8 +47,8 @@ public class UserService {
 
     public boolean checkUserStatus(String googleId) {
         List<User> users = getAllUsers();
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId().equals(googleId)) {
+        for (User user : users) {
+            if (user.getId().equals(googleId)) {
                 return false;
             }
         }
@@ -56,4 +56,16 @@ public class UserService {
     }
 
 
+    public List<User> getUsersById(List<String> friendRequests, String principal) {
+        List<User> usersList = new ArrayList<>();
+        System.out.println("friendRequests" + friendRequests.toString());
+        for (String userId : friendRequests) {
+            for (User user : UserRepository.findAll()) {
+                if (user.getId().equals(userId)) {
+                    usersList.add(user);
+                }
+            }
+        }
+        return usersList;
+    }
 }

@@ -1,4 +1,4 @@
-var userApi = Vue.resource('/users{/id}');
+var userApi = Vue.resource('/users');
 
 
 /*Vue.component('message-row', {
@@ -15,22 +15,37 @@ Vue.component('messages-list', {
 
 });*/
 
-var app = new Vue ({
+let app = new Vue({
     el: '#pData',
     data: {
         messages: ''
     },
     created: function () {
         userApi.get().then(result =>
-        result.json().then(data =>
-            data.forEach(user => {
-                console.log("DAVAI");
-                console.log(googleID)
-                if (user.id == googleID) {
-                    console.log('some')
-                    console.log("console");
-                this.messages = user;
-        }}))
-    )},
+            result.json().then(data =>
+                data.forEach(user => {
+
+                    if (user.id == googleID) {
+
+                        this.messages = user;
+                    }
+                }))
+        )
+    },
 });
-console.log("right right right");
+
+
+let req = new Vue({
+    el: '#reqData',
+    data: {
+        users: []
+    },
+    created() {
+        var vm = this
+        this.$http
+            .get('/friends/requests')
+            .then(function (response) {
+                vm.users = response.data
+            })
+    }
+})

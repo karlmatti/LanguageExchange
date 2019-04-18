@@ -9,6 +9,17 @@ INSERT INTO user VALUES (
 
 );
 
+INSERT INTO user VALUES (
+'111111111111111111111',
+'-',71,'German',
+'I would like to improve my German because I have not been in Austria for a while and that would be fun',
+'English','Arnold',
+'Acting and Powerlifting',
+'Schwarzenegger',
+'/img/114005839740106632529.PNG'
+
+);
+
 INSERT INTO friends VALUES (
 1, '1.txt', true,'100388202069890344398', '114005839740342106632529'
 );
@@ -18,7 +29,9 @@ INSERT INTO friends VALUES (
 INSERT INTO friends VALUES (
 3, '3.txt', true, '100388202069890344398', '22222222222222222222'
 );
-
+INSERT INTO friends VALUES (
+4, '0.txt', false,'114005839740106632529', '111111111111111111111'
+);
 
 /* Json  example
 [

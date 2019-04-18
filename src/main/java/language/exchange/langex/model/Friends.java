@@ -25,6 +25,7 @@ public class Friends {
         this.chatNumber = chatNumber;
     }
 
+
     public int getId() {
         return id;
     }

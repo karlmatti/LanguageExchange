@@ -31,9 +31,10 @@ public class FriendsService {
         return requests;
 
     }
-    public List<Friends> getAllFriends() {
-        List<Friends> friends = new ArrayList<Friends>();
-        FriendsRepository.findAll().forEach(friend -> friends.add(friend));
+
+    private List<Friends> getAllFriends() {
+        List<Friends> friends = new ArrayList<>();
+        FriendsRepository.findAll().forEach(friends::add);
         return friends;
     }
 
@@ -80,4 +81,17 @@ public class FriendsService {
         return addFriends;
     }
 
+    public List<String> getFriendRequests(String principal) {
+
+        List<Friends> allFriends = getAllFriends();
+        List<String> myFriendRequests = new ArrayList<>();
+
+        for (Friends friends : allFriends) {
+            if (!friends.getFriends() && friends.getUserOne().equals(principal)) {
+                myFriendRequests.add(friends.getUserTwo());
+            }
+        }
+
+        return myFriendRequests;
+    }
 }

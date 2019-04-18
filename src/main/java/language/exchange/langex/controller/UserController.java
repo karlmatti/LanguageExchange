@@ -18,14 +18,11 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     private User getUser(@PathVariable("id") String id) {
-        System.out.println("getUser");
         return userService.getUserById(id);
     }
 
     @GetMapping("/users")
     private List<User> getAllUsers() {
-        System.out.println("getUsersssssssss");
-
         return userService.getAllUsers();
     }
     /*

@@ -187,10 +187,6 @@ public class MainController {
         } else {
 
             List<User> allUsers = userService.getAllUsers();
-            allUsers.add(new User(1, "231111123123123", "firstname",
-                    "lastName", "cLvlLangs", "bLvlLangs", "aLvlLangs",
-                    "hobbies", "default.PNG", "bioGraphy"));
-
             List<User> returnedUsers = filterUsers(allUsers, keyword, criteria, principal.getName());
             model.addAttribute("googleID", principal.getName());
             model.addAttribute("users", returnedUsers);
@@ -199,7 +195,7 @@ public class MainController {
         }
     }
 
-    public List<User> filterUsers(List<User> allUsers, String keyword, int criteria, String principalName) {
+    private List<User> filterUsers(List<User> allUsers, String keyword, int criteria, String principalName) {
         List<User> returnedUsers = new ArrayList<>();
         for (User user : allUsers) {
             String firstName = user.getFirstName().toLowerCase();
@@ -213,22 +209,22 @@ public class MainController {
             if (!principalName.equals(user.getId())) {
                 System.out.println("principal name: " + principalName + "and userid: " + user.getId());
                 if (criteria == 0) { // by names, hobbies, languages
-                    if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1 ||
-                            hobbies.indexOf(keyword) != -1 || cLvlLangs.indexOf(keyword) != -1 ||
-                            bLvlLangs.indexOf(keyword) != -1 || aLvlLangs.indexOf(keyword) != -1) {
+                    if (firstName.contains(keyword) || lastName.contains(keyword) ||
+                            hobbies.contains(keyword) || cLvlLangs.contains(keyword) ||
+                            bLvlLangs.contains(keyword) || aLvlLangs.contains(keyword)) {
                         returnedUsers.add(user);
                     }
                 } else if (criteria == 1) { // by names
-                    if (firstName.indexOf(keyword) != -1 || lastName.indexOf(keyword) != -1) {
+                    if (firstName.contains(keyword) || lastName.contains(keyword)) {
                         returnedUsers.add(user);
                     }
                 } else if (criteria == 2) { // by hobbies
-                    if (hobbies.indexOf(keyword) != -1) {
+                    if (hobbies.contains(keyword)) {
                         returnedUsers.add(user);
                     }
                 } else if (criteria == 3) { // by languages
-                    if (cLvlLangs.indexOf(keyword) != -1 || bLvlLangs.indexOf(keyword) != -1 ||
-                            aLvlLangs.indexOf(keyword) != -1) {
+                    if (cLvlLangs.contains(keyword) || bLvlLangs.contains(keyword) ||
+                            aLvlLangs.contains(keyword)) {
                         returnedUsers.add(user);
                     }
                 }
