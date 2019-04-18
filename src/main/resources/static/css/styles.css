@@ -66,8 +66,9 @@
 }
 #profileImage{
   position: relative;
-  top: 90px;
-  left: 90px;
+    padding-top: 90px;
+    padding-left: 90px;
+    padding-bottom: 90px;
 }
 #pData{
   max-width: 400px;
@@ -78,6 +79,15 @@
   text-align:left;
   left: -50px;
   top:90px;
+}
+
+#reqData {
+    padding-left: 90px;
+}
+
+#card-friend-req {
+    padding-bottom: 20px;
+    max-width: 300px;
 }
 
 .submitbutton{
@@ -104,27 +114,29 @@
   text-align: left;
 }
 
-#fb{
+.fb {
   width:500px;
   border:1px solid gray;
   border-radius:5px;
   position:relative;
   height:175px;
-  top:120px;
+    top: 250px;
   left: 50px;
 }
-#fb p{
+
+.fb p {
   font-family:sans-serif;
   margin: 0 0 0 10px;
   line-height:30px;
 }
 
-#fb-top span{
+.fb-top span {
   color:#4267B2;
   float:right;
   margin-right:10px;
 }
-#fb-top{
+
+.fb-top {
   background-color:#3076FF;
   height:30px;
   width:500px;
@@ -135,36 +147,36 @@
   border:1px solid gray;
 }
 
-#fb img{
+.fb img {
   position:absolute;
   left:10px;
   top:52.5px;
 }
 
-#info{
+.info {
   position:absolute;
   left:120px;
   top:75px;
 }
 
-#info {
+.info {
   color:#134FC9;
   line-height:25px;
   font-size:18px;
 }
 
-#info span{
+.info span {
   color:#777;
   font-size:14px;
 }
 
-#button-block{
+.button-block {
   position:absolute;
   right:10px;
   top:85px;
 }
 
-#button-block div{
+.button-block div {
   display:inline-block;
 }
 #pData,#col-75{
@@ -205,7 +217,8 @@
   word-wrap: break-word;
   top:200px;
 }
-#confirm, #delete{
+
+.confirm, .delete {
   background-color:#4267B2;
   color:white;
   padding:7px;
@@ -214,7 +227,7 @@
   font-family:sans-serif;
 }
 
-#delete{
+.delete {
   color:#222;
   background-color:#bbb;
   border:1px solid #999;
@@ -222,7 +235,7 @@
   margin-right:0;
 }
 
-#button-block div:hover{
+.button-block div:hover {
   opacity:.8;
   cursor:pointer;
 }

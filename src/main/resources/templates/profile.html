@@ -154,97 +154,60 @@
         </div>
 
         <div id="reqData">
-            <div class="col-sm-4" th:each="request : ${requests}">
-                <div class="card" style="max-width: 300px;">
-                    <img src="http://www.athensparent.com/images/medium300x250.gif">
-                    <div class="card-body card-friend-req">
-                        <p class="card-text">First name:<span th:text="${request.getFirstName()}"></span></p>
-                        <p class="card-text">Last name:<span th:text="${request.getLastName()}"></span></p>
-                        <p class="card-text">C Lvl Language(s):<span th:text="${request.getcLvlLangs()}"></span></p>
-                        <p class="card-text">B Lvl Language(s):<span th:text="${request.getbLvlLangs()}"></span></p>
-                        <p class="card-text">A Lvl Language(s):<span th:text="${request.getaLvlLangs()}"></span></p>
-                        <p class="card-text">Hobbies:<span th:text="${request.getHobbies()}"></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4" th:each="request : ${requests}">
-                <div class="card" style="max-width: 300px;">
-                    <img src="http://www.athensparent.com/images/medium300x250.gif">
-                    <div class="card-body card-friend-req">
-                        <p class="card-text">First name:<span th:text="${request.getFirstName()}"></span></p>
-                        <p class="card-text">Last name:<span th:text="${request.getLastName()}"></span></p>
-                        <p class="card-text">C Lvl Language(s):<span th:text="${request.getcLvlLangs()}"></span></p>
-                        <p class="card-text">B Lvl Language(s):<span th:text="${request.getbLvlLangs()}"></span></p>
-                        <p class="card-text">A Lvl Language(s):<span th:text="${request.getaLvlLangs()}"></span></p>
-                        <p class="card-text">Hobbies:<span th:text="${request.getHobbies()}"></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4" th:each="request : ${requests}">
-                <div class="card" style="max-width: 300px;">
-                    <img src="http://www.athensparent.com/images/medium300x250.gif">
-                    <div class="card-body card-friend-req">
-                        <p class="card-text">First name:<span th:text="${request.getFirstName()}"></span></p>
-                        <p class="card-text">Last name:<span th:text="${request.getLastName()}"></span></p>
-                        <p class="card-text">C Lvl Language(s):<span th:text="${request.getcLvlLangs()}"></span></p>
-                        <p class="card-text">B Lvl Language(s):<span th:text="${request.getbLvlLangs()}"></span></p>
-                        <p class="card-text">A Lvl Language(s):<span th:text="${request.getaLvlLangs()}"></span></p>
-                        <p class="card-text">Hobbies:<span th:text="${request.getHobbies()}"></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4" th:each="request : ${requests}">
-                <div class="card" style="max-width: 300px;">
-                    <img src="http://www.athensparent.com/images/medium300x250.gif">
-                    <div class="card-body card-friend-req">
-                        <p class="card-text">First name:<span th:text="${request.getFirstName()}"></span></p>
-                        <p class="card-text">Last name:<span th:text="${request.getLastName()}"></span></p>
-                        <p class="card-text">C Lvl Language(s):<span th:text="${request.getcLvlLangs()}"></span></p>
-                        <p class="card-text">B Lvl Language(s):<span th:text="${request.getbLvlLangs()}"></span></p>
-                        <p class="card-text">A Lvl Language(s):<span th:text="${request.getaLvlLangs()}"></span></p>
-                        <p class="card-text">Hobbies:<span th:text="${request.getHobbies()}"></span></p>
-                    </div>
-                </div>
-            </div>
 
+            <div class="row fb" v-for="user in users">
+                <div class="fb-top">
+                    <p><b>Friend Requests</b></p>
+                    </div>
+                <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
+                     height="100" width="100" alt="Image of man">
+                <p class="info">
+                    <span>{{ user.firstName }}</span>
+                    <span>{{ user.lastName }}</span>
+                </p>
+                <div class="button-block">
+                    <div class="confirm">Confirm</div>
+                    <div class="delete">View Profile</div>
+                    <div class="delete">Delete Request</div>
+                    </div>
+
+            </div>
 
         </div>
     </div>
 
-</div>
 
-
-<!--
-<div class="row">
-    <div class="col">
-        <div id="fb">
-            <div id="fb-top">
-                <p><b>Friend Requests</b></p>
+    <!--
+    <div class="row">
+        <div class="col">
+            <div id="fb">
+                <div id="fb-top">
+                    <p><b>Friend Requests</b></p>
+                </div>
+                <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
+                     height="100" width="100" alt="Image of man">
+                <p id="info"><b>Rainer Murumaa</b></p>
+                <div id="button-block">
+                    <div id="confirm">Confirm</div>
+                    <div id="delete">Delete Request</div>
+                </div>
             </div>
-            <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
-                 height="100" width="100" alt="Image of man">
-            <p id="info"><b>Rainer Murumaa</b></p>
-            <div id="button-block">
-                <div id="confirm">Confirm</div>
-                <div id="delete">Delete Request</div>
+            <br>
+            <div id="fb">
+                <div id="fb-top">
+                    <p><b>Friend Requests</b></p>
+                </div>
+                <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
+                     height="100" width="100" alt="Image of man">
+                <p id="info"><b>Andres Kivil</b></p>
+                <div id="button-block">
+                    <div id="confirm">Confirm</div>
+                    <div id="delete">Delete Request</div>
+                </div>
             </div>
         </div>
-        <br>
-        <div id="fb">
-            <div id="fb-top">
-                <p><b>Friend Requests</b></p>
-            </div>
-            <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
-                 height="100" width="100" alt="Image of man">
-            <p id="info"><b>Andres Kivil</b></p>
-            <div id="button-block">
-                <div id="confirm">Confirm</div>
-                <div id="delete">Delete Request</div>
-            </div>
-        </div>
-    </div>
 
-</div>-->
+    </div>-->
 <script>
     var googleID = "[[${googleID}]]";
 </script>
