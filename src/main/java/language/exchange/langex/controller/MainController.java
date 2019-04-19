@@ -175,6 +175,13 @@ public class MainController {
         }
     }
 
+    @PostMapping("/profile/delete")
+    private String deleteRequest(Principal principal, @RequestParam("friendId") String friendId) {
+
+        friendsService.deleteFriendRequest(principal.getName(), friendId);
+
+        return "redirect:/profile";
+    }
     @GetMapping("/searchResults")
     private String searchUsers(@RequestParam("criteria") int criteria,
                                @RequestParam("keyword") String keyword,

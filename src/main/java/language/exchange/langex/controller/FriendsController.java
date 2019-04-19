@@ -28,6 +28,7 @@ public class FriendsController {
         return friendsService.getUserFriendsAndChats(id);
     }
 
+
     @GetMapping("/friends/requests")
     public List<User> getUserFriends(Principal principal) {
         System.out.println("koik sobrad koos");

@@ -94,4 +94,16 @@ public class FriendsService {
 
         return myFriendRequests;
     }
+
+    public void deleteFriendRequest(String userId, String friendId) {
+        System.out.println("userId" + userId + ";Friendid" + friendId);
+        for (Friends friends : FriendsRepository.findAll()) {
+            if (friends.getUserOne().equals(userId) && friends.getUserTwo().equals(friendId)) {
+                FriendsRepository.delete(friends);
+            } else if (friends.getUserTwo().equals(userId) && friends.getUserOne().equals(friendId)) {
+                FriendsRepository.delete(friends);
+            }
+        }
+
+    }
 }
