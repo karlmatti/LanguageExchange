@@ -33,7 +33,11 @@ body{
   height:250px;
 }
 .card-body{
-  background-color: #000089;
+    background: #4AC29A;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #FFEFBA,#FFFFFF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #FFEFBA,#FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .topnav a {
   float: left;
@@ -48,7 +52,7 @@ body{
   color: black;
 }
 .topnav a.active {
-  background-color: #4CAF50;
+  background-color: #FFA64C;
   color: white;
 }
 .topnav a.logout {
@@ -63,13 +67,13 @@ body{
 }
 .mainback h2.alignment{
   position: relative;
-  top: -40px;
-  left: 25px;
+  padding-top: -40px;
+  padding-left: 25px;
 }
 .firstData{
   position: relative;
-  top: 100px;
-  left: 35%;
+  padding-top: 100px;
+  padding-left: 35%;
 }
 #imageUpload{
   position: relative;
