@@ -145,21 +145,24 @@
                     </div>
                 <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
                      height="100" width="100" alt="Image of man">
+                <form action="/otherProfile" method="get" style="display: inline;">
                 <p class="info">
-                    <b>{{ user.firstName }} {{ user.lastName }}</b>
+                    <input type="hidden" v-bind:value="user.id" name="userId"/>
+                    <button type="submit" class="link">{{ user.firstName }} {{ user.lastName }}</button>
                 </p>
+                </form>
                 <div class="button-block">
-                    <form action="/otherProfile" method="get" style="display: inline;">
-                        od="ge type="hidden" v-bind:value="user.id" name="userId"/>
+                    <!--<form action="/otherProfile" method="get" style="display: inline;">
+                        <input type="hidden" v-bind:value="user.id" name="userId"/>
                         <button type="submit" class="btn btn-primary">View Profile</button>
-                    </form>
+                    </form>-->
                     <form action="/addFriends" method="post" style="display: inline;">
                         <input type="hidden" v-bind:value="user.id" name="friendId"/>
-                        <button type="submit" class="btn btn-warning">Confirm</button>
+                        <button type="submit" class="btn btn-success">Confirm</button>
                     </form>
                     <form action="/profile/delete" method="post" style="display: inline;">
                         <input type="hidden" v-bind:value="user.id" name="friendId"/>
-                        <button type="submit" class="btn btn-warning">Delete Request</button>
+                        <button type="submit" class="btn btn-danger">Delete Request</button>
                     </form>
                 </div>
             </div>

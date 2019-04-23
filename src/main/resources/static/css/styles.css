@@ -39,6 +39,9 @@ body{
     color:black;
   font-family: Arial, Helvetica, sans-serif;
 }
+.col-sm-4{
+  padding-top:10px;
+}
 .topnav a {
   float: left;
   color: #f2f2f2;
@@ -101,13 +104,17 @@ body{
 
 #reqData {
     padding-left:50px;
+  padding-bottom: 5px;
 }
 
 #card-friend-req {
     padding-bottom: 20px;
     max-width: 300px;
 }
-
+.link{
+    background:none;
+    border:none;
+}
 .submitbutton{
   position: relative;
   float: left;
@@ -133,12 +140,13 @@ body{
 
 .fb {
   width:500px;
-  border:1px solid gray;
+  border:1px solid white;
   border-radius:5px;
   position:relative;
   height:175px;
-    top: 50px;
+  top: 50px;
   left: 50px;
+  margin-top: 7px;
 }
 
 .fb p {
@@ -154,13 +162,13 @@ body{
 }
 
 .fb-top {
-  background-color:#3076FF;
+  background-color:#FFA64C;
   height:30px;
   width:500px;
   border-radius:5px 5px 0 0;
   position:absolute;
-  top:-1px;
-  left:-1px;
+  top:0px;
+  left:0px;
   border:1px solid gray;
 }
 
@@ -177,7 +185,7 @@ body{
 }
 
 .info {
-  color:#134FC9;
+  color:#FFA64C;
   line-height:25px;
   font-size:18px;
 }
