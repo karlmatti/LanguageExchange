@@ -24,8 +24,9 @@ body{
   float: right;
 }
 .topnav {
-  background-color: #333;
+  background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
   overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 }
 #bannerImage{
   width: 1200px;
@@ -90,10 +91,12 @@ body{
   text-align:left;
   left: -50px;
   top:90px;
+  font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
 }
 
 #reqData {
-    padding-left: 90px;
+    padding-left:50px;
 }
 
 #card-friend-req {
@@ -103,10 +106,9 @@ body{
 
 .submitbutton{
   position: relative;
-  float: right;
-  width: 200px;
-  left:-40px;
-  top:30px;
+  float: left;
+    left:185px;
+  width: 100px;
 }
 .friendList {
   background-color:#BF9795;
@@ -131,7 +133,7 @@ body{
   border-radius:5px;
   position:relative;
   height:175px;
-    top: 250px;
+    top: 50px;
   left: 50px;
 }
 
