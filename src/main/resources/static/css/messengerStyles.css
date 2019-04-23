@@ -87,7 +87,7 @@ input {
     -ms-filter: blur(60px);
     -o-filter: blur(60px);
     filter: blur(60px);
-    background: url('/images/forest3.jpg') 0 / cover;
+    background: url('/images/picture5.jpg') 0 / cover;
 }
 .glass {
     height: 100%;
@@ -150,7 +150,7 @@ input {
     right: -15px;
     bottom: -15px;
     left: -15px;
-    background: url('/images/forest3.jpg') 0 / cover;
+    background: url('/images/picture5.jpg') 0 / cover;
     opacity: .2;
     -webkit-filter: blur(20px);
     -moz-filter: blur(20px);
@@ -392,7 +392,7 @@ input {
     right: -15px;
     bottom: -15px;
     left: -15px;
-    background: url('/images/forest3.jpg') 0 / cover;
+    background: url('/images/picture5.jpg') 0 / cover;
     opacity: .5;
     -webkit-filter: blur(20px);
     -moz-filter: blur(20px);
