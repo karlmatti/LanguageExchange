@@ -96,7 +96,7 @@ public class FriendsService {
     }
 
     public void deleteFriendRequest(String userId, String friendId) {
-        System.out.println("userId" + userId + ";Friendid" + friendId);
+
         for (Friends friends : FriendsRepository.findAll()) {
             if (friends.getUserOne().equals(userId) && friends.getUserTwo().equals(friendId)) {
                 FriendsRepository.delete(friends);

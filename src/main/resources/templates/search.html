@@ -73,7 +73,7 @@
                         <input type="hidden" th:value="${user.getId()}" name="userId"/>
                         <button type="submit" class="btn btn-primary">View Profile</button>
                     </form>
-                    <form action="/addFriends" method="post" style="display: inline;" >
+                        <form action="/profile/add" method="post" style="display: inline;">
                         <input type="hidden" th:value="${googleID}" name="userId"/>
                         <input type="hidden" th:value="${user.getId()}" name="friendId"/>
                         <button type="submit" class="btn btn-warning">Add Friend</button>

@@ -152,9 +152,8 @@ public class MainController {
 
     }
 
-    @PostMapping("/addFriends")
-    public String addFriends(@RequestParam("userId") String userId,
-                             @RequestParam("friendId") String friendId,
+    @PostMapping("/profile/add")
+    public String addFriends(@RequestParam("friendId") String friendId,
                              Principal principal,
                              Model model) {
         boolean userStatus = checkUserExistance(principal);
@@ -163,15 +162,15 @@ public class MainController {
             return "redirect:/signUp";
         } else {
 
-            boolean successful = friendsService.addFriends(userId, friendId, counter + ".txt");
+            boolean successful = friendsService.addFriends(principal.getName(), friendId, counter + ".txt");
 
             if (successful) {
-                System.out.println(userId + " and " + friendId + " are now friends!");
+                System.out.println(principal.getName() + " and " + friendId + " are now friends!");
                 counter++;
             } else {
                 System.out.println("Sorry but they are already friends!");
             }
-            return "search";
+            return "profile";
         }
     }
 
