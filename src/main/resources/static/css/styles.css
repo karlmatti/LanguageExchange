@@ -1,3 +1,15 @@
+html{
+  height:100%;
+}
+body{
+  background: linear-gradient(to top, #FFEFBA,#FFFFFF) fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height:100%;
+}
 .body-wrapper{
   min-width: 1200px;
   max-width: 1200px;
@@ -44,9 +56,8 @@
   float: right;
 }
 .mainback {
-  background-color: #333;
-  min-height:1400px;
-  max-height: 1200px;
+  background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+  padding-bottom:150px;
   color:white;
 }
 .mainback h2.alignment{
