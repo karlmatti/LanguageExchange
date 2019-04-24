@@ -39,8 +39,9 @@ public class MainController {
     @GetMapping("/profile")
     public String profile(Principal principal, Model model) {
         model.addAttribute("googleID", principal.getName());
-        boolean userStatus = checkUserExistance(principal);
         model.addAttribute("userId", principal.getName());
+        boolean userStatus = checkUserExistance(principal);
+
         if (userStatus) {
 
             return "redirect:/signUp";
@@ -170,7 +171,7 @@ public class MainController {
             } else {
                 System.out.println("Sorry but they are already friends!");
             }
-            return "profile";
+            return "redirect:/profile";
         }
     }
 

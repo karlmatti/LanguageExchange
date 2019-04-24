@@ -89,18 +89,6 @@ body{
     padding-left: 90px;
     padding-bottom: 90px;
 }
-#pData{
-  max-width: 400px;
-  margin:auto;
-  margin-right: auto;
-  word-wrap: break-word;
-  position: relative;
-  text-align:left;
-  left: -50px;
-  top:90px;
-  font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-}
 
 #reqData {
     padding-left:50px;
@@ -204,10 +192,7 @@ body{
 .button-block div {
   display:inline-block;
 }
-#pData,#col-75{
-  display: inline-block;
 
-}
 #col-75 {
   margin:auto;
   margin-right: auto;

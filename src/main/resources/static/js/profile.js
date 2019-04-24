@@ -18,7 +18,7 @@ Vue.component('messages-list', {
 let app = new Vue({
     el: '#pData',
     data: {
-        messages: ''
+        messages: []
     },
     created: function () {
         userApi.get().then(result =>

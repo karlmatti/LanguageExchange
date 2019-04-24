@@ -40,14 +40,14 @@
     </div>
     <br>
     <div class="mainback">
-        <div class="row">
+        <div class="row" id="pData">
             <div class="col-sm-6">
 
                 <image id="profileImage" src="http://www.athensparent.com/images/medium300x250.gif"/>
                 <!--<input type="file" id="imageUpload" name="avatar" accept="image/png, image/jpeg">-->
             </div>
             <div class="col-sm-6">
-                <div id="pData">
+                <div>
                     <p><span class="glyphicon glyphicon-user"></span> Name: {{messages.firstName}} {{messages.lastName}}</p>
                     <p><span class="glyphicon glyphicon-font"></span> Age: {{messages.age}}</p>
                     <p><span class="glyphicon glyphicon-comment"></span> A Level Languages: {{messages.aLvlLangs}}</p>
@@ -79,6 +79,7 @@
                                                 <input type="text" class="form-control" name="firstName"
                                                        id="firstName" v-bind:value="messages.firstName"
                                                        autocomplete="off" maxlength="254" required>
+
                                             </div>
                                             <h6>Your new lastname</h6>
                                             <div class="form-group">
