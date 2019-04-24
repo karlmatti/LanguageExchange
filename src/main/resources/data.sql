@@ -17,7 +17,7 @@ INSERT INTO user VALUES (
 'Acting and Powerlifting',
 'Schwarzenegger',
 '/img/114005839740106632529.PNG'
-
+//
 );
 
 INSERT INTO friends VALUES (
