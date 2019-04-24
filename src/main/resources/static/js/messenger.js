@@ -57,9 +57,6 @@ getFirstUserChat();
 
 $(document).ready(function () {
 
-
-
-
     $('.r-f-input-wrp .input-wrp input').on('keydown', function (ev) {
         if (ev.keyCode == 13) {
             send();
@@ -69,7 +66,6 @@ $(document).ready(function () {
     $('.send').on('click', function (ev) {
         send();
     });
-
 
 
     $('.left-body .message-card').on('click', function (ev) {
@@ -102,7 +98,7 @@ $(document).ready(function () {
         let bgSrc = $target.attr('src');
         $('.m-c-name').removeClass('active');
         $target.addClass('active');
-        createMessages(bgSrc, obj);
+        createMessages(bgSrc, obj, idx);
 
         let timerId = setInterval(function() {
             let stringsCurrent = 0;
@@ -173,7 +169,7 @@ function getFirstUserChat() {
     var bgSrc = $target.attr('src');
     $('.m-c-name').removeClass('active');
     $target.addClass('active');
-    createMessages(bgSrc, obj);
+    createMessages(bgSrc, obj, idx);
 
     let timerId = setInterval(function() {
         var stringsCurrent = 0;
@@ -237,11 +233,12 @@ function send() {
 
 
 
-function createMessages(bgSrc, data) {
+function createMessages(bgSrc, data, idx) {
     $('.message-ul').children().remove();
 
     console.log("I AM IN createMessages");
     console.log(data);
+    console.log(idx);
 
     $('.right-header .name-wrp .name').text(data.name);
 
@@ -253,15 +250,16 @@ function createMessages(bgSrc, data) {
         let detail = data.detail[i];
         let $li = $('<li>', {class: detail.owner});
         let $msg = $('<div>', {class: 'message'}).text(detail.content);
-
-
+        let temporarylet = "";
+        const fs = require("fs");
 
         if (detail.owner == 'other') {
+
             let $icon = $('<div>', {class: 'icon'}).css({background: "url(" + bgSrc + ") 0 /cover"});
             $li.append('\n').append($icon).append('\n').append($msg).append('\n').click(function () {
                 console.log("meow");
-                console.log($(this).text());
-                Swal.mixin({
+                console.log(i);
+                temporarylet = Swal.mixin({
                     input: 'text',
                     confirmButtonText: 'Next &rarr;',
                     showCancelButton: true,
@@ -272,16 +270,25 @@ function createMessages(bgSrc, data) {
                     }
                 ]).then((result) => {
                     if (result.value) {
+                        temporarylet = result.value;
                         Swal.fire({
                             title: 'All done!',
                             html:
-                                'Your answers: <pre><code>' +
-                                JSON.stringify(result.value) +
+                                'Correct message is: <pre><code>' +
+                                JSON.stringify(result.value).substring(1,JSON.stringify(result.value).length - 1) +
                                 '</code></pre>',
                             confirmButtonText: 'Lovely!'
                         })
+                        //$li = $('<li>', {class: detail.owner});
+                        $(this).text("");
+                        $msg = $('<div>', {class: 'message'}).text(result.value).css("background-color", "green");
+                        $(this).append('\n').append($icon).append('\n').append($msg).append('\n');
+
+                        //var textByLine = fs.readFileSync( 3 + idx + '.txt').toString().split("\n");
+                        //console.log(textByLine);
                     }
                 })
+
             });
         } else {
             $li.append('\n').append('\n').append($msg);
