@@ -202,7 +202,7 @@ public class MainController {
         }
     }
 
-    private List<User> filterUsers(List<User> allUsers, String keyword, int criteria, String principalName) {
+    public List<User> filterUsers(List<User> allUsers, String keyword, int criteria, String principalName) {
         List<User> returnedUsers = new ArrayList<>();
         for (User user : allUsers) {
             String firstName = user.getFirstName().toLowerCase();

@@ -71,11 +71,7 @@ public class LangexApplicationTests {
         String hobby = "basketball";
         String searchingUserId = "55555";
 
-        System.out.println("I am here> " + mainController.filterUsers(
-                allUsers,
-                hobby,
-                searchByHobbies,
-                searchingUserId));
+
         List<User> actualResult = mainController.filterUsers(
                 allUsers,
                 hobby,
