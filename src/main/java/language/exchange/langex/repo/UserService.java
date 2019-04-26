@@ -39,11 +39,6 @@ public class UserService {
         UserRepository.deleteById(id);
     }
 
-    public void update(int id, User user) {
-        UserRepository.deleteById(id);
-        UserRepository.save(user);
-    }
-
 
     public boolean checkUserStatus(String googleId) {
         List<User> users = getAllUsers();
@@ -58,7 +53,6 @@ public class UserService {
 
     public List<User> getUsersById(List<String> friendRequests, String principal) {
         List<User> usersList = new ArrayList<>();
-        System.out.println("friendRequests" + friendRequests.toString());
         for (String userId : friendRequests) {
             for (User user : UserRepository.findAll()) {
                 if (user.getId().equals(userId)) {
