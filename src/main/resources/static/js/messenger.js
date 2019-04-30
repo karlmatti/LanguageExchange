@@ -249,9 +249,19 @@ function createMessages(bgSrc, data, idx) {
     for (let i=0; i<data.detail.length; i++) {
         let detail = data.detail[i];
         let $li = $('<li>', {class: detail.owner});
-        let $msg = $('<div>', {class: 'message'}).text(detail.content);
         let temporarylet = "";
-        const fs = require("fs");
+        let $msg;
+
+        if (detail.newContent === undefined) {
+            $msg = $('<div>', {class: 'message'}).text(detail.content);
+        } else {
+            $msg = $('<div>', {class: 'message'}).text(detail.newContent).css("background-color", "green")
+                .append($('<div>', {class: 'description'}).text(detail.content)).mouseover(function () {
+                $(this).children().show();
+            }).mouseout(function () {
+                $(this).children().hide();
+            })
+        }
 
         if (detail.owner == 'other') {
 
@@ -266,7 +276,7 @@ function createMessages(bgSrc, data, idx) {
                 }).queue([
                     {
                         title: 'Correct message',
-                        text: $(this).text()
+                        text: detail.newMessage
                     }
                 ]).then((result) => {
                     if (result.value) {
@@ -280,9 +290,41 @@ function createMessages(bgSrc, data, idx) {
                             confirmButtonText: 'Lovely!'
                         })
                         //$li = $('<li>', {class: detail.owner});
+
+
+                        let getInitialText = $(this).text();
+
+
+                        if ($msg.css("background-color").toString() === "rgb(0, 128, 0)") {
+                            getInitialText = $msg.children().text();
+                        }
+
                         $(this).text("");
-                        $msg = $('<div>', {class: 'message'}).text(result.value).css("background-color", "green");
+                        $msg.text("");
+
+
+
+                        $msg = $('<div>', {class: 'message'}).text(result.value).css("background-color", "green")
+                            .append($('<div>', {class: 'description'}).text(getInitialText)).mouseover(function () {
+                                $(this).children().show();
+                        }).mouseout(function () {
+                                $(this).children().hide();
+                        });
+
+
+
                         $(this).append('\n').append($icon).append('\n').append($msg).append('\n');
+
+
+                        let sendVar = "{'chatNumber': " + idx + ", 'messageNumber': " + i + ", 'newMessage':'" + result.value + "'}";
+                        console.log(sendVar);
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/chatboxFixMessage/" + sendVar,
+                            success: function (data) {
+                            }, async: false
+                        });
 
                         //var textByLine = fs.readFileSync( 3 + idx + '.txt').toString().split("\n");
                         //console.log(textByLine);

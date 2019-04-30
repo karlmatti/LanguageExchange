@@ -1,5 +1,8 @@
 package language.exchange.langex.controller;
 
+import org.codehaus.jackson.map.util.JSONPObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -108,6 +111,68 @@ public class ChatboxController {
         writer.newLine();
         writer.append(newData);
         writer.close();
+
+        return null;
+    }
+
+    @PostMapping("/chatboxFixMessage/{data}")
+    private String chatBoxFix(@PathVariable("data") String data) throws IOException, JSONException {
+        JSONObject obj = new JSONObject(data);
+
+        int requiredLine = obj.getInt("messageNumber") + 1;
+        String newMessage = obj.getString("newMessage");
+        int chatNumber = obj.getInt("chatNumber");
+
+        String originalFileContent = "";
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+
+
+        try {
+
+            reader = new BufferedReader(new FileReader("1.txt"));
+            String currentReadingLine = reader.readLine();
+
+            int currentLineNumber = 0;
+
+            while (currentReadingLine != null) {
+                if (requiredLine == currentLineNumber) {
+                    JSONObject obj2 = new JSONObject(currentReadingLine.substring(0, currentReadingLine.length() - 1));
+                    String thisUserID = obj2.getString("owner");
+                    String lastText = obj2.getString("content");
+
+                    currentReadingLine = "{ \"owner\": " + "\"" + thisUserID + "\"" + ",\"content\": " + "\"" + lastText + "\" , \"newContent\": \"" + newMessage + "\"},";
+                }
+                originalFileContent += currentReadingLine + System.lineSeparator();
+                currentReadingLine = reader.readLine();
+
+                System.out.println("current reading line is " + currentReadingLine);
+                System.out.println("original file content " + originalFileContent);
+                currentLineNumber++;
+
+            }
+
+            System.out.println("content");
+            System.out.println(originalFileContent);
+            writer = new BufferedWriter(new FileWriter("1.txt", false));
+            writer.write(originalFileContent);
+            writer.close();
+
+
+        } catch (IOException e) {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+
+                if (writer != null) {
+                    writer.close();
+                }
+
+            } catch (IOException s) {
+                //handle exception
+            }
+        }
 
         return null;
     }

@@ -507,3 +507,17 @@ input {
 .func-ul li:nth-child(3):before {
     content: '\f073';
 }
+
+.description {
+    display: none; !important;
+    position: absolute;
+    border:1px solid #000;
+    border-radius: 5px;
+    width:100%;
+    height:50px;
+    top: -5px;
+    left: 130px;
+    background-color: white;
+
+
+}
