@@ -263,6 +263,9 @@ function createMessages(bgSrc, data, idx) {
             })
         }
 
+        console.log($msg.children());
+
+
         if (detail.owner == 'other') {
 
             let $icon = $('<div>', {class: 'icon'}).css({background: "url(" + bgSrc + ") 0 /cover"});
@@ -276,9 +279,10 @@ function createMessages(bgSrc, data, idx) {
                 }).queue([
                     {
                         title: 'Correct message',
-                        text: detail.newMessage
+                        text: $msg.clone().children().remove().end().text()
                     }
                 ]).then((result) => {
+
                     if (result.value) {
                         temporarylet = result.value;
                         Swal.fire({
