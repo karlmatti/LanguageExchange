@@ -21,9 +21,9 @@ INSERT INTO user VALUES (
                             );
 
 
-INSERT INTO friends VALUES (
+/*INSERT INTO friends VALUES (
                                1, '1.txt', true,'100388202069890344398', '106071269554137060211'
-                               );
+                               );*/
 
 /* Json  example
 [

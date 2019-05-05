@@ -24,7 +24,6 @@ public class FriendsController {
 
     @GetMapping("/friends/{id}")
     private Map<String, String> getFriendByID(@PathVariable("id") String id) {
-
         return friendsService.getUserFriendsAndChats(id);
     }
 

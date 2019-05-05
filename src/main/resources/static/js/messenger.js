@@ -4,50 +4,10 @@ var chatID = [];
 var lastMessages = [];
 var thisUsersID = googleID;
 
-
-$.ajax({
-    url:"/friends/" + thisUsersID,
-    success: function (data) {
-        console.log(123);
-       for (let [userId, chatNumber] of Object.entries(data)) {
-           targetIDs.push(userId);
-           chatID.push(chatNumber);
-       }
-    },async: false
-});
-
-
-for (let i = 0; i < targetIDs.length; i++) {
-    $.ajax({
-        url: "/users/" + targetIDs[i],
-        success: function (data) {
-            realNames.push(data.firstName + ' ' + data.lastName);
-        }, async: false
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "/chatboxLastMessage/" + chatID[i],
-        success: function (data) {
-            lastMessages.push(data);
-        }, async: false
-    });
-}
-
-
+getInfoAboutFriends();
+displayAllChats();
 
 var activeChat = "";
-
-for (i = 1; i < targetIDs.length + 1; i++) {
-
-    $('<div>', {idx:"" + i, id:"m" + i, class:"message-card"}).appendTo('.left-body');
-    //$('<div>', {class:"m-card-icon", style:"background: url("+ realPictures[i - 1] +"); background-size: 100% 100%;"}).appendTo('#m' + i );
-    $('<div>', {id:"s" + i, class:"m-card-content"}).appendTo('#m' + i );
-    $('<div>', {class:"m-c-name active"}).text(realNames[i - 1]).appendTo('#s'+ i);
-    $('<div>', {class:"m-c-time"}).appendTo('#s' + i);
-    $('<div>', {class:"m-c-last-message"}).text(lastMessages[i - 1]).appendTo('#s'+ i);
-}
-
 var targetUser = "";
 var numberOfStringsinCertainChat = 0;
 var timeId = 0;
@@ -65,6 +25,34 @@ $(document).ready(function () {
 
     $('.send').on('click', function (ev) {
         send();
+    });
+
+    $('.search input').on('keydown', function (ev) {
+
+        if (ev.keyCode == 13) {
+
+            let targetName = $('.search input').val();
+            getInfoAboutFriends();
+            let targetIDsCopy = [];
+            let realNamesCopy = [];
+            let chatIDCopy = []
+            let lastMessageCopy = [];
+            for (let i = 0; i < targetIDs.length; i++) {
+                console.log(targetIDs);
+                if (realNames[i].toLowerCase().includes(targetName.toLowerCase())) {
+                    console.log("WORKS");
+                    targetIDsCopy.push(targetIDs[i]);
+                    realNamesCopy.push(realNames[i]);
+                    chatIDCopy.push(chatID[i]);
+                    lastMessageCopy.push(lastMessages[i]);
+                }
+            }
+            targetIDs = targetIDsCopy;
+            realNames = realNamesCopy;
+            chatID = chatIDCopy;
+            lastMessages = lastMessageCopy;
+            displayAllChats();
+        }
     });
 
 
@@ -136,6 +124,67 @@ $(document).ready(function () {
 
     scrollBottom();
 });
+
+function displayAllChats() {
+
+    for (i = 0; i < targetIDs.length + 1; i++) {
+
+        $('.message-card').remove();
+        //$('<div>', {class:"m-card-icon", style:"background: url("+ realPictures[i - 1] +"); background-size: 100% 100%;"}).appendTo('#m' + i );
+        $('.m-card-content').remove();
+        $('.m-c-name active').remove();
+        $('.m-c-time').remove();
+        $('.m-c-last-message').remove();
+    }
+
+    for (i = 1; i < targetIDs.length + 1; i++) {
+
+        $('<div>', {idx:"" + i, id:"m" + i, class:"message-card"}).appendTo('.left-body');
+        //$('<div>', {class:"m-card-icon", style:"background: url("+ realPictures[i - 1] +"); background-size: 100% 100%;"}).appendTo('#m' + i );
+        $('<div>', {id:"s" + i, class:"m-card-content"}).appendTo('#m' + i );
+        $('<div>', {class:"m-c-name active"}).text(realNames[i - 1]).appendTo('#s'+ i);
+        $('<div>', {class:"m-c-time"}).appendTo('#s' + i);
+        $('<div>', {class:"m-c-last-message"}).text(lastMessages[i - 1]).appendTo('#s'+ i);
+    }
+}
+
+function getInfoAboutFriends() {
+    targetIDs = [];
+    chatID = [];
+    realNames = [];
+    lastMessages = [];
+
+    $.ajax({
+        url:"/friends/" + thisUsersID,
+        success: function (data) {
+            console.log(123);
+            for (let [userId, chatNumber] of Object.entries(data)) {
+                targetIDs.push(userId);
+                chatID.push(chatNumber);
+            }
+        },async: false
+    });
+
+
+    for (let i = 0; i < targetIDs.length; i++) {
+        $.ajax({
+            url: "/users/" + targetIDs[i],
+            success: function (data) {
+                realNames.push(data.firstName + ' ' + data.lastName);
+            }, async: false
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/chatboxLastMessage/" + chatID[i],
+            success: function (data) {
+                lastMessages.push(data);
+            }, async: false
+        });
+    }
+
+
+}
 
 function getFirstUserChat() {
 
