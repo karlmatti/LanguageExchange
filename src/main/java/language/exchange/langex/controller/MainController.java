@@ -24,7 +24,7 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    private static int counter = 5;
+    private static int counter = 0;
     @Autowired
     UserService userService;
     @Autowired

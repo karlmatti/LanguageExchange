@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:v-bind="http://www.w3.org/1999/xhtml" lang="en">
 <head>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,6 +25,65 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <style>
+            .avatar-wrapper {
+              position: relative;
+              height: 200px;
+              width: 200px;
+              margin: 50px auto;
+              border-radius: 50%;
+              overflow: hidden;
+              box-shadow: 1px 1px 15px -5px black;
+              transition: all .3s ease;
+            }
+            .avatar-wrapper:hover {
+              transform: scale(1.05);
+              cursor: pointer;
+            }
+            .avatar-wrapper:hover .profile-pic {
+              opacity: .5;
+            }
+            .avatar-wrapper .profile-pic {
+              height: 100%;
+              width: 100%;
+              transition: all .3s ease;
+            }
+            .avatar-wrapper .profile-pic:after {
+              font-family: FontAwesome;
+              content: "\f007";
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              font-size: 190px;
+              background: #ecf0f1;
+              color: #34495e;
+              text-align: center;
+            }
+            .avatar-wrapper .upload-button {
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 100%;
+              width: 100%;
+            }
+            .avatar-wrapper .upload-button .fa-arrow-circle-up {
+              position: absolute;
+              font-size: 234px;
+              top: -17px;
+              left: 0;
+              text-align: center;
+              opacity: 0;
+              transition: all .3s ease;
+              color: #34495e;
+            }
+            .avatar-wrapper .upload-button:hover .fa-arrow-circle-up {
+              opacity: .9;
+            }
+
+    </style>
+
     <title>Grand language Exchange - Profile</title>
 </head>
 <body>
@@ -43,8 +103,13 @@
         <div class="row" id="pData">
             <div class="col-sm-6">
 
-                <image id="profileImage" src="http://www.athensparent.com/images/medium300x250.gif"/>
-                <!--<input type="file" id="imageUpload" name="avatar" accept="image/png, image/jpeg">-->
+                       <div class="avatar-wrapper">
+                       	 <img class="profile-pic" src="" />
+                       	 <div class="upload-button">
+                       		<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                       	 </div>
+                       	 <input class="file-upload" type="file" accept="image/*"/>
+                       </div>
             </div>
             <div class="col-sm-6">
                 <div class="userData">
@@ -173,38 +238,29 @@
     </div>
 </div>
 
-    <!--
-    <div class="row">
-        <div class="col">
-            <div id="fb">
-                <div id="fb-top">
-                    <p><b>Friend Requests</b></p>
-                </div>
-                <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
-                     height="100" width="100" alt="Image of man">
-                <p id="info"><b>Rainer Murumaa</b></p>
-                <div id="button-block">
-                    <div id="confirm">Confirm</div>
-                    <div id="delete">Delete Request</div>
-                </div>
-            </div>
-            <br>
-            <div id="fb">
-                <div id="fb-top">
-                    <p><b>Friend Requests</b></p>
-                </div>
-                <img src="https://scienceandsociety.duke.edu/wordpress/wp-content/uploads/profile-list-ben-100x100.jpg"
-                     height="100" width="100" alt="Image of man">
-                <p id="info"><b>Andres Kivil</b></p>
-                <div id="button-block">
-                    <div id="confirm">Confirm</div>
-                    <div id="delete">Delete Request</div>
-                </div>
-            </div>
-        </div>
-
-    </div>-->
 <script>
+    $(document).ready(function() {
+
+        var readURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.profile-pic').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".file-upload").on('change', function(){
+            readURL(this);
+        });
+
+        $(".upload-button").on('click', function() {
+           $(".file-upload").click();
+        });
+    });
     var googleID = "[[${googleID}]]";
 </script>
 <script src="/js/profile.js"></script>
@@ -218,7 +274,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>-->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
 </body>
 </html>

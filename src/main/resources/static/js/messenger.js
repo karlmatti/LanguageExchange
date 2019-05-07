@@ -116,7 +116,7 @@ $(document).ready(function () {
 
                 console.log(innerObj);
                 if (innerObj.owner != "self") {
-                    sendRobot(innerObj);
+                    sendRobot(innerObj, idx);
                 }
             }
         }, 500);
@@ -178,6 +178,7 @@ function getInfoAboutFriends() {
             type: "POST",
             url: "/chatboxLastMessage/" + chatID[i],
             success: function (data) {
+                console.log(data);
                 lastMessages.push(data);
             }, async: false
         });
@@ -247,7 +248,7 @@ function getFirstUserChat() {
 
             console.log(innerObj);
             if (innerObj.owner != "self") {
-                sendRobot(innerObj);
+                sendRobot(innerObj, idx);
             }
         }
     }, 500);
@@ -344,10 +345,7 @@ function createMessages(bgSrc, data, idx) {
                         })
                         //$li = $('<li>', {class: detail.owner});
 
-
                         let getInitialText = $(this).text();
-
-
                         if ($msg.css("background-color").toString() === "rgb(0, 128, 0)") {
                             getInitialText = $msg.children().text();
                         }
@@ -355,16 +353,12 @@ function createMessages(bgSrc, data, idx) {
                         $(this).text("");
                         $msg.text("");
 
-
-
                         $msg = $('<div>', {class: 'message'}).text(result.value).css("background-color", "green")
                             .append($('<div>', {class: 'description'}).text(getInitialText)).mouseover(function () {
                                 $(this).children().show();
                         }).mouseout(function () {
                                 $(this).children().hide();
                         });
-
-
 
                         $(this).append('\n').append($icon).append('\n').append($msg).append('\n');
 
@@ -411,12 +405,91 @@ function scrollBottom() {
 }
 
 
-function sendRobot(pushData) {
+function sendRobot(pushData, idx) {
+    let $target = $(this).find('.m-c-name');
+    let bgSrc = $target.attr('src');
+    let $icon = $('<div>', {class: 'icon'}).css({background: "url(" + bgSrc + ") 0 /cover"});
+    let activeChat = thisUsersID + " " + targetIDs[idx-1] + " " + chatID[idx-1] + " " +  realNames[idx-1];
+    let stringsCurrent = "";
+    $.ajax({
+        url:"/chatbox/" + activeChat,
+        type: "POST",
+        success: function (data) {
+            if (data.length < 1) {
+                stringsCurrent = 0;
+            } else {
+                stringsCurrent = JSON.parse(data).detail.length;
+            }
+        },async: false
+    });
+
+    console.log(stringsCurrent);
+
+
     $('.typing').removeClass('typing');
 
     var $li = $('<li>', {class: 'other typing'});
     var $msg = $('<div>', {class: 'message'}).append('<span>●</span><span>●</span><span>●</span>');
-    $li.append('\n').append($msg);
+    $li.append('\n').append($msg).click(function () {
+        console.log("meow");
+
+        temporarylet = Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+        }).queue([
+            {
+                title: 'Correct message',
+                text: $msg.clone().children().remove().end().text()
+            }
+        ]).then((result) => {
+
+            if (result.value) {
+                temporarylet = result.value;
+                Swal.fire({
+                    title: 'All done!',
+                    html:
+                        'Correct message is: <pre><code>' +
+                        JSON.stringify(result.value).substring(1,JSON.stringify(result.value).length - 1) +
+                        '</code></pre>',
+                    confirmButtonText: 'Lovely!'
+                })
+                //$li = $('<li>', {class: detail.owner});
+
+                let getInitialText = $(this).text();
+                if ($msg.css("background-color").toString() === "rgb(0, 128, 0)") {
+                    getInitialText = $msg.children().text();
+                }
+
+                $(this).text("");
+                $msg.text("");
+
+                $msg = $('<div>', {class: 'message'}).text(result.value).css("background-color", "green")
+                    .append($('<div>', {class: 'description'}).text(getInitialText)).mouseover(function () {
+                        $(this).children().show();
+                    }).mouseout(function () {
+                        $(this).children().hide();
+                    });
+
+                $(this).append('\n').append($icon).append('\n').append($msg).append('\n');
+
+
+                let sendVar = "{'chatNumber': " + idx + ", 'messageNumber': " + stringsCurrent + ", 'newMessage':'" + result.value + "'}";
+                console.log(sendVar);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/chatboxFixMessage/" + sendVar,
+                    success: function (data) {
+                    }, async: false
+                });
+
+                //var textByLine = fs.readFileSync( 3 + idx + '.txt').toString().split("\n");
+                //console.log(textByLine);
+            }
+        })
+
+    });
     $('.message-ul').append('\n').append($li);
     scrollBottom();
 
