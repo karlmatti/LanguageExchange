@@ -171,7 +171,7 @@ public class MainController {
             } else {
                 System.out.println("Sorry but they are already friends!");
             }
-            return "redirect:/profile";
+            return "redirect:/messenger";
         }
     }
 

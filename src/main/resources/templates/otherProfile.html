@@ -45,8 +45,8 @@
                 <image id="profileImage" src="http://www.athensparent.com/images/medium300x250.gif"/>
 
             </div>
-            <div class="col">
-                <div id="pData" class="userData">
+            <div class="col" id="pData">
+                <div class="userData">
                     <p><span class="glyphicon glyphicon-user"></span> Name: {{messages.firstName}} {{messages.lastName}}</p>
                     <p><span class="glyphicon glyphicon-font"></span> Age: {{messages.age}}</p>
                     <p><span class="glyphicon glyphicon-comment"></span> A Level Languages: {{messages.aLvlLangs}}</p>
@@ -55,30 +55,23 @@
                     <p><span class="glyphicon glyphicon-tasks"></span> Hobbies: {{messages.hobbies}}</p>
                     <p><span class="glyphicon glyphicon-cloud"></span> Biogprahy: {{messages.bioGraphy}}</p>
                     <br>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col" id="reqData">
-                <div v-for="user in users">
-
                     <form action="/profile/add" method="post" style="display: inline;">
-                        <input type="hidden" v-bind:value="user.id" name="friendId"/>
-                        <button type="submit" class="btn btn-success">Accept as Friend</button>
+                        <input type="hidden" v-bind:value="messages.id" name="friendId"/>
+                        <button type="submit" class="btn btn-success">Add as Friend</button>
                     </form>
-           
                 </div>
 
             </div>
+
+
         </div>
+
     </div>
 </div>
-
 <script>
     var googleID = "[[${googleID}]]";
 </script>
+
 <script src="/js/profile.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
