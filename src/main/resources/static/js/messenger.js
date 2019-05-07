@@ -305,12 +305,21 @@ function createMessages(bgSrc, data, idx) {
         if (detail.newContent === undefined) {
             $msg = $('<div>', {class: 'message'}).text(detail.content);
         } else {
+            if (detail.owner == "other") {
             $msg = $('<div>', {class: 'message'}).text(detail.newContent).css("background-color", "green")
                 .append($('<div>', {class: 'description'}).text(detail.content)).mouseover(function () {
                 $(this).children().show();
             }).mouseout(function () {
                 $(this).children().hide();
             })
+            } else {
+                $msg = $('<div>', {class: 'message'}).text(detail.newContent).css("background-color", "green")
+                    .append($('<div>', {class: 'description2'}).text(detail.content)).mouseover(function () {
+                        $(this).children().show();
+                    }).mouseout(function () {
+                        $(this).children().hide();
+                    })
+            }
         }
 
         console.log($msg.children());
@@ -380,7 +389,8 @@ function createMessages(bgSrc, data, idx) {
 
             });
         } else {
-            $li.append('\n').append('\n').append($msg);
+            let $icon = $('<div>', {class: 'icon'}).css({background: "url(" + bgSrc + ") 0 /cover"});
+            $li.append('\n').append($icon).append('\n').append($msg).append('\n');
         }
         $('.message-ul').append('\n').append($li);
     }
