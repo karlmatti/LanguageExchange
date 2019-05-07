@@ -19,7 +19,9 @@ INSERT INTO user VALUES (
                             '/img/114005839740106632529.PNG'
 
                             );
-
+INSERT INTO friends VALUES (
+4, '0.txt', false,'114005839740106632529', '111111111111111111111'
+);
 
 /*INSERT INTO friends VALUES (
                                1, '1.txt', true,'100388202069890344398', '106071269554137060211'
