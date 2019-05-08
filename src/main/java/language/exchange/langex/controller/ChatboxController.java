@@ -108,8 +108,9 @@ public class ChatboxController {
         String newData = explode[1];
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-        writer.newLine();
+
         writer.append(newData);
+        writer.newLine();
         writer.close();
 
         return null;
@@ -119,7 +120,7 @@ public class ChatboxController {
     private String chatBoxFix(@PathVariable("data") String data) throws IOException, JSONException {
         JSONObject obj = new JSONObject(data);
 
-        int requiredLine = obj.getInt("messageNumber") + 1;
+        int requiredLine = obj.getInt("messageNumber");
         String newMessage = obj.getString("newMessage");
         int chatNumber = obj.getInt("chatNumber");
 
@@ -130,7 +131,7 @@ public class ChatboxController {
 
         try {
 
-            reader = new BufferedReader(new FileReader("1.txt"));
+            reader = new BufferedReader(new FileReader(chatNumber + ".txt"));
             String currentReadingLine = reader.readLine();
 
             int currentLineNumber = 0;
@@ -154,7 +155,7 @@ public class ChatboxController {
 
             System.out.println("content");
             System.out.println(originalFileContent);
-            writer = new BufferedWriter(new FileWriter("1.txt", false));
+            writer = new BufferedWriter(new FileWriter(chatNumber + ".txt", false));
             writer.write(originalFileContent);
             writer.close();
 

@@ -86,9 +86,12 @@ $(document).ready(function () {
         let bgSrc = $target.attr('src');
         $('.m-c-name').removeClass('active');
         $target.addClass('active');
+
+
         createMessages(bgSrc, obj, idx);
 
         let timerId = setInterval(function() {
+            console.log("interval");
             let stringsCurrent = 0;
             $.ajax({
                 type: "POST",
@@ -114,7 +117,7 @@ $(document).ready(function () {
                     },async: false
                 });
 
-                console.log(innerObj);
+                console.log("jusTrA");
                 if (innerObj.owner != "self") {
                     sendRobot(innerObj, idx);
                 }
@@ -219,6 +222,7 @@ function getFirstUserChat() {
     var bgSrc = $target.attr('src');
     $('.m-c-name').removeClass('active');
     $target.addClass('active');
+
     createMessages(bgSrc, obj, idx);
 
     let timerId = setInterval(function() {
@@ -372,7 +376,8 @@ function createMessages(bgSrc, data, idx) {
                         $(this).append('\n').append($icon).append('\n').append($msg).append('\n');
 
 
-                        let sendVar = "{'chatNumber': " + idx + ", 'messageNumber': " + i + ", 'newMessage':'" + result.value + "'}";
+                        console.log(i);
+                        let sendVar = "{'chatNumber': " + idx + ", 'messageNumber': " + i  + ", 'newMessage':'" + result.value + "'}";
                         console.log(sendVar);
 
                         $.ajax({
@@ -483,8 +488,8 @@ function sendRobot(pushData, idx) {
 
                 $(this).append('\n').append($icon).append('\n').append($msg).append('\n');
 
-
-                let sendVar = "{'chatNumber': " + idx + ", 'messageNumber': " + stringsCurrent + ", 'newMessage':'" + result.value + "'}";
+                let temporary = parseInt(stringsCurrent, 10)  -  1;
+                    let sendVar = "{'chatNumber': " + idx + ", 'messageNumber': " + temporary + ", 'newMessage':'" + result.value + "'}";
                 console.log(sendVar);
 
                 $.ajax({
